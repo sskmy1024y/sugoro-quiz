@@ -1,5 +1,8 @@
 export interface User {
   id: string;
   name: string;
-  icon: string;
+}
+
+export interface LoginUser extends User {
+  roomId: string;
 }
