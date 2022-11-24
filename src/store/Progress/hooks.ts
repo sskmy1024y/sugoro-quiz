@@ -2,9 +2,10 @@ import {useRecoilValue, useSetRecoilState} from "recoil";
 import {ProgressState} from "./atoms";
 import {onValue, ref, set, update} from "firebase/database";
 import {db} from "config/firebase";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 import {Progress} from "models/ProgressState";
 import {CurrentPlayerState} from "store/Progress/selectors";
+import {useOrderPlayer} from "store/OrderPlayer";
 
 
 export const useProgress = (roomId: string) => {
@@ -42,4 +43,22 @@ export const useUpdateProgress = (roomId: string) => {
 
 export const useCurrentPlayer = (roomId: string) => {
   return useRecoilValue(CurrentPlayerState(roomId));
+}
+
+export const useOnNextTurn = (roomId: string) => {
+  const orderPlayer = useOrderPlayer(roomId);
+  const currentPlayer = useCurrentPlayer(roomId);
+  const updateProgress = useUpdateProgress(roomId);
+
+  return useCallback(async () => {
+    const currentPlayerIndex = currentPlayer ? orderPlayer.findIndex(player => player.id === currentPlayer.id) : 0;
+    const nextPlayer = currentPlayerIndex === orderPlayer.length - 1 ? orderPlayer[0] : orderPlayer[currentPlayerIndex + 1];
+
+    // TODO: 一周したらゲームターンにする
+
+    await updateProgress({
+      currentPlayerId: nextPlayer.id,
+      state: "dice-waiting"
+    })
+  },[currentPlayer, orderPlayer, updateProgress]);
 }

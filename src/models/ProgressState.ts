@@ -3,8 +3,7 @@ export type ProgressState =
   | "dice-waiting" // サイコロ待ち
   | "dice-rolling" // サイコロ振り中
   | "dice-rolled" // サイコロ振り終わり
-  | "moving" // 移動中
-  | "moved" // 移動終わり
+  | "next-waiting" // 次へ押し待ち
   | "event-waiting" // イベント待ち
   // TODO: イベント周りのprogressを追加する
   | "next-waiting" // 次のターン待ち → "dice-waiting"になる

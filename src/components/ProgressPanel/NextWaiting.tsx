@@ -1,6 +1,6 @@
-import {Box, Button, Card, CardBody, CardHeader, Fade, Heading, Text} from "@chakra-ui/react";
-import {useOnNextTurn, useProgress, useSyncronizedProgress} from "store/Progress";
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {Box, Button, Card, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
+import {useOnNextTurn, useProgress, useSyncronizedProgress, useUpdateProgress} from "store/Progress";
+import {useCallback, useMemo} from "react";
 import {LoginUser} from "models/User";
 import {Progress} from "models/ProgressState";
 import {ref, set, update} from "firebase/database";
@@ -13,22 +13,14 @@ type Props = {
   loginUser: LoginUser;
 }
 
-export const DiceRolled = ({loginUser}: Props) => {
+export const NextWaiting = ({loginUser}: Props) => {
   const progress = useProgress(loginUser.roomId);
   const currentPlayer = useRoomMembers(loginUser.roomId).find(member => member.id === progress.currentPlayerId);
   const onNextTurn = useOnNextTurn(loginUser.roomId);
 
-  const [showNextButton, setShowNextButton] = useState(false);
-
   const isMyTerm = useMemo(() => {
     return progress.currentPlayerId === loginUser.id;
   }, [progress.currentPlayerId, loginUser.id]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowNextButton(true);
-    }, 3000);
-  }, []);
 
   if (!progress.dice) return null
 
@@ -40,14 +32,12 @@ export const DiceRolled = ({loginUser}: Props) => {
       <CardBody>
         <Box>
           <Dice value={progress.dice!} isRolling={false} />
-          {isMyTerm ? (
-            <Fade in={showNextButton}>
-              <Button colorScheme='twitter' onClick={onNextTurn}>次のプレイヤーへ</Button>
-            </Fade>
-          ) : (
-            <SkipButton roomId={loginUser.roomId} />
-          )}
         </Box>
+        {isMyTerm ? (
+          <Button colorScheme='twitter' onClick={onNextTurn}>次のプレイヤーへ</Button>
+        ) : (
+          <SkipButton roomId={loginUser.roomId} />
+        )}
       </CardBody>
     </>
   )

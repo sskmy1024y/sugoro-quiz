@@ -1,4 +1,4 @@
-import {Box, Button, Card, CardBody, Text} from "@chakra-ui/react";
+import {Box, Button, Card, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
 import {useProgress, useSyncronizedProgress} from "store/Progress";
 import {useCallback, useMemo} from "react";
 import {LoginUser} from "models/User";
@@ -6,6 +6,8 @@ import {Progress} from "models/ProgressState";
 import {ref, set} from "firebase/database";
 import {db} from "config/firebase";
 import {useRoomMembers} from "store/Members";
+import {PlayerPosition} from "models/PlayerPosition";
+import {Dice} from "components/Dice";
 
 type Props = {
   loginUser: LoginUser;
@@ -16,9 +18,14 @@ export const NotStarted = ({loginUser}: Props) => {
 
   const onUpdateProgress = useCallback( async () => {
     // TODO: ランダムにプレイヤーを選ぶ
-    const orderMemberIds = members.map(member => member.id)
+    const orderMemberIds: string[] = members.map(member => member.id)
+    const playerPositions: PlayerPosition[] = orderMemberIds.map((memberId, index) => ({
+      playerId: memberId,
+      mathIndex: 0,
+    }))
 
     await set(ref(db, `rooms/${loginUser.roomId}/playerOrder`), orderMemberIds);
+    await set(ref(db, `rooms/${loginUser.roomId}/playerPositions`), playerPositions);
     await set(ref(db, `rooms/${loginUser.roomId}/progress`), {
       currentPlayerId: orderMemberIds[0],
       state: "dice-waiting"
@@ -28,16 +35,14 @@ export const NotStarted = ({loginUser}: Props) => {
 
 
   return (
-
+    <>
+      <CardHeader>
+        <Heading size='md'>参加メンバー募集中</Heading>
+      </CardHeader>
       <CardBody>
-        <Text>メンバー募集中</Text>
-
-          <Box>
-            <Text>参加メンバーが集まったら、ボタンを押してください</Text>
-            <Button colorScheme='twitter' onClick={onUpdateProgress}>ゲームを開始する</Button>
-          </Box>
-
+        <Text>参加メンバーが集まったら、ボタンを押してください</Text>
+        <Button colorScheme='twitter' onClick={onUpdateProgress}>ゲームを開始する</Button>
       </CardBody>
-
+    </>
   )
 }

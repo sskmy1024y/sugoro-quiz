@@ -7,6 +7,7 @@ import {Container} from "@chakra-ui/react";
 import {Header} from "components/Header";
 import {ProgressPanel} from "components/ProgressPanel";
 import {SubscribeProvider} from "components/SubscribeProvider";
+import {SugorokuBoard} from "components/SugorokuBoard";
 
 export const Main = () => {
   const navigate = useNavigate();
@@ -17,7 +18,10 @@ export const Main = () => {
       const json = localStorage.getItem("loginUser");
       if (json !== null) {
         const _loginUser = JSON.parse(json) as LoginUser;
-        setLoginUser(_loginUser);
+        setLoginUser(_loginUser).catch(() => {
+          localStorage.removeItem("loginUser");
+          navigate("/login");
+        });
       }
 
       navigate("/login");
@@ -30,10 +34,11 @@ export const Main = () => {
 
   return (
     <SubscribeProvider roomId={loginUser.roomId}>
-      <Container maxW='4xl'>
+      <Container maxW='8xl'>
         <Header loginUser={loginUser} />
         <MemberList roomId={loginUser.roomId} />
         <ProgressPanel loginUser={loginUser} />
+        <SugorokuBoard roomId={loginUser.roomId} />
       </Container>
     </SubscribeProvider>
   )

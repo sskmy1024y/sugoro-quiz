@@ -1,4 +1,4 @@
-import {Box, Button, Card, CardBody, Text} from "@chakra-ui/react";
+import {Box, Button, Card, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
 import {useProgress, useSyncronizedProgress} from "store/Progress";
 import {useCallback, useMemo} from "react";
 import {LoginUser} from "models/User";
@@ -8,6 +8,7 @@ import {db} from "config/firebase";
 import {useRoomMembers} from "store/Members";
 import {Dice} from "components/Dice";
 import {SkipButton} from "components/ProgressPanel/SkipButton";
+import {useUpdatePlayerPosition} from "store/PlayerPosition";
 
 type Props = {
   loginUser: LoginUser;
@@ -16,6 +17,7 @@ type Props = {
 export const DiceRolling = ({loginUser}: Props) => {
   const progress = useProgress(loginUser.roomId);
   const currentPlayer = useRoomMembers(loginUser.roomId).find(member => member.id === progress.currentPlayerId);
+  const updatePosition = useUpdatePlayerPosition(loginUser.roomId, loginUser.id);
 
   const isMyTerm = useMemo(() => {
     return progress.currentPlayerId === loginUser.id;
@@ -28,23 +30,28 @@ export const DiceRolling = ({loginUser}: Props) => {
       dice: dice,
       state: "dice-rolled"
     });
-  }, [loginUser.roomId]);
+    await updatePosition(dice);
+  }, [loginUser.roomId, updatePosition]);
 
-
-
-  console.log(progress.dice)
 
   return (
+    <>
+      <CardHeader>
+        <Heading size='md'>
+          {isMyTerm ? `あなたの番` : `${currentPlayer?.name}さんの番`}
+        </Heading>
+      </CardHeader>
       <CardBody>
-        <Text>{isMyTerm ? `あなたの番` : `${currentPlayer?.name}さんの番`}</Text>
-
-          <Box>
-            <Text>{isMyTerm ? `ボタンを押してサイコロを止めて下さい` : `サイコロを回しています…` }</Text>
-            <Dice value={progress.dice ?? 5} isRolling={!progress.dice} />
-            {isMyTerm ? <Button colorScheme='twitter' onClick={onStopDice}>サイコロを止める</Button> : <SkipButton roomId={loginUser.roomId} />}
-          </Box>
-
+        <Box>
+          <Text>{isMyTerm ? `ボタンを押してサイコロを止めて下さい` : `サイコロを回しています…` }</Text>
+          <Dice value={progress.dice ?? 5} isRolling={!progress.dice} />
+          {isMyTerm ? (
+            <Button colorScheme='twitter' onClick={onStopDice}>サイコロを止める</Button>
+          ) : (
+            <SkipButton roomId={loginUser.roomId} />
+          )}
+        </Box>
       </CardBody>
-
+    </>
   )
 }

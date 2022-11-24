@@ -1,4 +1,4 @@
-import {Box, Button, Card, CardBody, Text} from "@chakra-ui/react";
+import {Box, Button, Card, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
 import {useCurrentPlayer, useProgress, useSyncronizedProgress} from "store/Progress";
 import {useCallback, useMemo} from "react";
 import {LoginUser} from "models/User";
@@ -31,20 +31,23 @@ export const DiceWaiting = ({loginUser}: Props) => {
 
 
   return (
+    <>
+      <CardHeader>
+        <Heading size='md'>
+          {isMyTerm ? `あなたの番` : `${currentPlayer?.name}さんの番`}
+        </Heading>
+      </CardHeader>
       <CardBody>
-        <Text>{isMyTerm ? `あなたの番` : `${currentPlayer?.name}さんの番`}</Text>
-
-          <Box>
-            <Text>{isMyTerm ? `ボタンを押してサイコロを回して下さい` : `${currentPlayer?.name}さんを待っています…` }</Text>
-            <Dice value={progress.dice ?? 5} isRolling={progress.dice === null} />
-            {isMyTerm ? (
-              <Button colorScheme='twitter' onClick={onStartDice}>サイコロを回す</Button>
-              ) : (
-              <SkipButton roomId={loginUser.roomId} />
-            )}
-          </Box>
-
+        <Box>
+          <Text>{isMyTerm ? `ボタンを押してサイコロを回して下さい` : `${currentPlayer?.name}さんを待っています…` }</Text>
+          <Dice value={progress.dice ?? 5} isRolling={progress.dice === null} />
+          {isMyTerm ? (
+            <Button colorScheme='twitter' onClick={onStartDice}>サイコロを回す</Button>
+          ) : (
+            <SkipButton roomId={loginUser.roomId} />
+          )}
+        </Box>
       </CardBody>
-
+    </>
   )
 }

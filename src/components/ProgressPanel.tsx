@@ -5,6 +5,7 @@ import {NotStarted} from "components/ProgressPanel/NotStarted";
 import {DiceRolling} from "components/ProgressPanel/DiceRolling";
 import {DiceWaiting} from "components/ProgressPanel/DiceWaiting";
 import {DiceRolled} from "components/ProgressPanel/DiceRolled";
+import {NextWaiting} from "components/ProgressPanel/NextWaiting";
 
 type Props = {
   loginUser: LoginUser;
@@ -22,6 +23,8 @@ export const ProgressPanel = ({loginUser}: Props) => {
         <DiceRolling loginUser={loginUser} />
       ) : progress.state === "dice-rolled" ? (
         <DiceRolled loginUser={loginUser} />
+      ) : progress.state === "next-waiting" ? (
+        <NextWaiting loginUser={loginUser} />
       ) : null}
     </Card>
   )
