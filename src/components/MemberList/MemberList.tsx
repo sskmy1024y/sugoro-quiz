@@ -1,5 +1,6 @@
 import {useRoomMembers} from "store/Members";
-import {Avatar, Box, Text, Wrap, WrapItem} from "@chakra-ui/react";
+import {Box, SimpleGrid, Text} from "@chakra-ui/react";
+import {MemberItem} from "./MemberItem";
 
 type Props = {
   roomId: string;
@@ -11,13 +12,11 @@ export const MemberList = ({roomId}: Props) => {
   return (
     <Box>
       <Text size={"md"}>参加中のメンバー</Text>
-      <Wrap>
+      <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
         {members.map(member => (
-          <WrapItem key={member.id}>
-            <Avatar size={"md"} name={member.name} />
-          </WrapItem>
+          <MemberItem key={member.id} roomId={roomId} member={member}/>
         ))}
-      </Wrap>
+      </SimpleGrid>
     </Box>
   )
 }

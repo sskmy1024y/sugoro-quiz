@@ -6,21 +6,25 @@ import {
   AlertDialogOverlay,
   Button, useDisclosure
 } from "@chakra-ui/react";
-import React, {useCallback} from "react";
-import {useCurrentPlayer, useOnNextTurn, useProgress, useUpdateProgress} from "store/Progress";
-import {useOrderPlayer} from "store/OrderPlayer";
+import React, {memo} from "react";
+import {useOnNextTurn} from "store/Progress";
 
 type Props = {
   roomId: string;
 }
 
-export const SkipButton = ({roomId}: Props) => {
+export const SkipButton = memo(({roomId}: Props) => {
   const onNextTurn = useOnNextTurn(roomId);
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = React.useRef(null)
 
   const confirmSkip = () => {
     onOpen()
+  }
+
+  const onSkip = () => {
+    onNextTurn()
+    onClose()
   }
 
   return (
@@ -46,7 +50,7 @@ export const SkipButton = ({roomId}: Props) => {
               <Button ref={cancelRef} onClick={onClose}>
                 キャンセル
               </Button>
-              <Button colorScheme='red' onClick={onNextTurn} ml={3}>
+              <Button colorScheme='red' onClick={onSkip} ml={3}>
                 スキップする
               </Button>
             </AlertDialogFooter>
@@ -55,4 +59,4 @@ export const SkipButton = ({roomId}: Props) => {
       </AlertDialog>
     </>
   )
-}
+})
