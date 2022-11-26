@@ -3,6 +3,7 @@ import {usePlayerPositions} from "store/PlayerPosition";
 import {useCallback, useEffect, useState} from "react";
 import {MathPosition} from "config/Constants";
 import {useCurrentPlayer, useUpdateProgress} from "store/Progress";
+import {UserAvatar} from "components/common/UserAvatar";
 
 interface Props {
   roomId: string;
@@ -100,7 +101,7 @@ export const SugorokuBoard = ({roomId}: Props) => {
                 {existPlayers(index).map((member, index) => {
                   return (
                     <WrapItem key={index}>
-                      <Avatar size={"sm"} name={member.name} />
+                      <UserAvatar size={"sm"} user={member} />
                     </WrapItem>
                   )
                 })}

@@ -40,14 +40,14 @@ export const useUpdatePlayerPosition = (roomId: string, playerId: string) => {
 export const useSynchronizePlayerPositions = (roomId: string) => {
   const setPositions = useSetRecoilState(PlayerPositionsState(roomId));
   useEffect(() => {
-    const refs = ref(db, `rooms/${roomId}/playerPositions/`);
+    const refs = ref(db, `rooms/${roomId}/playerPositions`);
     const unsubscribe = onValue(refs, snapshot => {
       const members: PlayerPosition[] = [];
       snapshot.forEach(childSnapshot => {
         members.push(childSnapshot.val());
       });
       setPositions(members)
-    })
+    });
 
     return () => {
       unsubscribe()

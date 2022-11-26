@@ -17,6 +17,7 @@ import {useCallback} from "react";
 import {ref, set} from "firebase/database";
 import {db} from "config/firebase";
 import {usePlayerPositions} from "store/PlayerPosition";
+import {UserAvatar} from "components/common/UserAvatar";
 
 interface Props {
   roomId: string;
@@ -52,7 +53,7 @@ export const MemberItem = ({roomId, member}: Props) => {
       <CardBody>
         <Flex gap='4'>
           <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap' opacity={isIncludePlayer ? 1 : 0.5}>
-            <Avatar name={member.name} />
+            <UserAvatar user={member} />
             <Box>
               <Heading size='sm' minW={"74px"}>{member.name}</Heading>
               <Text>{isIncludePlayer ? "参加中" : "未参加"}</Text>
