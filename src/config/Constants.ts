@@ -60,7 +60,7 @@ export const MathPosition: Math[] = [
     y: 75,
     w: 24,
     h: 17,
-    forceStop: false
+    forceStop: true
   },
   {
     x: 26,
@@ -88,7 +88,7 @@ export const MathPosition: Math[] = [
     y: 74,
     w: 24,
     h: 19,
-    forceStop: false
+    forceStop: true
   },
   {
     x: 82,
@@ -123,7 +123,7 @@ export const MathPosition: Math[] = [
     y: 9,
     w: 24,
     h: 22,
-    forceStop: false
+    forceStop: true
   },
   {
     x: 58,
@@ -172,7 +172,7 @@ export const MathPosition: Math[] = [
     y: 56,
     w: 24,
     h: 18,
-    forceStop: false
+    forceStop: true
   },
   {
     x: 50,
@@ -200,6 +200,6 @@ export const MathPosition: Math[] = [
     y: 31,
     w: 16,
     h: 21,
-    forceStop: false
+    forceStop: true
   },
 ]

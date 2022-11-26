@@ -1,8 +1,8 @@
-import {Avatar, Box, usePrevious, Wrap, WrapItem} from "@chakra-ui/react";
-import {usePlayerPositions} from "store/PlayerPosition";
+import {Box, Wrap, WrapItem} from "@chakra-ui/react";
+import {usePlayerPositions, useUpdatePlayerAbsolutePosition} from "store/PlayerPosition";
 import {useCallback, useEffect, useState} from "react";
 import {MathPosition} from "config/Constants";
-import {useCurrentPlayer, useUpdateProgress} from "store/Progress";
+import {useCurrentPlayer} from "store/Progress";
 import {UserAvatar} from "components/common/UserAvatar";
 
 interface Props {
@@ -13,13 +13,14 @@ const DEBUG = process.env.NODE_ENV === "development";
 
 export const SugorokuBoard = ({roomId}: Props) => {
   const positions = usePlayerPositions(roomId);
+  const updatePosition = useUpdatePlayerAbsolutePosition(roomId);
   const [stepPositons, setStepPositions] = useState(positions);
   const currentPlayer = useCurrentPlayer(roomId);
 
   const existPlayers = useCallback((mathIndex: number) => {
     return stepPositons.filter(position => position.mathIndex === mathIndex)
       .map(position => position.member)
-      .sort((a, b) => currentPlayer?.id === a.id ? -1 : 1);
+      .sort((a) => currentPlayer?.id === a.id ? -1 : 1);
   }, [currentPlayer?.id, stepPositons]);
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export const SugorokuBoard = ({roomId}: Props) => {
     const diffPositionIndex = diffPositionIndexes[0];
     const currentStepPosition = stepPositons[diffPositionIndex].mathIndex;
     const diff = positions[diffPositionIndex].mathIndex - stepPositons[diffPositionIndex].mathIndex;
-    const stepAnimation = (next: number, target: number) => {
+    const stepAnimation = (next: number, target: number, isFirstStep?: boolean) => {
       setStepPositions(prev => {
         const newPositions = [...prev];
         newPositions[diffPositionIndex].mathIndex = next;
@@ -52,12 +53,15 @@ export const SugorokuBoard = ({roomId}: Props) => {
       if (MathPosition.length - 1 <= next) {
         // ゴール（もしくはそれ以上）に泊まった場合はアニメーション終了
         // TODO: ゴールに止まったらどうするか判断する
+        if (currentPlayer?.id) updatePosition(currentPlayer.id, next);
         return;
       }
 
       const nextMath = MathPosition[next];
-      if (nextMath.forceStop) {
+      if (nextMath.forceStop && !isFirstStep) { // 既に止まっていた場合（次の一歩）の場合は無視
         // 強制停止マスに止まった場合はアニメーション終了
+        // 現在地でデータを上書き
+        if (currentPlayer?.id) updatePosition(currentPlayer.id, next);
         // TODO: 強制マスゲームを実施
         return;
       }
@@ -69,7 +73,7 @@ export const SugorokuBoard = ({roomId}: Props) => {
         }, 1000);
       }
     }
-    stepAnimation(currentStepPosition, currentStepPosition + diff);
+    stepAnimation(currentStepPosition, currentStepPosition + diff, true);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [positions])

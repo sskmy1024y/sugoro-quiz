@@ -37,6 +37,27 @@ export const useUpdatePlayerPosition = (roomId: string, playerId: string) => {
   }, [playerId, positions, roomId])
 }
 
+/**
+ * プレイヤーの位置を強制的に更新する
+ * @param roomId
+ */
+export const useUpdatePlayerAbsolutePosition = (roomId: string) => {
+  const positions = useRecoilValue(PlayerPositionsState(roomId));
+
+  return useCallback(async (playerId: string, mathIndex: number) => {
+    const playerPositionIndex = positions.findIndex(position => position.playerId === playerId);
+    if (playerPositionIndex === -1) return;
+
+    const playerPosition = positions[playerPositionIndex]!;
+    const newPlayerPosition: PlayerPosition = {
+      ...playerPosition,
+      mathIndex
+    }
+
+    await update(ref(db, `rooms/${roomId}/playerPositions/${playerPositionIndex}`), newPlayerPosition);
+  }, [positions, roomId])
+}
+
 export const useSynchronizePlayerPositions = (roomId: string) => {
   const setPositions = useSetRecoilState(PlayerPositionsState(roomId));
   useEffect(() => {
