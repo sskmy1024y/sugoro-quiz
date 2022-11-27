@@ -1,16 +1,25 @@
+import {MISSIONS} from "config/Missions";
+
 export enum Rooms {
   Room1 = "room1",
   Room2 = "room2",
   Room3 = "room3",
+  Room4 = "room4",
+  Room5 = "room5",
+  Room6 = "room6",
 }
 
-interface Math {
+type Math = {
   x: number,
   y: number,
   w: number,
   h: number,
-  forceStop: boolean
-}
+} & ({
+  forceStop: false,
+} | {
+  forceStop: true,
+  missionId: string,
+})
 
 export const MathPosition: Math[] = [
   {
@@ -60,7 +69,8 @@ export const MathPosition: Math[] = [
     y: 75,
     w: 24,
     h: 17,
-    forceStop: true
+    forceStop: true,
+    missionId: "math_mission1"
   },
   {
     x: 26,
@@ -88,7 +98,8 @@ export const MathPosition: Math[] = [
     y: 74,
     w: 24,
     h: 19,
-    forceStop: true
+    forceStop: true,
+    missionId: "math_mission1"
   },
   {
     x: 82,
@@ -123,7 +134,8 @@ export const MathPosition: Math[] = [
     y: 9,
     w: 24,
     h: 22,
-    forceStop: true
+    forceStop: true,
+    missionId: "math_mission1"
   },
   {
     x: 58,
@@ -172,7 +184,8 @@ export const MathPosition: Math[] = [
     y: 56,
     w: 24,
     h: 18,
-    forceStop: true
+    forceStop: true,
+    missionId: "math_mission1"
   },
   {
     x: 50,
@@ -200,6 +213,7 @@ export const MathPosition: Math[] = [
     y: 31,
     w: 16,
     h: 21,
-    forceStop: true
+    forceStop: true,
+    missionId: "math_mission1"
   },
 ]

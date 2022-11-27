@@ -6,6 +6,11 @@ export type ProgressState =
   | "next-waiting" // 次へ押し待ち
   | "event-waiting" // イベント待ち
   // TODO: イベント周りのprogressを追加する
+  | "game-prepare" // ゲーム準備中
+  | "game-start" // ゲーム開始
+  | "game-end" // ゲーム終了（結果画面）
+
+  // -------------
   | "next-waiting" // 次のターン待ち → "dice-waiting"になる
   | "goal" // 誰かがゴールした
   | "result"  // 結果発表
