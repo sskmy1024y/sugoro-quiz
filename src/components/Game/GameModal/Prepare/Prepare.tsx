@@ -1,4 +1,4 @@
-import {Button, Heading, ModalBody, ModalFooter, ModalHeader, Text, VStack} from "@chakra-ui/react";
+import { Heading, ModalBody, ModalHeader, Text, VStack} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {MissionRule} from "models/Mission";

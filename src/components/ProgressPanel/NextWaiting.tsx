@@ -1,10 +1,7 @@
-import {Box, Button, Card, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
-import {useOnNextTurn, useProgress, useSyncronizedProgress, useUpdateProgress} from "store/Progress";
-import {useCallback, useMemo} from "react";
+import {Box, Button, CardBody, CardHeader, Heading} from "@chakra-ui/react";
+import {useOnNextTurn, useProgress} from "store/Progress";
+import { useMemo} from "react";
 import {LoginUser} from "models/User";
-import {Progress} from "models/ProgressState";
-import {ref, set, update} from "firebase/database";
-import {db} from "config/firebase";
 import {useRoomMembers} from "store/Members";
 import {Dice} from "components/Dice";
 import {SkipButton} from "components/ProgressPanel/SkipButton";

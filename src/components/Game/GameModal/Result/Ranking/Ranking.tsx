@@ -1,6 +1,6 @@
 import {useOrderPlayer} from "store/OrderPlayer";
 import {useMemo} from "react";
-import {Heading, HStack, Stack, VStack} from "@chakra-ui/react";
+import {Heading, Stack, VStack} from "@chakra-ui/react";
 import {MemberItem} from "./MemberItem";
 
 interface Props {

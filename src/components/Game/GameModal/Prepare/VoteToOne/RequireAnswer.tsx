@@ -1,4 +1,4 @@
-import {Box, Button, HStack, Text, VStack} from "@chakra-ui/react";
+import { Button, HStack, Text, VStack} from "@chakra-ui/react";
 import {UserAvatar} from "components/common/UserAvatar";
 import {LoginUser, User} from "models/User";
 import {CombinedGame} from "models/Game";

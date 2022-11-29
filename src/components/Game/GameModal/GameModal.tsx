@@ -1,11 +1,7 @@
 import {
-  Heading,
   Modal,
-  Text,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay, VStack, Box
+  ModalOverlay
 } from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";

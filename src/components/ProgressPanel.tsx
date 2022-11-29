@@ -1,4 +1,4 @@
-import {Box, Button, Card, CardBody, Text} from "@chakra-ui/react";
+import { Card} from "@chakra-ui/react";
 import {useProgress} from "store/Progress";
 import {LoginUser} from "models/User";
 import {NotStarted} from "components/ProgressPanel/NotStarted";

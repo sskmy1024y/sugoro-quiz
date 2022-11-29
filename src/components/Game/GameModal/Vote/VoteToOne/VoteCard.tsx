@@ -5,7 +5,6 @@ import {CombinedGame} from "models/Game";
 import {useVoteGame} from "store/Game";
 import {useCallback, useMemo} from "react";
 import {CannotVoteCard} from "components/Game/GameModal/CannotVoteCard";
-import {useTime} from "hooks/useTime";
 
 interface Props {
   loginUser: LoginUser
@@ -14,7 +13,6 @@ interface Props {
 }
 
 export const VoteCard = ({loginUser, game, targetUser}: Props) => {
-  const now = useTime(500)
   const onVote = useVoteGame(loginUser.roomId, game.key);
 
   const isJoined = useMemo(() => game.gamePlayers.some(v => v.player.id === loginUser.id), [game.gamePlayers, loginUser.id]);

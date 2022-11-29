@@ -1,6 +1,5 @@
 import {User} from "models/User";
 import {
-  Avatar,
   Box,
   Card,
   CardBody,

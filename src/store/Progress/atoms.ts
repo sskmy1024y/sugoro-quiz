@@ -1,4 +1,4 @@
-import {atom, atomFamily} from "recoil";
+import { atomFamily} from "recoil";
 import {Progress} from "models/ProgressState";
 
 export const ProgressState = atomFamily<Progress, string>({

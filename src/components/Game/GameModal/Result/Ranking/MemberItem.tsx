@@ -1,24 +1,13 @@
 import {User} from "models/User";
 import {
-  Avatar,
   Badge,
-  Box,
   Card,
   CardBody,
   Flex,
   Heading,
-  IconButton, Menu,
-  MenuButton, MenuItem,
-  MenuList,
-  Text,
   VStack
 } from "@chakra-ui/react";
-import {useIsIncludePlayer, useOrderPlayer} from "store/OrderPlayer";
-import {BsThreeDotsVertical} from "react-icons/all";
-import {useCallback, useMemo} from "react";
-import {ref, set} from "firebase/database";
-import {db} from "config/firebase";
-import {usePlayerPositions} from "store/PlayerPosition";
+import { useMemo} from "react";
 import {UserAvatar} from "components/common/UserAvatar";
 
 interface Props {

@@ -1,12 +1,10 @@
-import {Button, Heading, ModalBody, ModalFooter, ModalHeader, Text, VStack} from "@chakra-ui/react";
+import { Heading, ModalBody, ModalHeader, Text, VStack} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {MissionRule} from "models/Mission";
 import {VoteToOne} from "./VoteToOne";
-import {useCallback, useMemo} from "react";
-import {useOnNextTurn, useUpdateProgress} from "store/Progress";
-import {ref, set} from "firebase/database";
-import {db} from "config/firebase";
+import { useMemo} from "react";
+import {useOnNextTurn} from "store/Progress";
 import {Ranking} from "components/Game/GameModal/Result/Ranking";
 
 interface Props {

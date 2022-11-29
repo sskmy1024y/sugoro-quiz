@@ -1,6 +1,6 @@
-import {Button, Card, CardBody, HStack, Text, VStack} from "@chakra-ui/react";
+import { Card, CardBody, Text, VStack} from "@chakra-ui/react";
 import {UserAvatar} from "components/common/UserAvatar";
-import {CombinedGame, CombinedGamePlayer, CombinedGamePlayerVote} from "models/Game";
+import { CombinedGamePlayer} from "models/Game";
 
 type Props = CombinedGamePlayer;
 

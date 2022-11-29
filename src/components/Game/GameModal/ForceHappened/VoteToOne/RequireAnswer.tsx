@@ -1,9 +1,7 @@
-import {Box, Button, HStack, Text, VStack} from "@chakra-ui/react";
+import { Button, Text, VStack} from "@chakra-ui/react";
 import {UserAvatar} from "components/common/UserAvatar";
 import {LoginUser, User} from "models/User";
 import {CombinedGame} from "models/Game";
-import {useMemo} from "react";
-import {VoteMemberCard} from "components/Game/GameModal/VoteMemberCard";
 
 interface Props {
   loginUser: LoginUser;

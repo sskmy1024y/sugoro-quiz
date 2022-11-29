@@ -6,7 +6,7 @@ import {
   Heading,
   Stack,
   Input,
-  VStack, Select, Button, Avatar, FormControl
+  VStack, Select, Button, Avatar
 } from "@chakra-ui/react";
 import React, {ChangeEvent, FormEvent, useCallback, useEffect} from "react";
 import {Rooms} from "config/Constants";

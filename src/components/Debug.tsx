@@ -1,11 +1,6 @@
-import {Box, Button, Card, CardBody, Text} from "@chakra-ui/react";
-import {useCurrentPlayer, useProgress} from "store/Progress";
+import { Button} from "@chakra-ui/react";
+import {useCurrentPlayer} from "store/Progress";
 import {LoginUser} from "models/User";
-import {NotStarted} from "components/ProgressPanel/NotStarted";
-import {DiceRolling} from "components/ProgressPanel/DiceRolling";
-import {DiceWaiting} from "components/ProgressPanel/DiceWaiting";
-import {DiceRolled} from "components/ProgressPanel/DiceRolled";
-import {NextWaiting} from "components/ProgressPanel/NextWaiting";
 import {useSetNewGame} from "store/Game";
 
 type Props = {

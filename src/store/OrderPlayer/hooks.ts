@@ -2,7 +2,7 @@ import {onValue, ref} from "firebase/database";
 import {useRecoilValue, useSetRecoilState} from "recoil";
 import {OrderPlayerIdsState} from "./atoms";
 import {db} from "config/firebase";
-import {useCallback, useEffect, useMemo} from "react";
+import { useEffect, useMemo} from "react";
 import {useRoomMembers} from "store/Members";
 
 export const useOrderPlayer = (roomId: string) => {

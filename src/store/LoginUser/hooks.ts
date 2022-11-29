@@ -1,7 +1,7 @@
 import {useRecoilState, useRecoilValue} from "recoil";
 import {LoginUserState} from "./atoms";
 import {LoginUser, User} from "models/User";
-import { ref, child, get } from "firebase/database";
+import { ref, get } from "firebase/database";
 import {db} from "config/firebase";
 
 export const useLoginUser = () => {

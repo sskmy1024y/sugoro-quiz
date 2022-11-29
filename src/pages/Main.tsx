@@ -3,14 +3,12 @@ import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {LoginUser} from "models/User";
 import {MemberList} from "components/MemberList";
-import {Container, useDisclosure} from "@chakra-ui/react";
+import {Container} from "@chakra-ui/react";
 import {Header} from "components/Header";
 import {ProgressPanel} from "components/ProgressPanel";
 import {SubscribeProvider} from "components/SubscribeProvider";
 import {SugorokuBoard} from "components/SugorokuBoard";
 import {Game} from "components/Game/Game";
-import {Simulate} from "react-dom/test-utils";
-import progress = Simulate.progress;
 import {Debug} from "components/Debug";
 
 export const Main = () => {

@@ -1,5 +1,4 @@
-import {atom, atomFamily, selectorFamily} from "recoil";
-import {Progress} from "models/ProgressState";
+import { selectorFamily} from "recoil";
 import {User} from "models/User";
 import {ProgressState} from "store/Progress/atoms";
 import {MembersState} from "store/Members/atoms";

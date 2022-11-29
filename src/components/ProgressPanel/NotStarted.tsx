@@ -1,13 +1,10 @@
-import {Box, Button, Card, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
-import {useProgress, useSyncronizedProgress} from "store/Progress";
-import {useCallback, useMemo} from "react";
+import { Button, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
+import {useCallback} from "react";
 import {LoginUser} from "models/User";
-import {Progress} from "models/ProgressState";
 import {ref, set} from "firebase/database";
 import {db} from "config/firebase";
 import {useRoomMembers} from "store/Members";
 import {PlayerPosition} from "models/PlayerPosition";
-import {Dice} from "components/Dice";
 
 type Props = {
   loginUser: LoginUser;

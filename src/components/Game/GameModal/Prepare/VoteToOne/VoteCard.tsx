@@ -3,7 +3,7 @@ import {UserAvatar} from "components/common/UserAvatar";
 import {LoginUser, User} from "models/User";
 import {CombinedGame} from "models/Game";
 import {useVoteGame} from "store/Game";
-import {useCallback, useMemo} from "react";
+import { useMemo} from "react";
 import {CannotVoteCard} from "components/Game/GameModal/CannotVoteCard";
 import {useTime} from "hooks/useTime";
 import {SkipButton} from "components/Game/GameModal/SkipButton";
