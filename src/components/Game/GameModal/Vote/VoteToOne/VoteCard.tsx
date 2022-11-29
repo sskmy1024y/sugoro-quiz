@@ -17,7 +17,6 @@ export const VoteCard = ({loginUser, game, targetUser}: Props) => {
   const now = useTime(500)
   const onVote = useVoteGame(loginUser.roomId, game.key);
 
-  const timeLimited = useMemo(() => (game.timeoutAt - now) / 1000 < 0, [game.timeoutAt, now])
   const isJoined = useMemo(() => game.gamePlayers.some(v => v.player.id === loginUser.id), [game.gamePlayers, loginUser.id]);
 
   const isVoted = useCallback((vote: "good" | "bad") => {
@@ -47,7 +46,6 @@ export const VoteCard = ({loginUser, game, targetUser}: Props) => {
             colorScheme='red'
             variant={isVoted("bad") ? "solid" : "outline"}
             size='lg'
-            disabled={timeLimited}
             onClick={onVote("bad", targetUser.id)}
           >
             {"🤔"}
@@ -59,7 +57,6 @@ export const VoteCard = ({loginUser, game, targetUser}: Props) => {
             colorScheme='twitter'
             variant={isVoted("good") ? "solid" : "outline"}
             size='lg'
-            disabled={timeLimited}
             onClick={onVote("good", targetUser.id)}
           >
             {"👍"}

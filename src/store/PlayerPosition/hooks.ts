@@ -6,7 +6,6 @@ import {useCallback, useEffect, useMemo} from "react";
 import {useRoomMembers} from "store/Members";
 import {PlayerPosition} from "models/PlayerPosition";
 import {User} from "models/User";
-import {MathPosition} from "config/Constants";
 
 export const usePlayerPositions = (roomId: string) => {
   const positions = useRecoilValue(PlayerPositionsState(roomId));
@@ -30,7 +29,7 @@ export const useUpdatePlayerPosition = (roomId: string, playerId: string) => {
     const playerPosition = positions[playerPositionIndex]!;
     const newPlayerPosition: PlayerPosition = {
       ...playerPosition,
-      mathIndex: Math.min(playerPosition.mathIndex + diff, MathPosition.length -1)
+      mathIndex: playerPosition.mathIndex + diff
     }
 
     await update(ref(db, `rooms/${roomId}/playerPositions/${playerPositionIndex}`), newPlayerPosition);

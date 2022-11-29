@@ -4,7 +4,7 @@ import {CombinedGame} from "models/Game";
 import {VoteCard} from "./VoteCard";
 import {VoteMemberCard} from "components/Game/GameModal/VoteMemberCard";
 import {useMemo} from "react";
-import {RequireAnswer} from "components/Game/GameModal/Vote/VoteToOne/RequireAnswer";
+import {RequireAnswer} from "./RequireAnswer";
 
 interface Props {
   loginUser: LoginUser;

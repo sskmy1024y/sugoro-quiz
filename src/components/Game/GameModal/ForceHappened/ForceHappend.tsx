@@ -1,4 +1,4 @@
-import {Button, Flex, Heading, ModalBody, ModalFooter, ModalHeader, Text, VStack} from "@chakra-ui/react";
+import {Flex, Heading, ModalBody} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {useCallback, useMemo} from "react";

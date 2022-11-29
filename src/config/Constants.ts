@@ -1,5 +1,3 @@
-import {MISSIONS} from "config/Missions";
-
 export enum Rooms {
   Room1 = "room1",
   Room2 = "room2",
@@ -99,7 +97,7 @@ export const MathPosition: Math[] = [
     w: 24,
     h: 19,
     forceStop: true,
-    missionId: "math_mission1"
+    missionId: "math_mission2"
   },
   {
     x: 82,
@@ -135,7 +133,7 @@ export const MathPosition: Math[] = [
     w: 24,
     h: 22,
     forceStop: true,
-    missionId: "math_mission1"
+    missionId: "math_mission3"
   },
   {
     x: 58,
@@ -185,7 +183,7 @@ export const MathPosition: Math[] = [
     w: 24,
     h: 18,
     forceStop: true,
-    missionId: "math_mission1"
+    missionId: "math_mission4"
   },
   {
     x: 50,
@@ -214,6 +212,13 @@ export const MathPosition: Math[] = [
     w: 16,
     h: 21,
     forceStop: true,
-    missionId: "math_mission1"
+    missionId: "math_mission5"
+  },
+  {
+    x: 50,
+    y: 31,
+    w: 8,
+    h: 11,
+    forceStop: false
   },
 ]

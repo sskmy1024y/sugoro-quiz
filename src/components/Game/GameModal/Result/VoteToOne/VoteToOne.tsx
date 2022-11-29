@@ -1,8 +1,6 @@
 import {Button, Divider, HStack, ModalBody, Text, VStack} from "@chakra-ui/react";
 import {LoginUser, User} from "models/User";
 import {CombinedGame} from "models/Game";
-import {VoteCard} from "./VoteCard";
-import {RequireAnswer} from "./RequireAnswer";
 import {useMemo} from "react";
 import {UserAvatar} from "components/common/UserAvatar";
 import {SkipButton} from "components/Game/GameModal/SkipButton";

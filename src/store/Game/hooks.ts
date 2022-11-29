@@ -1,9 +1,9 @@
 import {limitToLast, onValue, orderByChild, push, query, ref, set} from "firebase/database";
-import {useRecoilCallback, useRecoilValue, useSetRecoilState} from "recoil";
+import {useRecoilValue, useSetRecoilState} from "recoil";
 import {LatestGameState} from "./atoms";
 import {db} from "config/firebase";
 import {useCallback, useEffect} from "react";
-import {MISSIONS} from "config/Missions";
+import {ALL_MISSIONS} from "config/Missions";
 import {CombinedGame, Game} from "models/Game";
 import {useOrderPlayer} from "store/OrderPlayer";
 import {MissionRule} from "models/Mission";
@@ -44,7 +44,7 @@ export const useSetNewGame = (roomId: string) => {
   const members = useOrderPlayer(roomId);
 
   return useCallback(async (missionId: string, targetPlayerId?: string) => {
-    const mission = MISSIONS.find((m) => m.id === missionId);
+    const mission = ALL_MISSIONS.find((m) => m.id === missionId);
     if (!mission) {
       console.warn(`Mission not found. missionId: ${missionId}`);
       return;

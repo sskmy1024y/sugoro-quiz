@@ -1,7 +1,6 @@
 import {selectorFamily} from "recoil";
 import {CombinedGame, CombinedGamePlayer, CombinedGamePlayerVote} from "models/Game";
-import {MISSIONS} from "config/Missions";
-import {User} from "models/User";
+import {ALL_MISSIONS} from "config/Missions";
 import {LatestGameState} from "store/Game/atoms";
 import {MembersState} from "store/Members/atoms";
 
@@ -16,7 +15,7 @@ export const LatestGameSelectorState = selectorFamily<CombinedGame | null, strin
       return null;
     }
 
-    const mission = MISSIONS.find(m => m.id === game?.missionId);
+    const mission = ALL_MISSIONS.find(m => m.id === game?.missionId);
     if (!mission) {
       console.warn("mission is null");
       return null;
