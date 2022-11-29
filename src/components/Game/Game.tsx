@@ -17,8 +17,10 @@ export const Game = ({loginUser}: Props) => {
   useEffect(() => {
     if (progress.state.startsWith("game-")) {
       onOpen();
+    } else {
+      onClose();
     }
-  }, [onOpen, progress.state])
+  }, [onClose, onOpen, progress.state])
 
   if (!latestGame) return null;
 

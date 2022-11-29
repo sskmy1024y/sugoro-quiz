@@ -40,36 +40,8 @@ export const VoteCard = ({loginUser, game, targetUser, onSkip}: Props) => {
           <UserAvatar user={targetUser} size={"xl"} />
           <Text fontWeight={"bold"}>{targetUser.name}</Text>
         </VStack>
-        <Text fontSize={"md"}>制限時間: {game.mission.timeout}秒</Text>
-        <Button colorScheme={"twitter"} isLoading loadingText={"ミッション開始待ち"} />
+        <Button colorScheme={"twitter"} isLoading loadingText={"準備中"} />
       </VStack>
-      <Text>{`${targetUser.name}さんがミッションをクリアしたら、いいねボタンを押してね！`}</Text>
-      <HStack w={"100%"} justifyContent={"center"} spacing={8}>
-        <VStack spacing={2}>
-          <Button
-            colorScheme='red'
-            variant={"outline"}
-            size='lg'
-            disabled={timeLimited}
-            onClick={onVote("good", targetUser.id)}
-          >
-            {"🤔"}
-          </Button>
-          <Text>うーん</Text>
-        </VStack>
-        <VStack spacing={2}>
-          <Button
-            colorScheme='twitter'
-            variant={"outline"}
-            size='lg'
-            disabled={timeLimited}
-            onClick={onVote("bad", targetUser.id)}
-          >
-            {"👍"}
-          </Button>
-          <Text>いいね！</Text>
-        </VStack>
-      </HStack>
       <SkipButton onClick={onSkip} confirmText={`このミッションをスキップしますか？（${targetUser.name}さんが参加できない場合はスキップしてね）`}>このミッションをスキップする</SkipButton>
     </VStack>
   )

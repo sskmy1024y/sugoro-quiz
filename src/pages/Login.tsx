@@ -60,13 +60,16 @@ export const Login = () => {
     }
 
     const user: User = {
+      key: "", // Dummy key
       id: userId,
       name,
-      iconUrl
+      iconUrl,
+      point: 0,
     }
 
+    const {key, ...value} = user;
     await set(push(ref(db, `rooms/${roomId}/users`)), {
-      ...user,
+      ...value,
       iconUrl: iconUrl ?? null
     }).then(async () => {
       const loginUser = {...user, roomId}

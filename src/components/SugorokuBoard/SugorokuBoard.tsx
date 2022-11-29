@@ -2,20 +2,24 @@ import {Box, Wrap, WrapItem} from "@chakra-ui/react";
 import {usePlayerPositions, useUpdatePlayerAbsolutePosition} from "store/PlayerPosition";
 import {useCallback, useEffect, useState} from "react";
 import {MathPosition} from "config/Constants";
-import {useCurrentPlayer} from "store/Progress";
+import {useCurrentPlayer, useUpdateProgress} from "store/Progress";
 import {UserAvatar} from "components/common/UserAvatar";
+import {useSetNewGame} from "store/Game";
+import {LoginUser} from "models/User";
 
 interface Props {
-  roomId: string;
+  loginUser: LoginUser;
 }
 
 const DEBUG = process.env.NODE_ENV === "development";
 
-export const SugorokuBoard = ({roomId}: Props) => {
-  const positions = usePlayerPositions(roomId);
-  const updatePosition = useUpdatePlayerAbsolutePosition(roomId);
+export const SugorokuBoard = ({loginUser}: Props) => {
+  const positions = usePlayerPositions(loginUser.roomId);
+  const updatePosition = useUpdatePlayerAbsolutePosition(loginUser.roomId);
+  const updateProgress = useUpdateProgress(loginUser.roomId);
   const [stepPositons, setStepPositions] = useState(positions);
-  const currentPlayer = useCurrentPlayer(roomId);
+  const currentPlayer = useCurrentPlayer(loginUser.roomId);
+  const setGame = useSetNewGame(loginUser.roomId)
 
   const existPlayers = useCallback((mathIndex: number) => {
     return stepPositons.filter(position => position.mathIndex === mathIndex)
@@ -60,9 +64,13 @@ export const SugorokuBoard = ({roomId}: Props) => {
       const nextMath = MathPosition[next];
       if (nextMath.forceStop && !isFirstStep) { // 既に止まっていた場合（次の一歩）の場合は無視
         // 強制停止マスに止まった場合はアニメーション終了
-        // 現在地でデータを上書き
-        if (currentPlayer?.id) updatePosition(currentPlayer.id, next);
-        // TODO: 強制マスゲームを実施
+        // NOTE: 強制マスゲームを実施
+        if (currentPlayer) {
+          setGame(nextMath.missionId, currentPlayer.id).then(async () => {
+            await updatePosition(currentPlayer.id, next)
+            await updateProgress({state: "game-force-happened"});
+          })
+        }
         return;
       }
 
@@ -98,7 +106,7 @@ export const SugorokuBoard = ({roomId}: Props) => {
                 top={`${position.y}%`}
                 w={`${position.w}%`}
                 h={`${position.h}%`}
-                bg={DEBUG ? "rgba(255,0,0,0.5)" : "transparent"}
+                // bg={DEBUG ? "rgba(255,0,0,0.5)" : "transparent"}
                 p={"10px"}
                 overflow={"hidden"}
               >

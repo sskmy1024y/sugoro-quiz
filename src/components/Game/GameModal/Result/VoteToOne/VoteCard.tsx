@@ -6,14 +6,16 @@ import {useVoteGame} from "store/Game";
 import {useCallback, useMemo} from "react";
 import {CannotVoteCard} from "components/Game/GameModal/CannotVoteCard";
 import {useTime} from "hooks/useTime";
+import {SkipButton} from "components/Game/GameModal/SkipButton";
 
 interface Props {
   loginUser: LoginUser
   game: CombinedGame
   targetUser: User;
+  onSkip: () => void;
 }
 
-export const VoteCard = ({loginUser, game, targetUser}: Props) => {
+export const VoteCard = ({loginUser, game, targetUser, onSkip}: Props) => {
   const now = useTime(500)
   const onVote = useVoteGame(loginUser.roomId, game.key);
 
@@ -29,26 +31,29 @@ export const VoteCard = ({loginUser, game, targetUser}: Props) => {
   }
 
   return (
-    <VStack
-      m={"0 auto"}
-      spacing={"24px"}
-      border={"1px solid #ddd"}
-      p={"16px 24px"}
-      borderRadius={"16px"}
-    >
-      <Text fontWeight={"bold"}>ミッションクリアした？</Text>
-      <VStack alignItems={"center"}>
-        <UserAvatar user={targetUser} size={"xl"} />
-        <Text fontWeight={"bold"}>{targetUser.name}</Text>
+    <VStack spacing={8} m={"0 auto"} w={"100%"}>
+      <VStack
+        m={"0 auto"}
+        spacing={"24px"}
+        border={"1px solid #ddd"}
+        p={"16px 24px"}
+        borderRadius={"16px"}
+      >
+        <VStack alignItems={"center"}>
+          <UserAvatar user={targetUser} size={"xl"} />
+          <Text fontWeight={"bold"}>{targetUser.name}</Text>
+        </VStack>
+        <Text fontSize={"md"}>獲得ポイント: {game.mission.timeout}秒</Text>
       </VStack>
+      <Text>{`${targetUser.name}さんがミッションをクリアしたら、いいねボタンを押してね！`}</Text>
       <HStack w={"100%"} justifyContent={"center"} spacing={8}>
         <VStack spacing={2}>
           <Button
             colorScheme='red'
-            variant={isVoted("bad") ? "solid" : "outline"}
+            variant={isVoted("good") ? "solid" : "outline"}
             size='lg'
             disabled={timeLimited}
-            onClick={onVote("bad", targetUser.id)}
+            onClick={onVote("good", targetUser.id)}
           >
             {"🤔"}
           </Button>
@@ -57,16 +62,17 @@ export const VoteCard = ({loginUser, game, targetUser}: Props) => {
         <VStack spacing={2}>
           <Button
             colorScheme='twitter'
-            variant={isVoted("good") ? "solid" : "outline"}
+            variant={isVoted("bad") ? "solid" : "outline"}
             size='lg'
             disabled={timeLimited}
-            onClick={onVote("good", targetUser.id)}
+            onClick={onVote("bad", targetUser.id)}
           >
             {"👍"}
           </Button>
           <Text>いいね！</Text>
         </VStack>
       </HStack>
+      <SkipButton onClick={onSkip} confirmText={`このミッションをスキップしますか？（${targetUser.name}さんが参加できない場合はスキップしてね）`}>このミッションをスキップする</SkipButton>
     </VStack>
   )
 }

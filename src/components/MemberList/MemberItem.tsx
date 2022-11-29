@@ -56,7 +56,7 @@ export const MemberItem = ({roomId, member}: Props) => {
             <UserAvatar user={member} />
             <Box>
               <Heading size='sm' minW={"74px"}>{member.name}</Heading>
-              <Text>{isIncludePlayer ? "参加中" : "未参加"}</Text>
+              <Text>{isIncludePlayer ? `${member.point}pt` : "未参加"}</Text>
             </Box>
           </Flex>
           <Menu>

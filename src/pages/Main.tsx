@@ -40,9 +40,9 @@ export const Main = () => {
     <SubscribeProvider roomId={loginUser.roomId}>
       <Container maxW='8xl'>
         <Header loginUser={loginUser} />
-        <MemberList roomId={loginUser.roomId} />
+        <MemberList loginUser={loginUser} />
         <ProgressPanel loginUser={loginUser} />
-        <SugorokuBoard roomId={loginUser.roomId} />
+        <SugorokuBoard loginUser={loginUser} />
         {process.env.NODE_ENV === "development" && <Debug loginUser={loginUser} />}
       </Container>
       <Game loginUser={loginUser} />

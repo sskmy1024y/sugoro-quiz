@@ -16,7 +16,10 @@ export const useSynchronizeRoomMembers = (roomId: string) => {
     const unsubscribe = onValue(refs, snapshot => {
       const members: User[] = [];
       snapshot.forEach(childSnapshot => {
-        members.push(childSnapshot.val());
+        members.push({
+          key: childSnapshot.key!,
+          ...childSnapshot.val()
+        });
       });
       setMembers(members)
     })

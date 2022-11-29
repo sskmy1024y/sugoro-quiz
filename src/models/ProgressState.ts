@@ -6,6 +6,8 @@ export type ProgressState =
   | "next-waiting" // 次へ押し待ち
   | "event-waiting" // イベント待ち
   // TODO: イベント周りのprogressを追加する
+  | "game-happened" // ゲーム発生
+  | "game-force-happened" // ゲーム発生（強制発生マス）
   | "game-prepare" // ゲーム準備中
   | "game-start" // ゲーム開始
   | "game-end" // ゲーム終了（結果画面）
