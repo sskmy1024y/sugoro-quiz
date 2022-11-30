@@ -2,7 +2,7 @@ import { Heading, ModalBody, ModalHeader, Text, VStack} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {MissionRule} from "models/Mission";
-import {VoteToOne} from "./VoteToOne";
+import {VoteToOneYN} from "./VoteToOneYN";
 import {useCallback, useMemo} from "react";
 import {useUpdateProgress} from "store/Progress";
 import {ref, set} from "firebase/database";
@@ -41,7 +41,7 @@ export const Prepare = ({loginUser, latestGame}: Props) => {
       </ModalHeader>
       <ModalBody>
         {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
-          <VoteToOne loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />
+          <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />
         ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
           <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNext} />
         ) : null}

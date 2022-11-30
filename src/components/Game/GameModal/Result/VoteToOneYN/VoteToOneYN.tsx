@@ -12,7 +12,7 @@ interface Props {
   onNext: () => void;
 }
 
-export const VoteToOne = ({loginUser, targetUser, game, onNext}: Props) => {
+export const VoteToOneYN = ({loginUser, targetUser, game, onNext}: Props) => {
   const getPoint = useMemo(() => {
     return game.gamePlayers
       .map(v => v.voteTo.find(v => v.id === targetUser.id)?.vote)

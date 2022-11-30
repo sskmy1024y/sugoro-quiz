@@ -11,7 +11,7 @@ interface Props {
   onNext: () => void;
 }
 
-export const VoteToOne = ({loginUser, targetUser, game, onNext}: Props) => {
+export const VoteToOneYN = ({loginUser, targetUser, game, onNext}: Props) => {
   return (
     <ModalBody>
       {loginUser.id === targetUser.id ? (

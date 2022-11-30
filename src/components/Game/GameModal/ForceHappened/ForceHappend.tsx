@@ -4,7 +4,7 @@ import {CombinedGame} from "models/Game";
 import {useCallback, useMemo} from "react";
 import {useUpdateProgress} from "store/Progress";
 import {MissionRule} from "models/Mission";
-import {VoteToOne} from "./VoteToOne";
+import {VoteToOneYN} from "./VoteToOneYN";
 import {VoteToOtherYN} from "./VoteToOtherYN";
 
 interface Props {
@@ -27,7 +27,7 @@ export const ForceHappened = ({loginUser, latestGame}: Props) => {
           <Heading size={"lg"}>緊急ミッション発生！</Heading>
         </Flex>
         {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
-          <VoteToOne loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />
+          <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />
         ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
           <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNext} />
         ) : null}

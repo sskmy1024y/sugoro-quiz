@@ -10,7 +10,7 @@ interface Props {
   onNext: () => void;
 }
 
-export const RequireAnswer = ({loginUser, targetUser, game, onNext}: Props) => {
+export const RequireAnswer = ({loginUser, onNext}: Props) => {
   return (
     <VStack spacing={8} m={"0 auto"} w={"100%"}>
       <VStack

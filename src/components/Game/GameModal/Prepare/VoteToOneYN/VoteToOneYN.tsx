@@ -11,13 +11,13 @@ interface Props {
   onNext: () => void;
 }
 
-export const VoteToOne = ({loginUser, targetUser, game, onNext}: Props) => {
+export const VoteToOneYN = ({loginUser, targetUser, game, onNext}: Props) => {
   return (
     <ModalBody>
       {loginUser.id === targetUser.id ? (
         <RequireAnswer loginUser={loginUser} game={game} targetUser={targetUser} onNext={onNext} />
       ) : (
-        <VoteCard loginUser={loginUser} game={game} targetUser={targetUser} />
+        <VoteCard loginUser={loginUser} game={game} targetUser={targetUser} onSkip={onNext} />
       )}
     </ModalBody>
   )
