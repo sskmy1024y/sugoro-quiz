@@ -6,7 +6,7 @@ export const ProgressState = atomFamily<Progress, string>({
   default: {
     currentPlayerId: undefined,
     dice: undefined,
-    state: "not-started",
+    state: "not-start",
   }
 })
 

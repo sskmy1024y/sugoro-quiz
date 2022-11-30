@@ -15,7 +15,7 @@ export const ProgressPanel = ({loginUser}: Props) => {
   const progress = useProgress(loginUser.roomId);
   return (
     <Card>
-      {progress.state === "not-started" ? (
+      {progress.state === "not-start" ? (
         <NotStarted loginUser={loginUser} />
       ) : progress.state === "dice-waiting" ? (
         <DiceWaiting loginUser={loginUser} />

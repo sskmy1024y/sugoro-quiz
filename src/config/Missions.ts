@@ -37,7 +37,7 @@ export const FORCE_MISSIONS: Mission[] = [
 export const MISSIONS: Mission[] = [
   {
     id: 'mission1',
-    mission: "3Qで一番、もしくは今年で一番、感情が動いた仕事のエピソードを教えて",
+    mission: "3Qで一番、もしくは今年で一番、感情が動いた仕事のエピソードを教えて（一人ずつ話してね）",
     rule: MissionRule.VoteToOtherYN,
     timeout: 60 * 5,
   },
@@ -47,6 +47,36 @@ export const MISSIONS: Mission[] = [
     rule: MissionRule.VoteToOtherYN,
     timeout: 60 * 3,
   },
+  {
+    id: 'mission3',
+    mission: "一人ずつ上長（あるいはチームメンバー）の紹介をカタカナ語禁止で話せ！",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60 * 5,
+  },
+  {
+    id: 'mission4',
+    mission: "今年一番の感謝を伝えたい人は？（一人ずつ話してね）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60 * 5,
+  },
+  {
+    id: 'mission5',
+    mission: "一人ずつ、今年一番の成功を話してね",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60 * 5,
+  },
+  {
+    id: 'mission6',
+    mission: "一人ずつ、今年一番のハッピーを話してね",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60 * 5,
+  },
+  {
+    id: 'mission7',
+    mission: "一人ずつ地元紹介選手権。故郷の魅力をプレゼンしろ！",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60 * 5,
+  }
 ]
 
 export const ALL_MISSIONS = [...FORCE_MISSIONS, ...MISSIONS];
