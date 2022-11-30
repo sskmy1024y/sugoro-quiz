@@ -6,6 +6,7 @@ import {useUpdateProgress} from "store/Progress";
 import {MissionRule} from "models/Mission";
 import {VoteToOneYN} from "./VoteToOneYN";
 import {VoteToOtherYN} from "./VoteToOtherYN";
+import {VoteToOne} from "components/Game/GameModal/Happened/VoteToOne";
 
 interface Props {
   loginUser: LoginUser;
@@ -30,6 +31,8 @@ export const Happened = ({loginUser, latestGame}: Props) => {
           <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />
         ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
           <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNext} />
+        ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (
+          <VoteToOne loginUser={loginUser} game={latestGame} onNext={onNext} />
         ) : null}
       </ModalBody>
     </>

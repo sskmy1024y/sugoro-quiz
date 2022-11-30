@@ -8,6 +8,7 @@ import {useUpdateProgress} from "store/Progress";
 import {ref, set} from "firebase/database";
 import {db} from "config/firebase";
 import {VoteToOtherYN} from "./VoteToOtherYN";
+import {VoteToOne} from "./VoteToOne";
 
 interface Props {
   loginUser: LoginUser;
@@ -44,6 +45,8 @@ export const Prepare = ({loginUser, latestGame}: Props) => {
           <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />
         ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
           <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNext} />
+        ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (
+          <VoteToOne loginUser={loginUser} game={latestGame} onNext={onNext} />
         ) : null}
       </ModalBody>
     </>

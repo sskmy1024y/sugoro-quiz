@@ -31,7 +31,7 @@ export const Debug = ({loginUser}: Props) => {
 
   return (
     <Portal>
-      <VStack position={"fixed"} bg={"white"} bottom={0} padding={"28px"} z-index={99999} alignItems={"flex-start"}>
+      <VStack position={"fixed"} bg={"white"} bottom={0} padding={"28px"} zIndex={99999} alignItems={"flex-start"}>
         <Button onClick={onNextTurn}>次の人へ</Button>
         <Button onClick={onStartMission}>ゲーム発生</Button>
         <InputGroup size='md'>

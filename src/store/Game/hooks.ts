@@ -128,3 +128,29 @@ export const useVoteGame = (roomId: string, gameKey: string) => {
     await set(voteRef, voteTo);
   },[game, gameKey, loginUser, roomId]);
 }
+
+
+export const useVoteToOneGame = (roomId: string, gameKey: string) => {
+  const loginUser = useRecoilValue(LoginUserState);
+  const game = useRecoilValue(LatestGameSelectorState(roomId));
+
+  return useCallback((targetPlayerId: string) => async () => {
+    if (!loginUser || !game) {
+      console.warn('Login user or game not found.');
+      return;
+    }
+    const gamePlayerIndex = game.gamePlayers.findIndex((v) => v.player.id === loginUser.id);
+    if (gamePlayerIndex === -1) {
+      console.warn('Game player not found.');
+      return;
+    }
+
+    const voteTo = [{
+      toPlayerId: targetPlayerId,
+      vote: 'good',
+    }]
+
+    const voteRef = ref(db, `rooms/${roomId}/games/${gameKey}/gamePlayers/${gamePlayerIndex}/voteTo`);
+    await set(voteRef, voteTo);
+  },[game, gameKey, loginUser, roomId]);
+}

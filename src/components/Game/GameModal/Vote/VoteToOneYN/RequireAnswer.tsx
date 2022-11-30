@@ -2,14 +2,13 @@ import { Text, VStack} from "@chakra-ui/react";
 import {UserAvatar} from "components/common/UserAvatar";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
-import {VotedView} from "components/Game/GameModal/Vote/VoteToOtherYN/VotedView";
 
 interface Props {
   loginUser: LoginUser
   game: CombinedGame
 }
 
-export const RequireAnswer = ({loginUser, game}: Props) => {
+export const RequireAnswer = ({loginUser}: Props) => {
   return (
     <VStack
       m={"0 auto"}
@@ -23,7 +22,6 @@ export const RequireAnswer = ({loginUser, game}: Props) => {
         <UserAvatar user={loginUser} size={"xl"} />
         <Text fontWeight={"bold"}>{loginUser.name}</Text>
       </VStack>
-      <VotedView player={loginUser} loginUser={loginUser} game={game} />
     </VStack>
   )
 }

@@ -2,7 +2,7 @@ import {Heading, ModalBody, ModalFooter, ModalHeader, Text, VStack} from "@chakr
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {MissionRule} from "models/Mission";
-import {VoteToOne} from "./VoteToOne";
+import {VoteToOneYN} from "./VoteToOneYN";
 import {useCallback, useMemo} from "react";
 import {TimeoutProgress} from "./TimeoutProgress";
 import {useUpdateProgress} from "store/Progress";
@@ -60,7 +60,7 @@ export const Vote = ({loginUser, latestGame}: Props) => {
       </ModalHeader>
       <ModalBody>
         {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
-          <VoteToOne loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} />
+          <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} />
         ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
           <VoteToOtherYN loginUser={loginUser} game={latestGame} />
         ) : null}
