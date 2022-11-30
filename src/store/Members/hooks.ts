@@ -1,8 +1,8 @@
-import {onValue, ref} from "firebase/database";
+import {onValue, ref, set} from "firebase/database";
 import {useRecoilValue, useSetRecoilState} from "recoil";
 import {MembersState} from "./atoms";
 import {db} from "config/firebase";
-import {useEffect} from "react";
+import {useCallback, useEffect} from "react";
 import {User} from "models/User";
 
 export const useRoomMembers = (roomId: string) => {
@@ -31,3 +31,9 @@ export const useSynchronizeRoomMembers = (roomId: string) => {
   ,[roomId, setMembers])
 }
 
+export const useSetUserPoint = (roomId: string) => {
+  return useCallback(async (user: User, point: number) => {
+    const refs = ref(db, `rooms/${roomId}/users/${user.key}/point`);
+    await set(refs, point)
+  }, [roomId])
+}

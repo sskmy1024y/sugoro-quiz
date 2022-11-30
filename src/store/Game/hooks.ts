@@ -8,14 +8,18 @@ import {CombinedGame, Game} from "models/Game";
 import {useOrderPlayer} from "store/OrderPlayer";
 import {MissionRule} from "models/Mission";
 import {User} from "models/User";
-import {LatestGameSelectorState} from "store/Game/selectors";
+import {GameQueueSelectorState, LatestGameSelectorState} from "store/Game/selectors";
 import {LoginUserState} from "store/LoginUser/atoms";
 
 export const useLatestGame = (roomId: string): CombinedGame | null => {
   return useRecoilValue(LatestGameSelectorState(roomId));
 }
 
-export const useSubscribeLatestGame = (roomId: string) => {
+export const useQueueGames = (roomId: string) => {
+  return useRecoilValue(GameQueueSelectorState(roomId));
+}
+
+export const useSubscribeGame = (roomId: string) => {
   const setLatestGame = useSetRecoilState(LatestGameState(roomId));
 
   useEffect(() => {

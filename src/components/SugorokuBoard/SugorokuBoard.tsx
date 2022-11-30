@@ -6,6 +6,7 @@ import {useCurrentPlayer, useUpdateProgress} from "store/Progress";
 import {UserAvatar} from "components/common/UserAvatar";
 import {useSetNewGame} from "store/Game";
 import {LoginUser} from "models/User";
+import {useSetUserPoint} from "store/Members";
 
 interface Props {
   loginUser: LoginUser;
@@ -20,6 +21,7 @@ export const SugorokuBoard = ({loginUser}: Props) => {
   const [stepPositons, setStepPositions] = useState(positions);
   const currentPlayer = useCurrentPlayer(loginUser.roomId);
   const setGame = useSetNewGame(loginUser.roomId)
+  const setUserPoint = useSetUserPoint(loginUser.roomId)
 
   const existPlayers = useCallback((mathIndex: number) => {
     return stepPositons.filter(position => (position.mathIndex % MathPosition.length) === mathIndex)
@@ -55,9 +57,9 @@ export const SugorokuBoard = ({loginUser}: Props) => {
       });
 
       if (MathPosition.length - 1 <= next) {
-        // ゴール（もしくはそれ以上）に泊まった場合は、pt追加
-        if (currentPlayer) {
-
+        // NOTE: ゴール（もしくはそれ以上）に泊まった場合は、pt追加
+        if (currentPlayer && loginUser.id === currentPlayer.id) {
+          setUserPoint(currentPlayer, currentPlayer.point + 1);
         }
       }
 
@@ -65,7 +67,7 @@ export const SugorokuBoard = ({loginUser}: Props) => {
       if (nextMath.forceStop && !isFirstStep) { // 既に止まっていた場合（次の一歩）の場合は無視
         // 強制停止マスに止まった場合はアニメーション終了
         // NOTE: 強制マスゲームを実施
-        if (currentPlayer) {
+        if (currentPlayer && loginUser.id === currentPlayer.id) {
           setGame(nextMath.missionId, currentPlayer.id).then(async () => {
             await updatePosition(currentPlayer.id, next)
             await updateProgress({state: "game-force-happened"});
