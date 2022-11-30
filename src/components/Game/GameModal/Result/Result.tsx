@@ -6,6 +6,7 @@ import {VoteToOne} from "./VoteToOne";
 import { useMemo} from "react";
 import {useOnNextTurn} from "store/Progress";
 import {Ranking} from "components/Game/GameModal/Result/Ranking";
+import {VoteToOtherYN} from "./VoteToOtherYN";
 
 interface Props {
   loginUser: LoginUser;
@@ -34,6 +35,8 @@ export const Result = ({loginUser, latestGame}: Props) => {
         <Heading size={"lg"} mb={"24px"} textAlign={"center"}>結果発表</Heading>
         {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
           <VoteToOne loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNextTurn} />
+        ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
+          <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNextTurn} />
         ) : null}
         <Ranking roomId={loginUser.roomId} />
       </ModalBody>

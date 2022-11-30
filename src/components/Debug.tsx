@@ -12,7 +12,7 @@ export const Debug = ({loginUser}: Props) => {
   const currentPlayer = useCurrentPlayer(loginUser.roomId)
 
   const onClick = async () => {
-    await setGame("math_mission1", currentPlayer?.id)
+    await setGame("mission1", currentPlayer?.id)
   }
 
   return (

@@ -12,7 +12,7 @@ interface Props {
   latestGame: CombinedGame;
 }
 
-export const ForceHappened = ({loginUser, latestGame}: Props) => {
+export const Happened = ({loginUser, latestGame}: Props) => {
   const updateProgress = useUpdateProgress(loginUser.roomId);
   const targetUser = useMemo(() => latestGame?.gamePlayers.filter(v => v.isTarget).map(v => v.player) ?? [], [latestGame]);
 
@@ -24,7 +24,7 @@ export const ForceHappened = ({loginUser, latestGame}: Props) => {
     <>
       <ModalBody>
         <Flex justifyContent={"center"} m={"32px"}>
-          <Heading size={"lg"}>緊急ミッション発生！</Heading>
+          <Heading size={"lg"}>ミッション発生！</Heading>
         </Flex>
         {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
           <VoteToOne loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />

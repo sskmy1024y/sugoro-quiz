@@ -10,6 +10,7 @@ import {useProgress} from "store/Progress";
 import {Prepare} from "components/Game/GameModal/Prepare";
 import {Result} from "components/Game/GameModal/Result";
 import {ForceHappened} from "components/Game/GameModal/ForceHappened";
+import {Happened} from "components/Game/GameModal/Happened";
 
 interface Props {
   loginUser: LoginUser;
@@ -27,7 +28,8 @@ export const GameModal = ({loginUser, isOpen, onClose, latestGame}: Props) => {
       <ModalContent>
         {progress.state === "game-force-happened" ? (
           <ForceHappened loginUser={loginUser} latestGame={latestGame} />
-
+        ) : progress.state === "game-happened" ? (
+          <Happened loginUser={loginUser} latestGame={latestGame} />
         ): progress.state === "game-prepare" ? (
           <Prepare loginUser={loginUser} latestGame={latestGame} />
         ) : progress.state === "game-start" ? (

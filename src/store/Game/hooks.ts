@@ -99,17 +99,26 @@ export const useVoteGame = (roomId: string, gameKey: string) => {
       return;
     }
 
-    const prevVoteTo = game.gamePlayers[gamePlayerIndex].voteTo;
-    const voteTo = prevVoteTo.length > 0 ? prevVoteTo.map((v) => {
-      const isTarget = v.id === targetPlayerId;
-      return {
-        toPlayerId: v.id,
-        vote: isTarget ? vote : v.vote,
-      }
-    }) : [{
-      toPlayerId: targetPlayerId,
-      vote,
-    }];
+    const prevVoteTo = game.gamePlayers[gamePlayerIndex].voteTo.map((v) => ({
+      toPlayerId: v.id,
+      vote: v.vote,
+    }));
+    const voteTo = prevVoteTo.length > 0 ?
+      prevVoteTo.find(v => v.toPlayerId === targetPlayerId) ?
+        prevVoteTo.map((v) => {
+          const isTarget = v.toPlayerId === targetPlayerId;
+          return {
+            toPlayerId: v.toPlayerId,
+            vote: isTarget ? vote : v.vote,
+          }
+        })
+      : [...prevVoteTo, {
+          toPlayerId: targetPlayerId,
+          vote
+      }] : [{
+        toPlayerId: targetPlayerId,
+        vote,
+      }];
 
     const voteRef = ref(db, `rooms/${roomId}/games/${gameKey}/gamePlayers/${gamePlayerIndex}/voteTo`);
     await set(voteRef, voteTo);
