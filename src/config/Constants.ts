@@ -19,6 +19,13 @@ type Math = {
   missionId: string,
 })
 
+type PointPlus = {
+  type: "pointPlus",
+  point: number,
+}
+
+type MathEventType = {}
+
 export const MathPosition: Math[] = [
   {
     x: 2,

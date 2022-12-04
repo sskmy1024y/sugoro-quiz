@@ -4,16 +4,13 @@ import {
   AlertDialogContent, AlertDialogFooter, AlertDialogHeader,
   AlertDialogOverlay,
   Button,
-  Divider, Flex,
-  HStack,
-  ModalBody, SimpleGrid,
-  Text, useDisclosure,
-  VStack
+  ModalBody, useDisclosure,
+  VStack, Text, HStack
 } from "@chakra-ui/react";
 import {LoginUser, User} from "models/User";
 import {CombinedGame} from "models/Game";
 import {useCallback, useMemo, useRef} from "react";
-import {UserAvatar} from "components/common/UserAvatar";
+import {Others} from "components/Game/GameModal/Result/VoteToOne/Others";
 
 interface Props {
   loginUser: LoginUser;
@@ -21,7 +18,7 @@ interface Props {
   onNext: () => void;
 }
 
-export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
+export const VoteToOne = ({loginUser, game, onNext}: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef(null)
 
@@ -29,14 +26,6 @@ export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
     onNext()
     onClose()
   }, [onNext, onClose])
-
-  const sortedPlayers = useMemo(() => {
-    return [...game.gamePlayers].sort((a, b) => {
-      if (b.player.id === loginUser.id) return 1;
-      if (a.player.id === loginUser.id) return -1;
-      return -1;
-    }).map(v => v.player);
-  }, [game.gamePlayers, loginUser.id])
 
   const getPoint = useCallback((player: User) => {
     return game.gamePlayers
@@ -46,6 +35,32 @@ export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
         return (curr === "good") ? prev + 1 : prev;
       }, 0)
   }, [game.gamePlayers])
+
+  const winners = useMemo(() => {
+    return game.gamePlayers.reduce<{player: User; point: number}[]>((prev, v) => {
+      const point = getPoint(v.player)
+      if (point === 0) return prev;
+
+      if (prev.length > 0) {
+        if (prev[0].point < point) {
+          return [{
+            player: v.player,
+            point,
+          }]
+        } else if (prev[0].point === point) {
+          return [...prev, {
+            player: v.player,
+            point,
+          }]
+        } else {
+          return prev;
+        }
+      }
+
+      return [{ player: v.player, point }]
+    }, [])
+  }, [game.gamePlayers, getPoint])
+
 
   return (
     <>
@@ -59,30 +74,19 @@ export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
             borderRadius={"16px"}
             minW={"280px"}
           >
-            <SimpleGrid columns={2} spacing={4}>
-              {
-                sortedPlayers.map((v) => (
-                  <Flex key={v.id} gap={"16px"} flexFlow={"row wrap"} p={"16px"} border={"1px solid #ddd"} borderRadius={"8px"}>
-                    <VStack alignItems={"center"}>
-                      <UserAvatar user={v} size={"md"}/>
-                      <Text fontWeight={"bold"}>{v.name}</Text>
-                    </VStack>
-                    <VStack spacing={"8px"}>
-                      <HStack alignItems={"baseline"}>
-                        <Text fontSize={"2xl"} fontWeight={"bold"}>{`+${getPoint(v)}`}</Text>
-                        <Text fontSize={"md"}>{`pt`}</Text>
-                      </HStack>
-                      <Divider/>
-                      <HStack alignItems={"baseline"}>
-                        <Text fontSize={"sm"}>累計</Text>
-                        <Text fontSize={"md"} fontWeight={"bold"}>{v.point}</Text>
-                        <Text fontSize={"sm"}>pt</Text>
-                      </HStack>
-                    </VStack>
-                  </Flex>
-                ))
-              }
-            </SimpleGrid>
+
+            {winners.length > 0 ? (
+              <HStack spacing={8}>
+                {winners.map((v, i) => (
+                  <Others key={i} game={game} player={v.player} loginUser={loginUser} point={v.point}></Others>
+                ))}
+              </HStack>
+            ) : (
+              <VStack>
+                <Text>勝者はいませんでした</Text>
+                <Text size={"lg"} fontWeight={"bold"}>{"ミッション失敗……"}</Text>
+              </VStack>
+            )}
             <Button colorScheme={"twitter"} onClick={onOpen}>{"すごろくに戻る"}</Button>
           </VStack>
         </VStack>

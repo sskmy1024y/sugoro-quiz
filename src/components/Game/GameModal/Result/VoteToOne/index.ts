@@ -1,1 +1,1 @@
-export * from './VoteToOtherYN'
+export * from './VoteToOne'

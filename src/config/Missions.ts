@@ -76,6 +76,12 @@ export const MISSIONS: Mission[] = [
     mission: "一人ずつ地元紹介選手権。故郷の魅力をプレゼンしろ！",
     rule: MissionRule.VoteToOtherYN,
     timeout: 60 * 5,
+  },
+  {
+    id: 'mission8',
+    mission: "一発芸、一番面白かった人に投票！",
+    rule: MissionRule.VoteTo1,
+    timeout: 60 * 5,
   }
 ]
 

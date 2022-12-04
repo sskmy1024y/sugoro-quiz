@@ -9,6 +9,7 @@ import {useUpdateProgress} from "store/Progress";
 import {ref, update} from "firebase/database";
 import {db} from "config/firebase";
 import {VoteToOtherYN} from "components/Game/GameModal/Vote/VoteToOtherYN";
+import { VoteToOne } from "./VoteToOne";
 
 interface Props {
   loginUser: LoginUser;
@@ -17,32 +18,44 @@ interface Props {
 
 export const Vote = ({loginUser, latestGame}: Props) => {
   const updateProgress = useUpdateProgress(loginUser.roomId);
-  const targetUser = useMemo(() => latestGame?.gamePlayers.filter(v => v.isTarget).map(v => v.player) ?? [], [latestGame]);
+  const targetUsers = useMemo(() => latestGame?.gamePlayers.filter(v => v.isTarget).map(v => v.player) ?? [], [latestGame]);
 
   const onNext = useCallback(async () => {
-    if (targetUser) {
-      const getPoints = latestGame.gamePlayers
-        .reduce<{key: string, point: number}[]>((prev, curr) => {
-          const newVal = [...prev];
-          curr.voteTo.forEach(p => {
-            const index = newVal.findIndex(v => v.key === p.key);
-            const prevPoint = index === -1 ? 0 : newVal[index].point;
-            newVal[index === -1 ? newVal.length : index] = {
-              key: p.key,
-              point: prevPoint + (p.vote === "good" ? 1 : 0)
-            }
-          })
-          return newVal;
-        }, [])
-      await Promise.all(getPoints.map(v => {
-        return update(ref(db, `rooms/${loginUser.roomId}/users/${v.key}`), {
-          point: v.point
+    const getPoints = latestGame.gamePlayers
+      .reduce<{key: string, point: number}[]>((prev, curr) => {
+        const newVal = [...prev];
+        const gamePlayer = curr.player;
+        const index = newVal.findIndex(v => v.key === gamePlayer.key);
+
+        if (index === -1) {
+          newVal.push({key: gamePlayer.key, point: gamePlayer.point});
+        } else {
+          newVal[index].point += gamePlayer.point;
+        }
+
+        curr.voteTo.forEach(p => {
+          const index = newVal.findIndex(v => v.key === p.key);
+          const prevPoint = index === -1 ? 0 : newVal[index].point;
+          const point = prevPoint + (p.vote === "good" ? 1 : 0);
+
+          if (index === -1) {
+            newVal.push({key: p.key, point});
+          } else {
+            newVal[index].point = point;
+          }
         })
-      }))
-    }
+
+        return newVal;
+      }, [])
+
+    await Promise.all(getPoints.map(v => {
+      return update(ref(db, `rooms/${loginUser.roomId}/users/${v.key}`), {
+        point: v.point
+      })
+    }))
 
     await updateProgress({state: "game-end"})
-  }, [latestGame, loginUser.roomId, targetUser, updateProgress])
+  }, [latestGame, loginUser.roomId, updateProgress])
 
   return (
     <>
@@ -60,9 +73,11 @@ export const Vote = ({loginUser, latestGame}: Props) => {
       </ModalHeader>
       <ModalBody>
         {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
-          <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} />
+          <VoteToOneYN loginUser={loginUser} targetUser={targetUsers[0]} game={latestGame} />
         ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
           <VoteToOtherYN loginUser={loginUser} game={latestGame} />
+        ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (
+          <VoteToOne loginUser={loginUser} game={latestGame} />
         ) : null}
       </ModalBody>
       <ModalFooter justifyContent={"center"}>

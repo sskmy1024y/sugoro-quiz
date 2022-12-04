@@ -21,10 +21,7 @@ export const VoteToOtherYN = ({loginUser, game}: Props) => {
     <ModalBody>
       <VStack spacing={8} m={"0 auto"} w={"100%"}>
         {isJoined && <RequireAnswer loginUser={loginUser} game={game} />}
-        {/*) : (*/}
-        {/*  <CannotVoteCard targetUser={targetUser} />*/}
-        {/*)}*/}
-        {isJoined && <Text>ミッションをクリアした人の中から一人選んでね！</Text>}
+        {isJoined && <Text>ミッションをクリアした人に投票してね</Text>}
         <HStack spacing={"4px"} w={"100%"} justifyContent={"space-around"}>
           {otherPlayers.map((v) => (
             <VoteCard key={v.player.id} {...v} loginUser={loginUser} game={game} />

@@ -4,7 +4,7 @@ import {CombinedGame} from "models/Game";
 import {MissionRule} from "models/Mission";
 import {VoteToOneYN} from "./VoteToOneYN";
 import {useCallback, useMemo} from "react";
-import {useUpdateProgress} from "store/Progress";
+import { useUpdateProgress} from "store/Progress";
 import {ref, set} from "firebase/database";
 import {db} from "config/firebase";
 import {VoteToOtherYN} from "./VoteToOtherYN";
