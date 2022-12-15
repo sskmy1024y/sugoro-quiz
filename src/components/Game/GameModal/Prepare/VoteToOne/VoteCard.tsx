@@ -22,7 +22,7 @@ export const VoteCard = ({loginUser, game, player}: Props) => {
           </VStack>
           {isJoined ? (
             <>
-              <Box h={"32px"} />
+              <Box h={"16px"} />
               <Text fontWeight={"bold"} fontSize={"12px"}>ミッションクリアした？</Text>
               <HStack w={"100%"} justifyContent={"center"} spacing={8}>
                 <VStack spacing={2}>

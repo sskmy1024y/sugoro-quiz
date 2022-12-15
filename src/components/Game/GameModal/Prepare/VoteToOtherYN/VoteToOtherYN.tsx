@@ -4,6 +4,7 @@ import {CombinedGame} from "models/Game";
 import {VoteCard} from "./VoteCard";
 import {useMemo} from "react";
 import {RequireAnswer} from "./RequireAnswer";
+import {PlayerOrder} from "components/Game/GameModal/PlayerOrder";
 
 interface Props {
   loginUser: LoginUser;
@@ -21,7 +22,8 @@ export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
   return (
     <ModalBody>
       <VStack spacing={8} m={"0 auto"} w={"100%"}>
-          <RequireAnswer loginUser={loginUser} game={game} onNext={onNext} />
+        <PlayerOrder game={game} roomId={loginUser.roomId} />
+        <RequireAnswer loginUser={loginUser} game={game} onNext={onNext} />
         {/*) : (*/}
         {/*  <CannotVoteCard targetUser={targetUser} />*/}
         {/*)}*/}

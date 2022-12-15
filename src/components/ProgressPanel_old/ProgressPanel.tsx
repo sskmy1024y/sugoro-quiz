@@ -13,6 +13,8 @@ type Props = {
 
 export const ProgressPanel = ({loginUser}: Props) => {
   const progress = useProgress(loginUser.roomId);
+
+  
   return (
     <Card>
       {progress.state === "not-start" ? (

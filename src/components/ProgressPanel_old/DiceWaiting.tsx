@@ -1,4 +1,4 @@
-import {Box, Button, Flex, Spacer, Text, VStack} from "@chakra-ui/react";
+import {Box, Button, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
 import {useCurrentPlayer, useProgress} from "store/Progress";
 import {useCallback, useMemo} from "react";
 import {LoginUser} from "models/User";
@@ -26,22 +26,26 @@ export const DiceWaiting = ({loginUser}: Props) => {
     });
   }, [loginUser.roomId]);
 
+
+
   return (
-    <Flex direction={"row"}>
-      <Box bg={"white"} borderRadius={"8px"}>
-        <Dice value={progress.dice ?? 5} isRolling={progress.dice === null} />
-      </Box>
-      <VStack alignItems={"flex-start"} p={"8px 16px"}>
-        <Box >
-          <Text fontSize={"16px"}>{isMyTerm ? `ボタンを押してサイコロを回して下さい` : `${currentPlayer?.name}さんを待っています…` }</Text>
+    <>
+      <CardHeader>
+        <Heading size='md'>
+          {isMyTerm ? `あなたの番` : `${currentPlayer?.name}さんの番`}
+        </Heading>
+      </CardHeader>
+      <CardBody>
+        <Box>
+          <Text>{isMyTerm ? `ボタンを押してサイコロを回して下さい` : `${currentPlayer?.name}さんを待っています…` }</Text>
+          <Dice value={progress.dice ?? 5} isRolling={progress.dice === null} />
+          {isMyTerm ? (
+            <Button colorScheme='twitter' onClick={onStartDice}>サイコロを回す</Button>
+          ) : (
+            <SkipButton roomId={loginUser.roomId} />
+          )}
         </Box>
-        <Spacer />
-        {isMyTerm ? (
-          <Button colorScheme='twitter' onClick={onStartDice}>サイコロを回す</Button>
-        ) : (
-          <SkipButton roomId={loginUser.roomId} />
-        )}
-      </VStack>
-    </Flex>
+      </CardBody>
+    </>
   )
 }

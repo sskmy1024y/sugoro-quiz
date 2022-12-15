@@ -1,4 +1,4 @@
-import {Box, Button, Flex, Spacer, Text, VStack} from "@chakra-ui/react";
+import {Box, Button, CardBody, CardHeader, Heading} from "@chakra-ui/react";
 import {useOnNextTurn, useProgress} from "store/Progress";
 import { useMemo} from "react";
 import {LoginUser} from "models/User";
@@ -22,21 +22,20 @@ export const NextWaiting = ({loginUser}: Props) => {
   if (!progress.dice) return null
 
   return (
-    <Flex direction={"row"}>
-      <Box bg={"white"} borderRadius={"8px"}>
-        <Dice value={progress.dice!} isRolling={false} />
-      </Box>
-      <VStack alignItems={"flex-start"} p={"8px 16px"}>
-        <Box >
-          <Text fontSize={"16px"}>{isMyTerm ? `ボタンを押してサイコロを回して下さい` : `${currentPlayer?.name}さんを待っています…` }</Text>
+    <>
+      <CardHeader>
+        <Heading size='md'>{isMyTerm ? `あなたの番` : `${currentPlayer?.name}さんの番`}</Heading>
+      </CardHeader>
+      <CardBody>
+        <Box>
+          <Dice value={progress.dice!} isRolling={false} />
         </Box>
-        <Spacer />
         {isMyTerm ? (
           <Button colorScheme='twitter' onClick={onNextTurn}>次のプレイヤーへ</Button>
         ) : (
           <SkipButton roomId={loginUser.roomId} />
         )}
-      </VStack>
-    </Flex>
+      </CardBody>
+    </>
   )
 }

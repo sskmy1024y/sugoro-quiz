@@ -1,7 +1,8 @@
-import {Box, Button, Fade, Flex, Spacer, VStack} from "@chakra-ui/react";
+import {Box, Button, CardBody, CardHeader, Fade, Heading} from "@chakra-ui/react";
 import {useOnNextTurn, useProgress} from "store/Progress";
 import { useEffect, useMemo, useState} from "react";
 import {LoginUser} from "models/User";
+import {useRoomMembers} from "store/Members";
 import {Dice} from "components/Dice";
 import {SkipButton} from "components/ProgressPanel/SkipButton";
 import {usePlayerPositions} from "store/PlayerPosition";
@@ -13,6 +14,7 @@ type Props = {
 export const DiceRolled = ({loginUser}: Props) => {
   const progress = useProgress(loginUser.roomId);
   const positions = usePlayerPositions(loginUser.roomId);
+  const currentPlayer = useRoomMembers(loginUser.roomId).find(member => member.id === progress.currentPlayerId);
   const [stepPositions, setStepPositions] = useState(positions);
   const onNextTurn = useOnNextTurn(loginUser.roomId);
 
@@ -54,20 +56,22 @@ export const DiceRolled = ({loginUser}: Props) => {
   if (!progress.dice) return null
 
   return (
-    <Flex direction={"row"}>
-      <Box bg={"white"} borderRadius={"8px"}>
-        <Dice value={progress.dice!} isRolling={false} />
-      </Box>
-      <VStack alignItems={"flex-start"} p={"8px 16px"}>
-        <Spacer />
-        {isMyTerm ? (
-          <Fade in={showNextButton}>
-            <Button colorScheme='twitter' onClick={onNextTurn}>次のプレイヤーへ</Button>
-          </Fade>
-        ) : (
-          <SkipButton roomId={loginUser.roomId} />
-        )}
-      </VStack>
-    </Flex>
+    <>
+      <CardHeader>
+        <Heading size='md'>{isMyTerm ? `あなたの番` : `${currentPlayer?.name}さんの番`}</Heading>
+      </CardHeader>
+      <CardBody>
+        <Box>
+          <Dice value={progress.dice!} isRolling={false} />
+          {isMyTerm ? (
+            <Fade in={showNextButton}>
+              <Button colorScheme='twitter' onClick={onNextTurn}>次のプレイヤーへ</Button>
+            </Fade>
+          ) : (
+            <SkipButton roomId={loginUser.roomId} />
+          )}
+        </Box>
+      </CardBody>
+    </>
   )
 }

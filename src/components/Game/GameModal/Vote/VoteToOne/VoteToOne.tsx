@@ -2,8 +2,9 @@ import {HStack, ModalBody, Text, VStack} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {VoteCard} from "./VoteCard";
-import {useMemo} from "react";
+import { useMemo} from "react";
 import {RequireAnswer} from "./RequireAnswer";
+import {PlayerOrder} from "components/Game/GameModal/PlayerOrder";
 
 interface Props {
   loginUser: LoginUser;
@@ -20,6 +21,7 @@ export const VoteToOne = ({loginUser, game}: Props) => {
   return (
     <ModalBody>
       <VStack spacing={8} m={"0 auto"} w={"100%"}>
+        <PlayerOrder game={game} roomId={loginUser.roomId} />
         {isJoined && <RequireAnswer loginUser={loginUser} game={game} />}
         {isJoined && <Text fontWeight={"bold"}>一番いいと思った人に投票してね！</Text>}
         <HStack spacing={"4px"} w={"100%"} justifyContent={"space-around"}>

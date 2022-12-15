@@ -55,7 +55,7 @@ export const useSetNewGame = (roomId: string) => {
     }
 
     const randomMember = members[Math.floor(Math.random() * members.length)];
-    const targetPlayers = mission.rule === MissionRule.VoteToOtherYN
+    const targetPlayers = mission.rule !== MissionRule.VoteTo1YN
       ? members
       : targetPlayerId
         ? [members.find((v) => v.id === targetPlayerId)].filter((v): v is User => v !== undefined)
@@ -68,7 +68,9 @@ export const useSetNewGame = (roomId: string) => {
 
     const targetPlayerIds = targetPlayers.map((v) => v.id);
 
-    const gamePlayers = members.map((m) => ({
+    const gamePlayers = [...members].sort((a, b) => {
+      return a.point > b.point ? -1 : 1;
+    }).map((m) => ({
       playerId: m.id,
       isTarget: targetPlayerIds.includes(m.id),
     }))
@@ -79,6 +81,7 @@ export const useSetNewGame = (roomId: string) => {
       key: "",
       missionId,
       gamePlayers,
+      currentGamePlayerId: gamePlayers[0].playerId,
       timeoutAt: now - mission.timeout * 1000,
       createdAt: now,
     }

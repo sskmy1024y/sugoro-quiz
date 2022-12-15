@@ -39,8 +39,8 @@ export const Main = () => {
       <Container maxW='8xl'>
         <Header loginUser={loginUser} />
         <MemberList loginUser={loginUser} />
-        <ProgressPanel loginUser={loginUser} />
         <SugorokuBoard loginUser={loginUser} />
+        <ProgressPanel loginUser={loginUser} />
         {process.env.NODE_ENV === "development" && <Debug loginUser={loginUser} />}
       </Container>
       <Game loginUser={loginUser} />

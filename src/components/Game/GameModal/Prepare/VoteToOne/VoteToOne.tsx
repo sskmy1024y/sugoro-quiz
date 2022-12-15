@@ -4,6 +4,7 @@ import {CombinedGame} from "models/Game";
 import {VoteCard} from "./VoteCard";
 import {useMemo} from "react";
 import {RequireAnswer} from "./RequireAnswer";
+import {PlayerOrder} from "components/Game/GameModal/PlayerOrder";
 
 interface Props {
   loginUser: LoginUser;
@@ -21,6 +22,7 @@ export const VoteToOne = ({loginUser, game, onNext}: Props) => {
   return (
     <ModalBody>
       <VStack spacing={8} m={"0 auto"} w={"100%"}>
+        <PlayerOrder game={game} roomId={loginUser.roomId} />
         <RequireAnswer loginUser={loginUser} game={game} onNext={onNext} />
         {isJoined && <Text>ミッションをクリアした人の中から一人選んでね！</Text>}
         <HStack spacing={"4px"} w={"100%"} justifyContent={"space-around"}>

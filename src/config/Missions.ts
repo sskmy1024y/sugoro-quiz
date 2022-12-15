@@ -81,7 +81,7 @@ export const MISSIONS: Mission[] = [
     id: 'mission8',
     mission: "一発芸、一番面白かった人に投票！",
     rule: MissionRule.VoteTo1,
-    timeout: 60 * 5,
+    timeout: 30,
   }
 ]
 

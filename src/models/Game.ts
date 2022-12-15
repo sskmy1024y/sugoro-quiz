@@ -4,8 +4,9 @@ import {User} from "models/User";
 export type Game = {
   key: string; // firebase key
   missionId: string;
-  gamePlayers: GamePlayer[];
-  timeoutAt: number;
+  gamePlayers: GamePlayer[]; // 順番はポイントが高い順
+  currentGamePlayerId?: string;
+  timeoutAt: number; // タイムアウト時刻（一人ごと）
   createdAt: number;
 }
 
@@ -22,6 +23,7 @@ export type CombinedGame = {
   key: string; // firebase key
   mission: Mission;
   gamePlayers: CombinedGamePlayer[];
+  currentGamePlayerId: string | null;
   timeoutAt: number;
   createdAt: number;
 }

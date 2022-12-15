@@ -23,7 +23,7 @@ export const GameModal = ({loginUser, isOpen, onClose, latestGame}: Props) => {
   const progress = useProgress(loginUser.roomId);
 
   return (
-    <Modal onClose={onClose} closeOnOverlayClick={false} size={"5xl"} isOpen={isOpen}>
+    <Modal onClose={onClose} closeOnEsc={false} closeOnOverlayClick={false} size={"5xl"} isOpen={isOpen}>
       <ModalOverlay />
       <ModalContent>
         {progress.state === "game-force-happened" ? (
