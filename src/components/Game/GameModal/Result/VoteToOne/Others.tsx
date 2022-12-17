@@ -20,7 +20,7 @@ export const Others = ({loginUser, game, player, point}: Props) => {
             <UserAvatar user={player} size={"lg"} />
             <Text fontWeight={"bold"} fontSize={"16px"} noOfLines={1}>{player.name}</Text>
           </VStack>
-          <VotedView loginUser={loginUser} game={game} player={player} />
+          <VotedView game={game} player={player} />
           <VStack spacing={"8px"}>
             <HStack alignItems={"baseline"}>
               <Text fontSize={"4xl"} fontWeight={"bold"}>{`+${point}`}</Text>

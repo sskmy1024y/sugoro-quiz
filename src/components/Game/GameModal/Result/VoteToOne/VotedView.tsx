@@ -1,16 +1,15 @@
 import {useMemo} from "react";
 import {CombinedGame, CombinedGamePlayerVote} from "models/Game";
-import {LoginUser, User} from "models/User";
+import {User} from "models/User";
 import {AvatarGroup, HStack, Text, VStack} from "@chakra-ui/react";
 import {UserAvatar} from "components/common/UserAvatar";
 
 type Props = {
   player: User;
-  loginUser: LoginUser
   game: CombinedGame
 }
 
-export const VotedView = ({loginUser, game, player}: Props) => {
+export const VotedView = ({game, player}: Props) => {
   /**
    * このユーザに対しての投票状況を取得する
    */
