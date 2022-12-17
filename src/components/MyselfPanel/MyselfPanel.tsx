@@ -45,7 +45,7 @@ export const MyselfPanel = ({loginUser}: Props) => {
               <HStack spacing={"8px"}>
                 <Text
                   fontFamily={"SuperMario"}
-                  fontSize={"36px"}
+                  fontSize={"40px"}
                   fontWeight={"bold"}
                   lineHeight={"0"}
                 >{loginUser.point}</Text>
@@ -53,7 +53,7 @@ export const MyselfPanel = ({loginUser}: Props) => {
               </HStack>
             </Flex>
           </VStack>
-          <Spacer />
+          <Spacer minH={"16px"} />
           <Button size={"sm"} onClick={onOpen}>ルームから退出する</Button>
         </CardBody>
       </Card>

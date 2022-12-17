@@ -12,11 +12,12 @@ import {
 } from "@chakra-ui/react";
 import {useIsIncludePlayer, useOrderPlayer} from "store/OrderPlayer";
 import {BsThreeDotsVertical} from "react-icons/all";
-import {useCallback} from "react";
+import React, {useCallback} from "react";
 import {ref, set} from "firebase/database";
 import {db} from "config/firebase";
 import {usePlayerPositions} from "store/PlayerPosition";
 import {UserAvatar} from "components/common/UserAvatar";
+import {PT} from "config/Constants";
 
 interface Props {
   roomId: string;
@@ -50,12 +51,20 @@ export const MemberItem = ({roomId, member}: Props) => {
   return (
     <Card size={"sm"} bg={"white"} borderRadius={"8px"}>
       <CardBody>
-        <Flex gap='4' alignItems={"center"}>
-          <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap' opacity={isIncludePlayer ? 1 : 0.5}>
+        <Flex gap='4px' alignItems={"center"}>
+          <Flex flex='1' gap='8px' alignItems='center' flexWrap='wrap' opacity={isIncludePlayer ? 1 : 0.5}>
             <UserAvatar user={member} />
             <Box>
               <Heading size='sm' minW={"74px"}>{member.name}</Heading>
-              <Text>{isIncludePlayer ? `${member.point}pt` : "未参加"}</Text>
+              <Text>{isIncludePlayer ?
+                (<><Text
+                  as={"span"}
+                  fontFamily={"SuperMario"}
+                  fontSize={"28px"}
+                  lineHeight={"0.8"}
+                  mr={"2px"}
+                >{`${member.point}`}</Text>{PT}</>) : "未参加"}
+              </Text>
             </Box>
           </Flex>
           <Menu>

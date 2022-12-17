@@ -1,4 +1,4 @@
-import { Button, CardBody, CardHeader, Heading, Text} from "@chakra-ui/react";
+import {Button, Flex, Heading, Spacer, Text, VStack} from "@chakra-ui/react";
 import {useCallback} from "react";
 import {LoginUser} from "models/User";
 import {ref, set} from "firebase/database";
@@ -32,14 +32,14 @@ export const NotStarted = ({loginUser}: Props) => {
 
 
   return (
-    <>
-      <CardHeader>
-        <Heading size='md'>参加メンバー募集中</Heading>
-      </CardHeader>
-      <CardBody>
-        <Text>参加メンバーが集まったら、ボタンを押してください</Text>
-        <Button colorScheme='twitter' onClick={onUpdateProgress}>ゲームを開始する</Button>
-      </CardBody>
-    </>
+    <Flex direction={"column"} m={"-8px 8px 8px"} h={"100%"} justifyContent={"space-between"}>
+      <Heading size='md'>参加メンバー募集中</Heading>
+      <VStack alignItems={"flex-start"} mt={"8px"} spacing={"4px"}>
+        <Text>参加メンバーが集まったら、「開始する」ボタンを押してください。</Text>
+        <Text>（未参加のルームメンバーも、開始すると自動で「参加」になります）</Text>
+      </VStack>
+      <Spacer />
+      <Button colorScheme='twitter' onClick={onUpdateProgress}>ゲームを開始する</Button>
+    </Flex>
   )
 }
