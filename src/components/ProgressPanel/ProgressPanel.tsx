@@ -5,7 +5,6 @@ import {NotStarted} from "./NotStarted";
 import {DiceRolling} from "./DiceRolling";
 import {DiceWaiting} from "./DiceWaiting";
 import {DiceRolled} from "./DiceRolled";
-import {NextWaiting} from "./NextWaiting";
 import {useMemo} from "react";
 import {CurrentPlayer} from "components/ProgressPanel/CurrentPlayer";
 
@@ -25,8 +24,6 @@ export const ProgressPanel = ({loginUser}: Props) => {
         <DiceRolling loginUser={loginUser} />
       ) : progress.state === "dice-rolled" ? (
         <DiceRolled loginUser={loginUser} />
-      ) : progress.state === "next-waiting" ? (
-        <NextWaiting loginUser={loginUser} />
       ) : null
   }, [loginUser, progress.state]);
 

@@ -1,4 +1,4 @@
-import {Box, Button, Fade, Flex, Spacer, VStack} from "@chakra-ui/react";
+import {Box, Flex, Spacer, VStack} from "@chakra-ui/react";
 import {useOnNextTurn, useProgress} from "store/Progress";
 import { useEffect, useMemo, useState} from "react";
 import {LoginUser} from "models/User";
@@ -10,22 +10,28 @@ type Props = {
   loginUser: LoginUser;
 }
 
+const DERAY = 1000;
+
 export const DiceRolled = ({loginUser}: Props) => {
   const progress = useProgress(loginUser.roomId);
   const positions = usePlayerPositions(loginUser.roomId);
   const [stepPositions, setStepPositions] = useState(positions);
   const onNextTurn = useOnNextTurn(loginUser.roomId);
 
-  const [showNextButton, setShowNextButton] = useState(false);
-
   const isMyTerm = useMemo(() => {
     return progress.currentPlayerId === loginUser.id;
   }, [progress.currentPlayerId, loginUser.id]);
 
   useEffect(() => {
+    if (!isMyTerm) return;
     if (positions.length === 0) return;
+
+    let timer: NodeJS.Timeout;
+
     if (positions.length !== stepPositions.length) {
-      setShowNextButton(true); // 遅延がない場合はすぐに表示
+      timer = setTimeout(() => {
+        onNextTurn();
+      }, DERAY * 2);
       setStepPositions(positions);
       return;
     }
@@ -35,8 +41,10 @@ export const DiceRolled = ({loginUser}: Props) => {
       return prev;
     }, [])
     if (diffPositionIndexes.length > 1 || diffPositionIndexes.length === 0) {
+      timer = setTimeout(() => {
+        onNextTurn();
+      }, DERAY * 2);
       setStepPositions(positions);
-      setShowNextButton(true); // 遅延がない場合はすぐに表示
       return;
     }
 
@@ -44,9 +52,13 @@ export const DiceRolled = ({loginUser}: Props) => {
     const diffPositionIndex = diffPositionIndexes[0];
     const diff = positions[diffPositionIndex].mathIndex - stepPositions[diffPositionIndex].mathIndex;
 
-    setTimeout(() => {
-      setShowNextButton(true); // ボタンを表示するまでの時間を遅延させる
-    }, diff * 1000);
+    timer = setTimeout(() => {
+      onNextTurn();
+    }, diff * DERAY);
+
+    return () => {
+      clearTimeout(timer);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [positions]);
 
@@ -60,11 +72,7 @@ export const DiceRolled = ({loginUser}: Props) => {
       </Box>
       <VStack alignItems={"flex-start"} p={"8px 16px"}>
         <Spacer />
-        {isMyTerm ? (
-          <Fade in={showNextButton}>
-            <Button colorScheme='twitter' onClick={onNextTurn}>次のプレイヤーへ</Button>
-          </Fade>
-        ) : (
+        {isMyTerm && (
           <SkipButton roomId={loginUser.roomId} />
         )}
       </VStack>

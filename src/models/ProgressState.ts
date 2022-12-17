@@ -3,7 +3,6 @@ export const ProgressState = {
   DiceWaiting : "dice-waiting", // サイコロ待ち
   DiceRolling : "dice-rolling", // サイコロ振り中
   DiceRolled : "dice-rolled", // サイコロ振り終わり
-  NextWaiting : "next-waiting", // 次へ押し待ち
   EventWaiting : "event-waiting", // イベント待ち
   GameHappened : "game-happened", // ゲーム発生
   GameForceHappened : "game-force-happened", // ゲーム発生（強制発生マス）
