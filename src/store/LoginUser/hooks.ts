@@ -1,4 +1,4 @@
-import {useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import {LoginUserState} from "./atoms";
 import {LoginUser, User} from "models/User";
 import { ref, get, runTransaction } from "firebase/database";
@@ -11,7 +11,8 @@ export const useLoginUser = () => {
 }
 
 export const useLoginUserState = () => {
-  const [loginUser, setLoginUser] = useRecoilState(LoginUserState);
+  const loginUser = useLoginUser();
+  const setLoginUser = useSetLoginUser();
 
   const setLoginUserWithVerified = async (loginUser: LoginUser) => {
     get(ref(db, `rooms/${loginUser.roomId}/users`)).then((snapshot) => {
@@ -34,6 +35,15 @@ export const useLoginUserState = () => {
   }
 
   return [loginUser, setLoginUserWithVerified] as const;
+}
+
+export const useSetLoginUser = () => {
+  const setLoginUser = useSetRecoilState(LoginUserState);
+
+  return useCallback((loginUser: LoginUser) => {
+    localStorage.setItem("loginUser", JSON.stringify(loginUser));
+    setLoginUser(loginUser)
+  }, [setLoginUser])
 }
 
 export const useOnExit = () => {

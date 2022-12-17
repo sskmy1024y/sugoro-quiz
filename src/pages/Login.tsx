@@ -25,6 +25,7 @@ export const Login = () => {
   const [name, setName] = React.useState("");
   const [roomId, setRoomId] = React.useState("");
   const [loginUser, setLoginUser] = useLoginUserState();
+
   const [iconBase64, setIconBase64] = React.useState<string>();
 
   useEffect(() => {
@@ -75,7 +76,6 @@ export const Login = () => {
     }).then(async () => {
       const key = pushRef.key!;
       const loginUser = {...user, key, roomId}
-      localStorage.setItem("loginUser", JSON.stringify(loginUser));
       await setLoginUser(loginUser);
     })
   }, [iconBase64, name, roomId, setLoginUser])

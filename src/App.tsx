@@ -9,6 +9,7 @@ import {Main} from "pages/Main";
 import 'config/firebase'
 import {RecoilRoot} from "recoil";
 import {Fonts} from "theme/GlobalStyle";
+import {useEffect} from "react";
 
 const theme = extendTheme({
   fonts: {
@@ -17,16 +18,28 @@ const theme = extendTheme({
   },
 })
 
-export const App = () => (
-  <RecoilRoot>
-    <ChakraProvider theme={theme}>
-      <Fonts />
-      <BrowserRouter>
-        <Routes>
-          <Route path={`/`} element={<Main />} />
-          <Route path={`/login`} element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-    </ChakraProvider>
-  </RecoilRoot>
-)
+export const App = () => {
+  useEffect(() => {
+    console.clear();
+    console.log(
+      "%cWelcome to UniFesチーム%c\n%cここを開いてしまった物好きなあなた。\nぜひUniFes!チームに入って一緒にエンターテイメントを作りましょう！",
+      "color:white; background-color: #00a1e5; padding:2px 4px; border-radius:4px; font-size: 16px; font-weight: bold;",
+      "",
+      "color:white; font-size: 14px; padding-top: 4px;",
+    );
+  }, [])
+
+  return (
+    <RecoilRoot>
+      <ChakraProvider theme={theme}>
+        <Fonts/>
+        <BrowserRouter>
+          <Routes>
+            <Route path={`/`} element={<Main/>}/>
+            <Route path={`/login`} element={<Login/>}/>
+          </Routes>
+        </BrowserRouter>
+      </ChakraProvider>
+    </RecoilRoot>
+  )
+}
