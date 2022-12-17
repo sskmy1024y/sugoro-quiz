@@ -119,7 +119,7 @@ export const SugorokuBoard = ({loginUser}: Props) => {
 
 
   return (
-    <Box w={"100%"} overflow={"auto"} margin={"0 auto"}>
+    <Box w={"100%"} overflow={"auto"} pl={"300px"} margin={"0 auto"}>
       <Box
         position={"relative"}
         w={"1260px"}

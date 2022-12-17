@@ -24,12 +24,12 @@ export const MemberList = ({loginUser}: Props) => {
   }, [members, orderPlayers, loginUser.id]);
 
   return (
-    <Card w={"330px"} bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"}>
+    <Card w={"280px"} bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"}>
       <CardHeader>
         <Heading size={"md"} color={"gray.700"}>ルームメンバー</Heading>
       </CardHeader>
-      <CardBody pt={"0"}>
-        <VStack spacing={4} maxH={"500px"} overflowY={"scroll"}>
+      <CardBody p={"0 16px 16px"}>
+        <VStack spacing={4} alignItems={"flex-start"} maxH={"500px"} overflowX={"unset"} overflowY={"scroll"}>
           {orderMembers.map(member => (
             <MemberItem key={member.id} roomId={loginUser.roomId} member={member}/>
           ))}
