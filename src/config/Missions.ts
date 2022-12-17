@@ -1,33 +1,33 @@
 import {Mission, MissionRule} from "models/Mission";
 
-export const FORCE_MISSIONS: Mission[] = [
+export const EVENT_MATH_MISSIONS: Mission[] = [
   {
     id: 'math_mission1',
-    mission: "普段家族に言わないけれど…",
+    mission: "英語禁止で上長を紹介して！（英語使わず紹介できてたら投票してね）",
     rule: MissionRule.VoteTo1YN,
-    timeout: 60 * 3,
+    timeout: 60,
   },
   {
     id: 'math_mission2',
-    mission: "英語（カタカナ用語）禁止でUniposを紹介しろ！",
+    mission: "早口言葉言えるかな？　3回繰り返してね「バナナの謎はまだ謎なのだぞ」　（言えてた！と思ったら投票してね！）",
     rule: MissionRule.VoteTo1YN,
-    timeout: 60 * 3,
+    timeout: 60,
   },
   {
     id: 'math_mission3',
-    mission: "20秒瞬きしちゃダメ！",
+    mission: "今年１番自分を褒めたくなった瞬間は？（いい話と思ったら投票してね！）",
     rule: MissionRule.VoteTo1YN,
     timeout: 20,
   },
   {
     id: 'math_mission4',
-    mission: "山手線渋谷駅から新宿駅までの駅名を言え！",
+    mission: "自分の動きの中で、今年一番顧客の未来を変えたと思えた瞬間は？（それは顧客の行動を変えてると思ったらいいねに投票してね！）",
     rule: MissionRule.VoteTo1YN,
     timeout: 60,
   },
   {
     id: 'math_mission5',
-    mission: "先月のカード請求額をいえ！",
+    mission: "今年やり残したことは？（来年がんばれ！って思ったら投票してね！）",
     rule: MissionRule.VoteTo1YN,
     timeout: 60,
   }
@@ -37,52 +37,94 @@ export const FORCE_MISSIONS: Mission[] = [
 export const MISSIONS: Mission[] = [
   {
     id: 'mission1',
-    mission: "3Qで一番、もしくは今年で一番、感情が動いた仕事のエピソードを教えて（一人ずつ話してね）",
-    rule: MissionRule.VoteToOtherYN,
-    timeout: 60 * 5,
+    mission: "ミッション順番1番目の人の、昨日の晩御飯は何だった！？ 周りのみんなで順番に質問して当てよう！（見事当てた人に、みんなで投票してね！）",
+    rule: MissionRule.VoteTo1,
+    timeout: 60,
   },
   {
     id: 'mission2',
-    mission: "早口言葉を順番に言っていけ！",
-    rule: MissionRule.VoteToOtherYN,
-    timeout: 60 * 3,
+    mission: "今年一番やらかした話を教えて！仕事以外でもOKだよ。　（一番「やらかしてんなあ〜(笑)」と思った人に投票してね！）",
+    rule: MissionRule.VoteTo1,
+    timeout: 60,
   },
   {
     id: 'mission3',
-    mission: "一人ずつ上長（あるいはチームメンバー）の紹介をカタカナ語禁止で話せ！",
-    rule: MissionRule.VoteToOtherYN,
-    timeout: 60 * 5,
+    mission: "推しのお菓子をプレゼンして！（一番食べたくなった人に投票してね！）",
+    rule: MissionRule.VoteTo1,
+    timeout: 60,
   },
   {
     id: 'mission4',
-    mission: "今年一番の感謝を伝えたい人は？（一人ずつ話してね）",
-    rule: MissionRule.VoteToOtherYN,
-    timeout: 60 * 5,
+    mission: "五七五で自己紹介をしてください！（一番「うまいな〜」と思った人に投票してね！）",
+    rule: MissionRule.VoteTo1,
+    timeout: 60,
   },
   {
     id: 'mission5',
-    mission: "一人ずつ、今年一番の成功を話してね",
-    rule: MissionRule.VoteToOtherYN,
-    timeout: 60 * 5,
+    mission: "「俺が考える最強の休日の過ごし方」をプレゼンして！　（「その休日を体験したい…」と思った人に投票してね！）",
+    rule: MissionRule.VoteTo1,
+    timeout: 60,
   },
   {
     id: 'mission6',
-    mission: "一人ずつ、今年一番のハッピーを話してね",
-    rule: MissionRule.VoteToOtherYN,
-    timeout: 60 * 5,
+    mission: "みんなの今年買ってよかったものを教えて！（一番「いいな〜！ほしい！」と思った人に投票してね！）",
+    rule: MissionRule.VoteTo1,
+    timeout: 60,
   },
   {
     id: 'mission7',
-    mission: "一人ずつ地元紹介選手権。故郷の魅力をプレゼンしろ！",
-    rule: MissionRule.VoteToOtherYN,
-    timeout: 60 * 5,
+    mission: "今年一番成長したことは何でしょうか？（一番成長したと思う人に投票してね！）",
+    rule: MissionRule.VoteTo1,
+    timeout: 60,
   },
   {
     id: 'mission8',
-    mission: "一発芸、一番面白かった人に投票！",
+    mission: "今年の自分的ビッグニュースを発表！（一番驚いたニュースを発表した人に投票してね！）",
     rule: MissionRule.VoteTo1,
-    timeout: 30,
+    timeout: 60,
+  },
+  {
+    id: 'mission9',
+    mission: "今年一番お世話になった人を紹介して！（いい話だなと思った人全員に投票してね！）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60,
+  },
+  {
+    id: 'mission10',
+    mission: "来年の抱負を一言で！（一人ずつ話して、いいと思った人全員に投票してね！）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60,
+  },
+  {
+    id: 'mission11',
+    mission:　"英語禁止で今年よかった出来事を教えて！（１人ずつ話して、いいと思った人全員に投票してね！）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60,
+  },
+  {
+    id: 'mission12',
+    mission: "今年一年を一漢字で例えるなら？（１人ずつ話して、いいと思った人全員に投票してね！）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60,
+  },
+  {
+    id: 'mission13',
+    mission: "オフィス周辺で一番オススメのご飯屋さんを教えて！（１人ずつ話して、行きたいと思った人全員に投票してね！）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60,
+  },
+  {
+    id: 'mission14',
+    mission: "英語禁止で来年会社でやってみたいことを教えて！（１人ずつ話して、いいと思った人全員に投票してね！）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60,
+  },
+  {
+    id: 'mission15',
+    mission: "今年仕事してて一番嬉しかった瞬間は？（１人ずつ話して、いいと思った人全員に投票してね！）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60,
   }
 ]
 
-export const ALL_MISSIONS = [...FORCE_MISSIONS, ...MISSIONS];
+export const ALL_MISSIONS = [...EVENT_MATH_MISSIONS, ...MISSIONS];
