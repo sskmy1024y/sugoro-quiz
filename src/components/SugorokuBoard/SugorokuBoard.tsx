@@ -1,11 +1,12 @@
-import {Box, Wrap, WrapItem} from "@chakra-ui/react";
+import {Box, useToast, Wrap, WrapItem} from "@chakra-ui/react";
 import {usePlayerPositions} from "store/PlayerPosition";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {useCurrentPlayer, useOnNextTurn, useUpdateProgress} from "store/Progress";
 import {UserAvatar} from "components/common/UserAvatar";
 import {useSetNewGame} from "store/Game";
 import {LoginUser} from "models/User";
 import {MathPosition} from "config/Board";
+import {useSetUserPoint} from "store/Members";
 
 interface Props {
   loginUser: LoginUser;
@@ -19,7 +20,9 @@ export const SugorokuBoard = ({loginUser}: Props) => {
   const [stepPositions, setStepPositions] = useState(positions);
   const currentPlayer = useCurrentPlayer(loginUser.roomId);
   const setGame = useSetNewGame(loginUser.roomId)
+  const setPoint = useSetUserPoint(loginUser.roomId);
   const onNextTerm = useOnNextTurn(loginUser.roomId)
+  const toast = useToast()
 
   const existPlayers = useCallback((mathIndex: number) => {
     return stepPositions.filter(position => (position.mathIndex % MathPosition.length) === mathIndex)
@@ -27,7 +30,11 @@ export const SugorokuBoard = ({loginUser}: Props) => {
       .sort((a) => currentPlayer?.id === a.id ? -1 : 1);
   }, [currentPlayer?.id, stepPositions]);
 
+  // useEffect発火用に、mathIndexが変更されたことだけ検知する
+  const positionsDeps = useMemo(() => positions.map(position => position.mathIndex).join(","), [positions]);
+
   useEffect(() => {
+    console.log("positions", positions);
     if (positions.length === 0) return;
     if (positions.length !== stepPositions.length) {
       setStepPositions(positions);
@@ -55,17 +62,6 @@ export const SugorokuBoard = ({loginUser}: Props) => {
       });
 
       const nextMath = MathPosition[next % MathPosition.length];
-      // if (nextMath.type === "event" && !isFirstStep) { // 既に止まっていた場合（次の一歩）の場合は無視
-      //   // 強制停止マスに止まった場合はアニメーション終了
-      //   // NOTE: 強制マスゲームを実施
-      //   if (currentPlayer && loginUser.id === currentPlayer.id) {
-      //     setGame(nextMath.missionId, currentPlayer.id).then(async () => {
-      //       await updatePosition(currentPlayer.id, next)
-      //       await updateProgress({state: "game-force-happened"});
-      //     })
-      //   }
-      //   return;
-      // }
 
       if (next !== target) {
         setTimeout(() => {
@@ -88,9 +84,22 @@ export const SugorokuBoard = ({loginUser}: Props) => {
         }
 
         case "point": { // ポイントマスに止まった場合
-          // TODO: ポイントが加算されたアニメーション発火する
-          // TODO: DBにぽいんと追加する
-          // TODO: 次の人へ
+          if (currentPlayer) {
+            toast({
+              title: `${loginUser.id !== currentPlayer.id ? `${currentPlayer.name}さんが` : ""}ポイントを獲得しました`,
+              description: `+${nextMath.point}pt`,
+              status: "success",
+              position: "top-right",
+              duration: 5000,
+              isClosable: true,
+            })
+            if (currentPlayer.id === loginUser.id) {
+              setPoint(currentPlayer, currentPlayer.point + nextMath.point);
+            }
+          }
+          setTimeout(() => {
+            onNextTerm();
+          }, 1000);
           return;
         }
 
@@ -103,7 +112,7 @@ export const SugorokuBoard = ({loginUser}: Props) => {
     stepAnimation(currentStepPosition, currentStepPosition + diff);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [positions])
+  }, [positionsDeps])
 
 
   return (

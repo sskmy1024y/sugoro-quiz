@@ -27,7 +27,6 @@ export const useSubscribeLatestGame = (roomId: string) => {
     const queryRef = query(gameRef, orderByChild('createdAt'), limitToLast(1));
     const unsubscribe = onValue(queryRef, (snapshot) => {
       if (snapshot.exists()) {
-        console.log('latest game updated', snapshot.val());
         snapshot.forEach((childSnapshot) => {
           const key = childSnapshot.key ?? '';
           const game = childSnapshot.val();

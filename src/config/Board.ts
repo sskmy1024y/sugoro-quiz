@@ -42,8 +42,8 @@ export const MathPosition: Math[] = [
     y: 31,
     w: 16,
     h: 11,
-    type: "event",
-    missionId: "mission2"
+    type: "point",
+    point: 1,
   },
 ]
 

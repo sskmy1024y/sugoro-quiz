@@ -28,6 +28,7 @@ export const VoteToOne = ({loginUser, game, onNext}: Props) => {
           m={"0 auto"}
           spacing={"24px"}
           border={"1px solid #ddd"}
+          bg={"white"}
           p={"24px 32px"}
           borderRadius={"16px"}
         >

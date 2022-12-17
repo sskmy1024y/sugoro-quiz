@@ -95,7 +95,7 @@ export const Vote = ({loginUser, latestGame}: Props) => {
         ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
           <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNext} />
         ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (
-          <VoteToOne loginUser={loginUser} game={latestGame} />
+          <VoteToOne loginUser={loginUser} game={latestGame} onNext={onNext} />
         ) : null}
       </ModalBody>
       <ModalFooter justifyContent={"center"}>

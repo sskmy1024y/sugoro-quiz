@@ -28,6 +28,7 @@ export const VoteCard = ({loginUser, game, targetUser}: Props) => {
         m={"0 auto"}
         spacing={"24px"}
         border={"1px solid #ddd"}
+        bg={"white"}
         p={"16px 24px"}
         borderRadius={"16px"}
       >
