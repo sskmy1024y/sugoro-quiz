@@ -81,18 +81,24 @@ export const Login = () => {
   }, [iconBase64, name, roomId, setLoginUser])
 
   return (
-    <Box>
-      <Card maxW={"2xl"} margin={"24px auto"}>
+    <Box h={"100lvh"} pt={"24px"} bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"}>
+      <Card maxW={"2xl"} margin={"24px auto"} bg={"white"} borderRadius={"16px"}>
         <CardHeader>
           <Heading size='lg'>メンバー登録</Heading>
         </CardHeader>
 
         <CardBody>
           <form onSubmit={onSubmit}>
-            <Stack spacing='4'>
-              <VStack spacing='4' align={"center"}>
+            <Stack spacing='16px'>
+              <VStack spacing='4px' align={"center"}>
                 <Avatar name={name} size='2xl' src={iconBase64} />
                 <FileUpload accept={'image/*'} onChange={onFileChange} />
+              </VStack>
+              <VStack align={"start"} spacing={"8px"}>
+                <Heading size='s' textTransform='uppercase'>
+                  ニックネームを入力してください
+                </Heading>
+                <Input value={name} onChange={(e) => setName(e.target.value)} placeholder={"ゆにぽん"} />
               </VStack>
               <VStack align={"start"} spacing={"8px"}>
                 <Heading size='s' textTransform='uppercase'>
@@ -103,12 +109,6 @@ export const Login = () => {
                     <option key={room} value={room}>{room}</option>
                   ))}
                 </Select>
-              </VStack>
-              <VStack align={"start"} spacing={"8px"}>
-                <Heading size='s' textTransform='uppercase'>
-                  ニックネームを入力してください
-                </Heading>
-                <Input value={name} onChange={(e) => setName(e.target.value)} placeholder={"ゆにぽん"} />
               </VStack>
               <Button
                 type={"submit"}
