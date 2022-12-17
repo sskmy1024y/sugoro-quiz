@@ -7,7 +7,7 @@ import {Progress} from "models/ProgressState";
 import {CurrentPlayerState} from "store/Progress/selectors";
 import {useOrderPlayer} from "store/OrderPlayer";
 import {MISSIONS} from "config/Missions";
-import {useQueueGames, useSetNewGame} from "store/Game";
+import {useLatestGame, useSetNewGame} from "store/Game";
 
 
 export const useProgress = (roomId: string) => {
@@ -53,25 +53,16 @@ export const useOnNextTurn = (roomId: string) => {
   const updateProgress = useUpdateProgress(roomId);
   const progress = useProgress(roomId);
   const setGame = useSetNewGame(roomId);
-  const queueGames = useQueueGames(roomId);
+  const latestGame = useLatestGame(roomId);
 
   return useCallback(async () => {
     const currentPlayerIndex = currentPlayer ? orderPlayer.findIndex(player => player.id === currentPlayer.id) : 0;
     const nextPlayer = currentPlayerIndex === orderPlayer.length - 1 ? orderPlayer[0] : orderPlayer[currentPlayerIndex + 1];
 
-    // NOTE: 完了していないゲームがあれば、発動する
-    if (queueGames.length > 0) {
-      const game = queueGames[0];
-      const targetId = game.gamePlayers.length > 0 ? game.gamePlayers[0].player.id : undefined;
-      await setGame(game.mission.id, targetId)
-      await updateProgress({
-        state: "game-happened"
-      })
-      return;
-    }
+    const isPlayedTermGame = progress.state.startsWith("game-") && !(latestGame?.isEventMath) // 一周した時のゲームプレイ後か？
 
     // NOTE: 一周したら、ゲームターンにする
-    if (nextPlayer.id === orderPlayer[0].id && !(progress.state.startsWith("game-"))) {
+    if (nextPlayer.id === orderPlayer[0].id && !isPlayedTermGame) {
       const randomMission = MISSIONS[Math.floor(Math.random() * MISSIONS.length)];
       await setGame(randomMission.id);
       await updateProgress({
@@ -83,5 +74,5 @@ export const useOnNextTurn = (roomId: string) => {
         state: "dice-waiting"
       })
     }
-  },[currentPlayer, orderPlayer, progress.state, queueGames, setGame, updateProgress]);
+  },[currentPlayer, orderPlayer, progress.state, latestGame, setGame, updateProgress]);
 }

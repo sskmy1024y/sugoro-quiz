@@ -3,7 +3,7 @@ import {useSynchronizeOrderPlayerIds} from "store/OrderPlayer";
 import {useSynchronizeRoomMembers} from "store/Members";
 import {useSyncronizedProgress} from "store/Progress";
 import {useSynchronizePlayerPositions} from "store/PlayerPosition";
-import {useSubscribeGame} from "store/Game";
+import {useSubscribeLatestGame} from "store/Game";
 
 interface Props {
   roomId: string;
@@ -15,7 +15,7 @@ export const SubscribeProvider = ({roomId, children}: Props) => {
   useSynchronizeRoomMembers(roomId);
   useSyncronizedProgress(roomId);
   useSynchronizePlayerPositions(roomId);
-  useSubscribeGame(roomId);
+  useSubscribeLatestGame(roomId);
 
   return (
     <>

@@ -19,7 +19,7 @@ export const useQueueGames = (roomId: string) => {
   return useRecoilValue(GameQueueSelectorState(roomId));
 }
 
-export const useSubscribeGame = (roomId: string) => {
+export const useSubscribeLatestGame = (roomId: string) => {
   const setLatestGame = useSetRecoilState(LatestGameState(roomId));
 
   useEffect(() => {
@@ -27,6 +27,7 @@ export const useSubscribeGame = (roomId: string) => {
     const queryRef = query(gameRef, orderByChild('createdAt'), limitToLast(1));
     const unsubscribe = onValue(queryRef, (snapshot) => {
       if (snapshot.exists()) {
+        console.log('latest game updated', snapshot.val());
         snapshot.forEach((childSnapshot) => {
           const key = childSnapshot.key ?? '';
           const game = childSnapshot.val();
@@ -47,11 +48,10 @@ export const useSubscribeGame = (roomId: string) => {
 export const useSetNewGame = (roomId: string) => {
   const members = useOrderPlayer(roomId);
 
-  return useCallback(async (missionId: string, targetPlayerId?: string) => {
+  return useCallback(async (missionId: string, targetPlayerId?: string, isEventMath: boolean = false) => {
     const mission = ALL_MISSIONS.find((m) => m.id === missionId);
     if (!mission) {
-      console.warn(`Mission not found. missionId: ${missionId}`);
-      return;
+      throw new Error(`Mission not found. missionId: ${missionId}`);
     }
 
     const randomMember = members[Math.floor(Math.random() * members.length)];
@@ -62,8 +62,7 @@ export const useSetNewGame = (roomId: string) => {
         : [randomMember];
 
     if (targetPlayers.length === 0) {
-      console.warn(`Target player not found. targetPlayerId: ${targetPlayerId}`);
-      return;
+      throw new Error(`Target player not found. targetPlayerId: ${targetPlayerId}`);
     }
 
     const targetPlayerIds = targetPlayers.map((v) => v.id);
@@ -82,6 +81,7 @@ export const useSetNewGame = (roomId: string) => {
       missionId,
       gamePlayers,
       currentGamePlayerId: gamePlayers[0].playerId,
+      isEventMath,
       timeoutAt: now - mission.timeout * 1000,
       createdAt: now,
     }

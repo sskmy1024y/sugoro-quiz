@@ -6,6 +6,7 @@ export type Game = {
   missionId: string;
   gamePlayers: GamePlayer[]; // 順番はポイントが高い順
   currentGamePlayerId?: string;
+  isEventMath: boolean; // イベントマスのゲームならtrue
   timeoutAt: number; // タイムアウト時刻（一人ごと）
   createdAt: number;
 }
@@ -24,6 +25,7 @@ export type CombinedGame = {
   mission: Mission;
   gamePlayers: CombinedGamePlayer[];
   currentGamePlayerId: string | null;
+  isEventMath: boolean; // イベントマスのゲームならtrue
   timeoutAt: number;
   createdAt: number;
 }

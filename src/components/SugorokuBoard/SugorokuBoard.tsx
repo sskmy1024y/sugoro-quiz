@@ -1,12 +1,11 @@
 import {Box, Wrap, WrapItem} from "@chakra-ui/react";
-import {usePlayerPositions, useUpdatePlayerAbsolutePosition} from "store/PlayerPosition";
+import {usePlayerPositions} from "store/PlayerPosition";
 import {useCallback, useEffect, useState} from "react";
-import {MathPosition} from "config/Constants";
-import {useCurrentPlayer, useUpdateProgress} from "store/Progress";
+import {useCurrentPlayer, useOnNextTurn, useUpdateProgress} from "store/Progress";
 import {UserAvatar} from "components/common/UserAvatar";
 import {useSetNewGame} from "store/Game";
 import {LoginUser} from "models/User";
-import {useSetUserPoint} from "store/Members";
+import {MathPosition} from "config/Board";
 
 interface Props {
   loginUser: LoginUser;
@@ -16,28 +15,27 @@ const DEBUG = process.env.NODE_ENV === "development";
 
 export const SugorokuBoard = ({loginUser}: Props) => {
   const positions = usePlayerPositions(loginUser.roomId);
-  const updatePosition = useUpdatePlayerAbsolutePosition(loginUser.roomId);
   const updateProgress = useUpdateProgress(loginUser.roomId);
-  const [stepPositons, setStepPositions] = useState(positions);
+  const [stepPositions, setStepPositions] = useState(positions);
   const currentPlayer = useCurrentPlayer(loginUser.roomId);
   const setGame = useSetNewGame(loginUser.roomId)
-  const setUserPoint = useSetUserPoint(loginUser.roomId)
+  const onNextTerm = useOnNextTurn(loginUser.roomId)
 
   const existPlayers = useCallback((mathIndex: number) => {
-    return stepPositons.filter(position => (position.mathIndex % MathPosition.length) === mathIndex)
+    return stepPositions.filter(position => (position.mathIndex % MathPosition.length) === mathIndex)
       .map(position => position.member)
       .sort((a) => currentPlayer?.id === a.id ? -1 : 1);
-  }, [currentPlayer?.id, stepPositons]);
+  }, [currentPlayer?.id, stepPositions]);
 
   useEffect(() => {
     if (positions.length === 0) return;
-    if (positions.length !== stepPositons.length) {
+    if (positions.length !== stepPositions.length) {
       setStepPositions(positions);
       return;
     }
 
     const diffPositionIndexes = positions.reduce<number[]>((prev, position, index) => {
-      if (stepPositons[index].mathIndex !== position.mathIndex) return [...prev, index];
+      if (stepPositions[index].mathIndex !== position.mathIndex) return [...prev, index];
       return prev;
     }, [])
     if (diffPositionIndexes.length > 1 || diffPositionIndexes.length === 0) {
@@ -47,43 +45,62 @@ export const SugorokuBoard = ({loginUser}: Props) => {
 
     // 差分が一人だけの場合はアニメーション発火
     const diffPositionIndex = diffPositionIndexes[0];
-    const currentStepPosition = stepPositons[diffPositionIndex].mathIndex;
-    const diff = positions[diffPositionIndex].mathIndex - stepPositons[diffPositionIndex].mathIndex;
-    const stepAnimation = (next: number, target: number, isFirstStep?: boolean) => {
+    const currentStepPosition = stepPositions[diffPositionIndex].mathIndex;
+    const diff = positions[diffPositionIndex].mathIndex - stepPositions[diffPositionIndex].mathIndex;
+    const stepAnimation = (next: number, target: number) => {
       setStepPositions(prev => {
         const newPositions = [...prev];
         newPositions[diffPositionIndex].mathIndex = next;
         return newPositions;
       });
 
-      if (MathPosition.length - 1 <= next) {
-        // NOTE: ゴール（もしくはそれ以上）に泊まった場合は、pt追加
-        if (currentPlayer && loginUser.id === currentPlayer.id) {
-          setUserPoint(currentPlayer, currentPlayer.point + 1);
-        }
-      }
-
       const nextMath = MathPosition[next % MathPosition.length];
-      if (nextMath.forceStop && !isFirstStep) { // 既に止まっていた場合（次の一歩）の場合は無視
-        // 強制停止マスに止まった場合はアニメーション終了
-        // NOTE: 強制マスゲームを実施
-        if (currentPlayer && loginUser.id === currentPlayer.id) {
-          setGame(nextMath.missionId, currentPlayer.id).then(async () => {
-            await updatePosition(currentPlayer.id, next)
-            await updateProgress({state: "game-force-happened"});
-          })
-        }
-        return;
-      }
+      // if (nextMath.type === "event" && !isFirstStep) { // 既に止まっていた場合（次の一歩）の場合は無視
+      //   // 強制停止マスに止まった場合はアニメーション終了
+      //   // NOTE: 強制マスゲームを実施
+      //   if (currentPlayer && loginUser.id === currentPlayer.id) {
+      //     setGame(nextMath.missionId, currentPlayer.id).then(async () => {
+      //       await updatePosition(currentPlayer.id, next)
+      //       await updateProgress({state: "game-force-happened"});
+      //     })
+      //   }
+      //   return;
+      // }
 
       if (next !== target) {
         setTimeout(() => {
           const delta = next < target ? 1 : -1;
           stepAnimation(next + delta, target);
         }, 1000);
+        return;
+      }
+
+      // NOTE: 止まったマスのtypeに応じて処理を実施
+      switch (nextMath.type) {
+        case "event": {　// イベントマスに止まった場合
+          // NOTE: DB書き換えはcurrentPlayerが行う（うまく進まなくなった時はskipボタン押す）
+          if (currentPlayer && loginUser.id === currentPlayer.id) {
+            setGame(nextMath.missionId, currentPlayer.id, true).then(async () => {
+              await updateProgress({state: "game-force-happened"});
+            })
+          }
+          return;
+        }
+
+        case "point": { // ポイントマスに止まった場合
+          // TODO: ポイントが加算されたアニメーション発火する
+          // TODO: DBにぽいんと追加する
+          // TODO: 次の人へ
+          return;
+        }
+
+        case "normal": { // 通常マスに止まった場合
+          onNextTerm();
+          return;
+        }
       }
     }
-    stepAnimation(currentStepPosition, currentStepPosition + diff, true);
+    stepAnimation(currentStepPosition, currentStepPosition + diff);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [positions])

@@ -52,6 +52,7 @@ export const LatestGameSelectorState = selectorFamily<CombinedGame | null, strin
       mission,
       gamePlayers,
       currentGamePlayerId: game.currentGamePlayerId ?? null,
+      isEventMath: game.isEventMath,
       timeoutAt: game.timeoutAt,
       createdAt: game.createdAt
     }
