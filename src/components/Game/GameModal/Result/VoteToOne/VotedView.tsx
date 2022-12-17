@@ -19,7 +19,7 @@ export const VotedView = ({loginUser, game, player}: Props) => {
       const voted = v.voteTo.find(v => v.id === player.id)
       return voted ? [...prev, {...v.player, vote: voted.vote}] : prev;
     }, [])
-  }, [game.gamePlayers, loginUser.id, player.id]);
+  }, [game.gamePlayers, player.id]);
 
   const votedMember = useMemo(() => {
     return votedFrom.reduce<[CombinedGamePlayerVote[], CombinedGamePlayerVote[]]>((prev, v) => {

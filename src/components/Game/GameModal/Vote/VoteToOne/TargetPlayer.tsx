@@ -3,8 +3,7 @@ import {UserAvatar} from "components/common/UserAvatar";
 import {LoginUser, User} from "models/User";
 import {CombinedGame} from "models/Game";
 import {VotedView} from "components/Game/GameModal/Vote/VoteToOtherYN/VotedView";
-import {useCallback, useMemo} from "react";
-import {useVoteGame} from "store/Game";
+import { useMemo} from "react";
 
 interface Props {
   loginUser: LoginUser;
@@ -14,15 +13,8 @@ interface Props {
 }
 
 export const TargetPlayer = ({player, loginUser, game, onNext}: Props) => {
-  const onVote = useVoteGame(loginUser.roomId, game.key);
-
   const isJoined = useMemo(() => game.gamePlayers.some(v => v.player.id === loginUser.id), [game.gamePlayers, loginUser.id]);
-
   const isMeTarget = useMemo(() => game.currentGamePlayerId === loginUser.id, [game.currentGamePlayerId, loginUser.id]);
-
-  const isVoted = useCallback((vote: "good" | "bad") => {
-    return game.gamePlayers.find(v => v.player.id === loginUser.id)?.voteTo.some(v => v.id === player.id && v.vote === vote) ?? false;
-  }, [game.gamePlayers, loginUser.id, player.id]);
 
   return (
     <>

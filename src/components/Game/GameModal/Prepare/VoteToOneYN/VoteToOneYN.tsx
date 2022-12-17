@@ -18,7 +18,7 @@ export const VoteToOneYN = ({loginUser, targetUser, game, onNext}: Props) => {
   return (
     <ModalBody>
       {loginUser.id === targetUser.id ? (
-        <RequireAnswer loginUser={loginUser} game={game} targetUser={targetUser} onNext={onNext} />
+        <RequireAnswer loginUser={loginUser} game={game} onNext={onNext} />
       ) : (
         <VoteCard loginUser={loginUser} game={game} targetUser={targetUser} onSkip={onNextTurn} />
       )}

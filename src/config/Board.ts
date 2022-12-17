@@ -34,34 +34,6 @@ export const MathPosition: Math[] = [
     y: 20,
     w: 16,
     h: 11,
-    type: "event",
-    missionId: "mission1"
-  },
-  {
-    x: 2,
-    y: 31,
-    w: 16,
-    h: 11,
-    type: "point",
-    point: 1,
-  },
-]
-
-
-
-const test = [
-  {
-    x: 2,
-    y: 9,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 2,
-    y: 20,
-    w: 16,
-    h: 11,
     type: "normal"
   },
   {

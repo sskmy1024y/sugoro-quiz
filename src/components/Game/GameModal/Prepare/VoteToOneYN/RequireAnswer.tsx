@@ -1,21 +1,15 @@
 import { Button, Text, VStack} from "@chakra-ui/react";
 import {UserAvatar} from "components/common/UserAvatar";
-import {LoginUser, User} from "models/User";
+import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
-import {useMemo} from "react";
 
 interface Props {
   loginUser: LoginUser;
-  targetUser: User;
   game: CombinedGame;
   onNext: () => void;
 }
 
-export const RequireAnswer = ({loginUser, targetUser, game, onNext}: Props) => {
-  const otherPlayers = useMemo(() =>
-      game.gamePlayers.filter(v => v.player.id !== loginUser.id && v.player.id !== targetUser.id)
-    , [game.gamePlayers, loginUser.id, targetUser.id]);
-
+export const RequireAnswer = ({loginUser, game, onNext}: Props) => {
   return (
     <VStack spacing={"16px"} m={"0 auto"} w={"100%"}>
       <VStack spacing={"8px"}>

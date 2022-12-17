@@ -1,5 +1,5 @@
 import {Button, InputGroup, InputRightElement, Portal, Select, VStack} from "@chakra-ui/react";
-import {useCurrentPlayer, useOnNextTurn, useUpdateProgress} from "store/Progress";
+import { useOnNextTurn, useUpdateProgress} from "store/Progress";
 import {LoginUser} from "models/User";
 import {useSetNewGame} from "store/Game";
 import {ProgressState} from "models/ProgressState";
@@ -17,7 +17,6 @@ type Props = {
 export const Debug = ({loginUser}: Props) => {
   const setGame = useSetNewGame(loginUser.roomId)
   const updateProgress = useUpdateProgress(loginUser.roomId)
-  const currentPlayer = useCurrentPlayer(loginUser.roomId)
   const onNextTurn = useOnNextTurn(loginUser.roomId)
   const [progressState, setProgressState] = useState<ProgressState>("game-prepare")
   const [missionRule, setMissionRule] = useState<MissionRule>(MissionRule.VoteTo1)
