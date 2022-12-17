@@ -1,4 +1,4 @@
-import {Flex, Heading, ModalBody} from "@chakra-ui/react";
+import {Box, Flex, Heading, ModalBody, Image} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {useCallback, useMemo} from "react";
@@ -7,6 +7,7 @@ import {MissionRule} from "models/Mission";
 import {VoteToOneYN} from "./VoteToOneYN";
 import {VoteToOtherYN} from "./VoteToOtherYN";
 import {VoteToOne} from "components/Game/GameModal/Happened/VoteToOne";
+import {ENABLE_UNISEPON} from "config/Constants";
 
 interface Props {
   loginUser: LoginUser;
@@ -25,15 +26,20 @@ export const Happened = ({loginUser, latestGame}: Props) => {
     <>
       <ModalBody>
         <Flex justifyContent={"center"} m={"32px"}>
-          <Heading size={"lg"}>ミッション発生！</Heading>
+          <Heading size={"lg"} color="white" fontWeight={"900"}>ミッション発生！</Heading>
         </Flex>
-        {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
-          <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />
-        ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
-          <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNext} />
-        ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (
-          <VoteToOne loginUser={loginUser} game={latestGame} onNext={onNext} />
-        ) : null}
+        <Box position={"relative"}>
+          {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
+            <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />
+          ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
+            <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNext} />
+          ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (
+            <VoteToOne loginUser={loginUser} game={latestGame} onNext={onNext} />
+          ) : null}
+          <Box position={"absolute"} bottom={"-96px"} right={"400px"} zIndex={1}>
+            {ENABLE_UNISEPON && <Image src={"/images/fight-1.gif"} w={"128px"} h={"100%"} />}
+          </Box>
+        </Box>
       </ModalBody>
     </>
   )

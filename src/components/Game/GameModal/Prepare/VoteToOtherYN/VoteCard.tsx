@@ -13,7 +13,7 @@ export const VoteCard = ({loginUser, game, player}: Props) => {
   const isJoined = useMemo(() => game.gamePlayers.some(v => v.player.id === loginUser.id), [game.gamePlayers, loginUser.id]);
 
   return (
-    <Card w={"160px"} size={"sm"}>
+    <Card w={"160px"} size={"sm"} bg={"white"} borderRadius={"8px"}>
       <CardBody>
         <VStack spacing={"8px"}>
           <VStack alignItems={"center"}>
@@ -22,7 +22,7 @@ export const VoteCard = ({loginUser, game, player}: Props) => {
           </VStack>
           {isJoined ? (
             <>
-              <Box h={"32px"} />
+              <Box h={"8px"} />
               <Text fontWeight={"bold"} fontSize={"12px"}>ミッションクリアした？</Text>
               <HStack w={"100%"} justifyContent={"center"} spacing={8}>
                 <VStack spacing={2}>

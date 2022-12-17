@@ -32,7 +32,7 @@ export const ProgressPanel = ({loginUser}: Props) => {
 
 
   return (
-    <Card mt={"44px"} zIndex={0} borderRadius={"24px"} bg={"#eee"}>
+    <Card mt={"44px"} zIndex={0} borderRadius={"24px"} bg={"#eee"} flexGrow={1}>
       <CardHeader position={"absolute"} top={"-44px"} left={0} zIndex={1}>
         <CurrentPlayer loginUser={loginUser} />
       </CardHeader>

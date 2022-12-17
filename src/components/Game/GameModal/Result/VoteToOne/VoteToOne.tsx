@@ -5,12 +5,14 @@ import {
   AlertDialogOverlay,
   Button,
   ModalBody, useDisclosure,
-  VStack, Text, HStack
+  VStack, Text, HStack,
+  Box, Image
 } from "@chakra-ui/react";
 import {LoginUser, User} from "models/User";
 import {CombinedGame} from "models/Game";
 import {useCallback, useMemo, useRef} from "react";
 import {Others} from "components/Game/GameModal/Result/VoteToOne/Others";
+import {ENABLE_UNISEPON} from "config/Constants";
 
 interface Props {
   loginUser: LoginUser;
@@ -69,10 +71,13 @@ export const VoteToOne = ({loginUser, game, onNext}: Props) => {
           <VStack
             m={"0 auto"}
             spacing={"24px"}
-            border={"1px solid #ddd"}
+            bg={"rgba(255, 255, 255, 0.6)"}
+            backdropFilter={"blur(5px)"}
             p={"32px"}
             borderRadius={"16px"}
             minW={"280px"}
+            zIndex={0}
+            position={"relative"}
           >
 
             {winners.length > 0 ? (
@@ -88,6 +93,9 @@ export const VoteToOne = ({loginUser, game, onNext}: Props) => {
               </VStack>
             )}
             <Button colorScheme={"twitter"} onClick={onOpen}>{"すごろくに戻る"}</Button>
+            <Box position={"absolute"} bottom={"18px"} right={0} zIndex={1}>
+              {ENABLE_UNISEPON && <Image src={"/images/ouen.gif"} w={"128px"} h={"100%"} />}
+            </Box>
           </VStack>
         </VStack>
       </ModalBody>

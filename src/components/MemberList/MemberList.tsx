@@ -1,5 +1,5 @@
 import {useRoomMembers} from "store/Members";
-import {Box, SimpleGrid, Text} from "@chakra-ui/react";
+import {Card, CardBody, CardHeader, Heading, VStack} from "@chakra-ui/react";
 import {MemberItem} from "./MemberItem";
 import {useMemo} from "react";
 import {LoginUser} from "models/User";
@@ -24,13 +24,17 @@ export const MemberList = ({loginUser}: Props) => {
   }, [members, orderPlayers, loginUser.id]);
 
   return (
-    <Box>
-      <Text size={"md"}>参加中のメンバー</Text>
-      <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
-        {orderMembers.map(member => (
-          <MemberItem key={member.id} roomId={loginUser.roomId} member={member}/>
-        ))}
-      </SimpleGrid>
-    </Box>
+    <Card w={"330px"} bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"}>
+      <CardHeader>
+        <Heading size={"md"} color={"gray.700"}>ルームメンバー</Heading>
+      </CardHeader>
+      <CardBody pt={"0"}>
+        <VStack spacing={4} maxH={"500px"} overflowY={"scroll"}>
+          {orderMembers.map(member => (
+            <MemberItem key={member.id} roomId={loginUser.roomId} member={member}/>
+          ))}
+        </VStack>
+      </CardBody>
+    </Card>
   )
 }

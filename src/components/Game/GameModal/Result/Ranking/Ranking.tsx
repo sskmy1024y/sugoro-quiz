@@ -1,6 +1,6 @@
 import {useOrderPlayer} from "store/OrderPlayer";
 import {useMemo} from "react";
-import {Heading, Stack, VStack} from "@chakra-ui/react";
+import {Heading, VStack} from "@chakra-ui/react";
 import {MemberItem} from "./MemberItem";
 import {User} from "models/User";
 
@@ -22,13 +22,13 @@ export const Ranking = ({roomId}: Props) => {
   }, [members]);
 
   return (
-    <VStack>
+    <VStack spacing={"24px"}>
       <Heading size={"lg"}>現在の順位</Heading>
-      <Stack spacing={"8px"} alignItems={"end"} flexFlow={"wrap"} justifyContent={"space-around"}>
+      <VStack spacing={"8px"} alignItems={"flex-end"}>
         {rankingSort.map((v) => (
           <MemberItem key={v.member.id} member={v.member} order={v.ranking} />
         ))}
-      </Stack>
+      </VStack>
     </VStack>
   )
 }

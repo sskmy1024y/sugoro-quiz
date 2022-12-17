@@ -3,17 +3,19 @@ import {
   AlertDialogBody,
   AlertDialogContent, AlertDialogFooter, AlertDialogHeader,
   AlertDialogOverlay,
+  Box,
   Button,
   Divider, Flex,
-  HStack,
-  ModalBody, SimpleGrid,
+  HStack, SimpleGrid,
   Text, useDisclosure,
-  VStack
+  VStack,
+  Image
 } from "@chakra-ui/react";
 import {LoginUser, User} from "models/User";
 import {CombinedGame} from "models/Game";
 import {useCallback, useMemo, useRef} from "react";
 import {UserAvatar} from "components/common/UserAvatar";
+import {ENABLE_UNISEPON} from "config/Constants";
 
 interface Props {
   loginUser: LoginUser;
@@ -49,44 +51,48 @@ export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
 
   return (
     <>
-      <ModalBody>
-        <VStack spacing={8} m={"0 auto 42px"} w={"100%"}>
-          <VStack
-            m={"0 auto"}
-            spacing={"24px"}
-            border={"1px solid #ddd"}
-            p={"32px"}
-            borderRadius={"16px"}
-            minW={"280px"}
-          >
-            <SimpleGrid columns={2} spacing={4}>
-              {
-                sortedPlayers.map((v) => (
-                  <Flex key={v.id} gap={"16px"} flexFlow={"row wrap"} p={"16px"} border={"1px solid #ddd"} borderRadius={"8px"}>
-                    <VStack alignItems={"center"}>
-                      <UserAvatar user={v} size={"md"}/>
-                      <Text fontWeight={"bold"}>{v.name}</Text>
-                    </VStack>
-                    <VStack spacing={"8px"}>
-                      <HStack alignItems={"baseline"}>
-                        <Text fontSize={"2xl"} fontWeight={"bold"}>{`+${getPoint(v)}`}</Text>
-                        <Text fontSize={"md"}>{`pt`}</Text>
-                      </HStack>
-                      <Divider/>
-                      <HStack alignItems={"baseline"}>
-                        <Text fontSize={"sm"}>累計</Text>
-                        <Text fontSize={"md"} fontWeight={"bold"}>{v.point}</Text>
-                        <Text fontSize={"sm"}>pt</Text>
-                      </HStack>
-                    </VStack>
-                  </Flex>
-                ))
-              }
-            </SimpleGrid>
-            <Button colorScheme={"twitter"} onClick={onOpen}>{"すごろくに戻る"}</Button>
-          </VStack>
+      <VStack spacing={8} m={"0 auto 42px"} w={"100%"}>
+        <VStack
+          m={"0 auto"}
+          spacing={"24px"}
+          p={"32px"}
+          bg={"rgba(255, 255, 255, 0.4)"}
+          backdropFilter={"blur(5px)"}
+          borderRadius={"16px"}
+          minW={"280px"}
+          position={"relative"}
+          zIndex={0}
+        >
+          <SimpleGrid columns={2} spacing={4}>
+            {
+              sortedPlayers.map((v) => (
+                <Flex key={v.id} gap={"16px"} flexFlow={"row wrap"} p={"16px"} border={"1px solid #ddd"} bg={"white"} borderRadius={"8px"}>
+                  <VStack alignItems={"center"}>
+                    <UserAvatar user={v} size={"md"}/>
+                    <Text fontWeight={"bold"}>{v.name}</Text>
+                  </VStack>
+                  <VStack spacing={"8px"}>
+                    <HStack alignItems={"baseline"}>
+                      <Text fontSize={"2xl"} fontWeight={"bold"}>{`+${getPoint(v)}`}</Text>
+                      <Text fontSize={"md"}>{`pt`}</Text>
+                    </HStack>
+                    <Divider/>
+                    <HStack alignItems={"baseline"}>
+                      <Text fontSize={"sm"}>累計</Text>
+                      <Text fontSize={"md"} fontWeight={"bold"}>{v.point}</Text>
+                      <Text fontSize={"sm"}>pt</Text>
+                    </HStack>
+                  </VStack>
+                </Flex>
+              ))
+            }
+          </SimpleGrid>
+          <Button colorScheme={"twitter"} onClick={onOpen}>{"すごろくに戻る"}</Button>
+          <Box position={"absolute"} bottom={0} right={0} zIndex={1}>
+            {ENABLE_UNISEPON && <Image src={"/images/ouen.gif"} w={"128px"} h={"100%"} />}
+          </Box>
         </VStack>
-      </ModalBody>
+      </VStack>
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}

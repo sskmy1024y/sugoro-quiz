@@ -23,9 +23,15 @@ export const GameModal = ({loginUser, isOpen, onClose, latestGame}: Props) => {
   const progress = useProgress(loginUser.roomId);
 
   return (
-    <Modal onClose={onClose} closeOnEsc={false} closeOnOverlayClick={false} size={"5xl"} isOpen={isOpen}>
+    <Modal
+      onClose={onClose}
+      closeOnEsc={false}
+      closeOnOverlayClick={false}
+      size={"full"}
+      isOpen={isOpen}
+    >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"} pb={"16px"}>
         {progress.state === "game-force-happened" ? (
           <ForceHappened loginUser={loginUser} latestGame={latestGame} />
         ) : progress.state === "game-happened" ? (

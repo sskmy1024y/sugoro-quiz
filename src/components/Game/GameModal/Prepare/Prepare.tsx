@@ -30,14 +30,14 @@ export const Prepare = ({loginUser, latestGame}: Props) => {
     <>
       <ModalHeader mt={"16px"}>
         <VStack
-          spacing={"16px"}
+          spacing={"8px"}
           p={"16px 24px"}
           bg={"#eee"}
           borderRadius={"16px"}
           w={"100%"}
         >
-          <Heading size={"md"}>ミッション</Heading>
-          <Text fontSize={"16px"}>{latestGame.mission.mission}</Text>
+          <Heading alignSelf={"flex-start"} size={"md"}>ミッション内容</Heading>
+          <Text fontSize={"24px"}>{latestGame.mission.mission}</Text>
         </VStack>
       </ModalHeader>
       <ModalBody>

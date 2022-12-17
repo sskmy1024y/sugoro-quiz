@@ -1,14 +1,15 @@
 import {User} from "models/User";
 import {
-  Badge,
+  Badge, Box,
   Card,
   CardBody,
   Flex,
-  Heading,
+  Heading, Image,
   VStack
 } from "@chakra-ui/react";
 import { useMemo} from "react";
 import {UserAvatar} from "components/common/UserAvatar";
+import {ENABLE_UNISEPON} from "config/Constants";
 
 interface Props {
   member: User;
@@ -27,7 +28,7 @@ export const MemberItem = ({member, order}: Props) => {
     if (order === 1) return "xl"
     if (order === 2) return "lg"
     if (order === 3) return "md"
-    return "sm"
+    return "md"
   }, [order])
 
   const width = useMemo(() => {
@@ -38,28 +39,31 @@ export const MemberItem = ({member, order}: Props) => {
   }, [order])
 
   const height = useMemo(() => {
-    if (order === 1) return "140px"
-    if (order === 2) return "120px"
+    if (order === 1) return "120px"
+    if (order === 2) return "100px"
     if (order === 3) return "100px"
     return "95px"
   }, [order])
 
 
   return (
-    <Card size={"sm"} w={width} h={height}>
+    <Card size={"sm"} w={width} h={height} bg={"white"} borderRadius={"8px"} zIndex={0} position={"relative"}>
       <CardBody>
-        <Flex gap='4'>
-          <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-            <UserAvatar size={iconSize} user={member} />
-            <VStack alignItems={"flex-start"}>
-              <Badge colorScheme={colorScheme}>
-                <Heading size={"xs"} textTransform={"lowercase"}>{children}</Heading>
-              </Badge>
-              <Heading size='sm' noOfLines={1}>{member.name}</Heading>
-              <Heading size='sm' noOfLines={1}>{member.point} pt</Heading>
-            </VStack>
-          </Flex>
+        <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
+          <UserAvatar size={iconSize} user={member} />
+          <VStack alignItems={"flex-start"} justifyContent={"space-between"}>
+            <Badge colorScheme={colorScheme}>
+              <Heading size={"xs"} textTransform={"lowercase"}>{children}</Heading>
+            </Badge>
+            <Heading size='sm' noOfLines={1}>{member.name}</Heading>
+            <Heading size='sm' noOfLines={1}>{member.point} pt</Heading>
+          </VStack>
         </Flex>
+        {order === 1 && (
+          <Box position={"absolute"} top={"18px"} right={0} zIndex={1}>
+            {ENABLE_UNISEPON && <Image src={"/images/otagei.gif"} w={"128px"} h={"100%"} />}
+          </Box>
+        )}
       </CardBody>
     </Card>
   )

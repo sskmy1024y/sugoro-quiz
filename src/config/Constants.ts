@@ -229,3 +229,7 @@ export const MathPosition: Math[] = [
     forceStop: false
   },
 ]
+
+export const ENABLE_UNISEPON = process.env.NODE_ENV === "development" ??  false
+
+export const PT = "pt"

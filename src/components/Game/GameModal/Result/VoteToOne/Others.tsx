@@ -13,7 +13,7 @@ type Props = {
 
 export const Others = ({loginUser, game, player, point}: Props) => {
   return (
-    <Card w={"240px"} size={"sm"}>
+    <Card w={"240px"} size={"sm"} bg={"white"} borderRadius={"8px"}>
       <CardBody>
         <VStack spacing={"8px"}>
           <VStack alignItems={"center"}>

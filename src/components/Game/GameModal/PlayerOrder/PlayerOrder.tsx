@@ -16,12 +16,12 @@ export const PlayerOrder = ({roomId, game}: Props) => {
   }, [game.currentGamePlayerId, progress.state])
 
   return (
-    <VStack p={"16px"} spacing={"4px"} m={"0 auto"} w={"100%"} border={"1px solid #ddd"} borderRadius={"4px"}>
-      <Heading size={"sm"} w={"100%"}>回答する順番</Heading>
-      <HStack spacing={"8px"}>
+    <VStack w={"100%"} spacing={"4px"} borderRadius={"8px"} bg={"rgba(255, 255, 255, 0.6)"} backdropFilter={"blur(5px)"} p={"16px"}>
+      <Heading size={"sm"} w={"100%"}>回答する順番（一人ずつ回答してね！）</Heading>
+      <HStack spacing={"12px"}>
         {game.gamePlayers.map((v, i) => (
           <Fragment key={v.player.id}>
-            <HStack w={"160px"} p={"8px 16px"} bg={isCurrentPlayer(v.player.id) ? "yellow.200" : "#eee"} spacing={"4px"} borderRadius={"8px"}>
+            <HStack w={"160px"} p={"8px 16px"} bg={isCurrentPlayer(v.player.id) ? "#00a1e5" : "#eee"} spacing={"4px"} borderRadius={"8px"}>
               <UserAvatar user={v.player} size={"xs"} />
               <Text fontWeight={"bold"} fontSize={"16px"}>{v.player.name}</Text>
             </HStack>

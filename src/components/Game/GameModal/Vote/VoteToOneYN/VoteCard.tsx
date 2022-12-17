@@ -28,16 +28,17 @@ export const VoteCard = ({loginUser, game, targetUser}: Props) => {
   return (
     <VStack
       m={"0 auto"}
-      spacing={"24px"}
+      spacing={"16px"}
       border={"1px solid #ddd"}
+      bg={"white"}
       p={"16px 24px"}
       borderRadius={"16px"}
     >
-      <Text fontWeight={"bold"}>ミッションクリアした？</Text>
       <VStack alignItems={"center"}>
         <UserAvatar user={targetUser} size={"xl"} />
         <Text fontWeight={"bold"}>{targetUser.name}</Text>
       </VStack>
+      <Text fontWeight={"bold"}>ミッションクリアした？</Text>
       <HStack w={"100%"} justifyContent={"center"} spacing={8}>
         <VStack spacing={2}>
           <Button

@@ -50,7 +50,7 @@ export const Debug = ({loginUser}: Props) => {
 
   return (
     <Portal>
-      <VStack position={"fixed"} bg={"white"} bottom={0} padding={"28px"} zIndex={99999} alignItems={"flex-start"}>
+      <VStack position={"fixed"} bg={"white"} right={0} bottom={0} padding={"28px"} zIndex={99999} alignItems={"flex-start"}>
         <Button onClick={onAddMember}>メンバー追加</Button>
         <Button onClick={onNextTurn}>次の人へ</Button>
         <Button onClick={onStartMission}>ゲーム発生</Button>

@@ -21,10 +21,10 @@ export const VoteCard = ({loginUser, game, player}: Props) => {
   }, [game.gamePlayers, loginUser.id, player.id]);
 
   return (
-    <Card w={"160px"} size={"sm"}>
+    <Card w={"160px"} size={"sm"} bg={"white"} borderRadius={"8px"}>
       <CardBody>
         <VStack spacing={"8px"}>
-          <VStack alignItems={"center"}>
+          <VStack alignItems={"center"} spacing={"2px"}>
             <UserAvatar user={player} size={"sm"} />
             <Text fontWeight={"bold"} fontSize={"16px"} noOfLines={1}>{player.name}</Text>
           </VStack>

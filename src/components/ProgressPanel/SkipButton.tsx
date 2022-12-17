@@ -29,7 +29,7 @@ export const SkipButton = memo(({roomId}: Props) => {
 
   return (
     <>
-    <Button onClick={confirmSkip}>この人をスキップする</Button>
+      <Button onClick={confirmSkip}>この人をスキップする</Button>
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}

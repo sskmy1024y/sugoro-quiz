@@ -1,4 +1,4 @@
-import { Heading, ModalBody, ModalHeader, Text, VStack} from "@chakra-ui/react";
+import {Box, Heading, HStack, ModalBody, ModalHeader, Text, VStack} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {MissionRule} from "models/Mission";
@@ -28,20 +28,25 @@ export const Result = ({loginUser, latestGame}: Props) => {
           borderRadius={"16px"}
           w={"100%"}
         >
-          <Heading size={"md"}>ミッション</Heading>
-          <Text fontSize={"16px"}>{latestGame.mission.mission}</Text>
+          <Heading alignSelf={"flex-start"} size={"md"}>ミッション内容</Heading>
+          <Text fontSize={"24px"}>{latestGame.mission.mission}</Text>
         </VStack>
       </ModalHeader>
       <ModalBody mb={"20px"}>
-        <Heading size={"lg"} mb={"24px"} textAlign={"center"}>結果発表</Heading>
-        {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
-          <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNextTurn} />
-        ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
-          <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNextTurn} />
-        ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (
-          <VoteToOne loginUser={loginUser} game={latestGame} onNext={onNextTurn} />
-        ) : null}
-        <Ranking roomId={loginUser.roomId} />
+        <HStack alignItems={"flex-start"} gap={"24px"}>
+          <VStack flex={1}>
+            <Heading size={"lg"} mb={"24px"} textAlign={"center"}>結果発表</Heading>
+            {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
+              <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNextTurn} />
+            ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
+              <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNextTurn} />
+            ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (
+              <VoteToOne loginUser={loginUser} game={latestGame} onNext={onNextTurn} />
+            ) : null}
+          </VStack>
+          <Box w={"1px"} bg={"white"} height={"360px"} />
+          <Ranking roomId={loginUser.roomId} />
+        </HStack>
       </ModalBody>
     </>
   )

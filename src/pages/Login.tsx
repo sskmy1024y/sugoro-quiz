@@ -68,11 +68,13 @@ export const Login = () => {
     }
 
     const {key, ...value} = user;
-    await set(push(ref(db, `rooms/${roomId}/users`)), {
+    const pushRef = push(ref(db, `rooms/${roomId}/users`));
+    await set(pushRef, {
       ...value,
       iconUrl: iconUrl ?? null
     }).then(async () => {
-      const loginUser = {...user, roomId}
+      const key = pushRef.key!;
+      const loginUser = {...user, key, roomId}
       localStorage.setItem("loginUser", JSON.stringify(loginUser));
       await setLoginUser(loginUser);
     })

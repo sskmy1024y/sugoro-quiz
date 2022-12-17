@@ -24,15 +24,14 @@ export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
       <VStack spacing={8} m={"0 auto"} w={"100%"}>
         <PlayerOrder game={game} roomId={loginUser.roomId} />
         <RequireAnswer loginUser={loginUser} game={game} onNext={onNext} />
-        {/*) : (*/}
-        {/*  <CannotVoteCard targetUser={targetUser} />*/}
-        {/*)}*/}
-        {isJoined && <Text>ミッションをクリアした人には「いいね」を押してね</Text>}
-        <HStack spacing={"4px"} w={"100%"} justifyContent={"space-around"}>
-          {otherPlayers.map((v) => (
-            <VoteCard key={v.player.id} {...v} loginUser={loginUser} game={game} />
-          ))}
-        </HStack>
+        <VStack w={"100%"} spacing={"16px"} borderRadius={"8px"} bg={"rgba(255, 255, 255, 0.6)"} backdropFilter={"blur(5px)"} p={"16px 32px"}>
+          {isJoined && <Text>ミッションをクリアした人には「いいね」を押してね</Text>}
+          <HStack spacing={"4px"} w={"100%"} justifyContent={"space-around"}>
+            {otherPlayers.map((v) => (
+              <VoteCard key={v.player.id} {...v} loginUser={loginUser} game={game} />
+            ))}
+          </HStack>
+        </VStack>
       </VStack>
     </ModalBody>
   )

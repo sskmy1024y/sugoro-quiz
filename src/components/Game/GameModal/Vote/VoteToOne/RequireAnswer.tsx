@@ -22,11 +22,12 @@ export const RequireAnswer = ({loginUser, game}: Props) => {
       m={"0 auto"}
       spacing={"24px"}
       border={"1px solid #ddd"}
+      bg={"white"}
       p={"24px 32px"}
       minW={"200px"}
       borderRadius={"16px"}
     >
-      <Text fontWeight={"bold"}>回答する人</Text>
+      <Text fontWeight={"bold"}>ミッションをクリアしろ！</Text>
       <VStack alignItems={"center"}>
         <UserAvatar user={currentPlayer.player} size={"xl"} />
         <Text fontWeight={"bold"}>{loginUser.name}</Text>

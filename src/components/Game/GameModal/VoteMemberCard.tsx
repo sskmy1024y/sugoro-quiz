@@ -6,7 +6,7 @@ type Props = CombinedGamePlayer;
 
 export const VoteMemberCard = ({player, voteTo }: Props) => {
   return (
-    <Card w={"160px"} h={"140px"} size={"sm"}>
+    <Card w={"160px"} h={"140px"} size={"sm"} bg={"white"} borderRadius={"16px"}>
       <CardBody>
         <VStack spacing={"8px"}>
           <VStack alignItems={"center"}>

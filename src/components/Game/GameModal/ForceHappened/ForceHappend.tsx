@@ -24,7 +24,7 @@ export const ForceHappened = ({loginUser, latestGame}: Props) => {
     <>
       <ModalBody>
         <Flex justifyContent={"center"} m={"32px"}>
-          <Heading size={"lg"}>緊急ミッション発生！</Heading>
+          <Heading size={"lg"} color="white" fontWeight={"900"}>緊急ミッション発生！</Heading>
         </Flex>
         {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
           <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNext} />

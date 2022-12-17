@@ -25,54 +25,64 @@ export const TargetPlayer = ({player, loginUser, game, onNext}: Props) => {
   }, [game.gamePlayers, loginUser.id, player.id]);
 
   return (
-    <VStack
-      m={"0 auto"}
-      spacing={"24px"}
-      border={"1px solid #ddd"}
-      p={"24px 32px"}
-      borderRadius={"16px"}
-    >
-      <Text fontWeight={"bold"}>{player.name}さんの番</Text>
-      <VStack alignItems={"center"}>
-        <UserAvatar user={player} size={"xl"} />
-        <Text fontWeight={"bold"}>{player.name}</Text>
-      </VStack>
-      <VotedView player={player} loginUser={loginUser} game={game} />
-      {isMeTarget ? (
-        <Button colorScheme={"twitter"} onClick={onNext}>自分の番を終了する</Button>
-      ) : isJoined ? (
-        <VStack bg={"gray.100"} borderRadius={"8px"} p={"16px 24px"} spacing={"16px"}>
-          <Text fontWeight={"bold"}>判定！</Text>
-          <HStack w={"100%"} justifyContent={"center"} spacing={8}>
-            <VStack spacing={2}>
-              <Button
-                colorScheme='red'
-                variant={isVoted("bad") ? "solid" : "outline"}
-                size='md'
-                onClick={onVote("bad", player.id)}
-              >
-                {"🤔"}
-              </Button>
-              <Text>うーん</Text>
-            </VStack>
-            <VStack spacing={2}>
-              <Button
-                colorScheme='twitter'
-                variant={isVoted("good") ? "solid" : "outline"}
-                size='md'
-                onClick={onVote("good", player.id)}
-              >
-                {"👍"}
-              </Button>
-              <Text>いいね！</Text>
-            </VStack>
-          </HStack>
-        </VStack>
-      ) : (
-        <Box>
-          <Text fontWeight={"bold"} fontSize={"12px"} color={"red"}>ゲーム未参加のため投票できません</Text>
-        </Box>
+    <>
+      {isMeTarget && (
+        <Text
+          fontSize={"20px"}
+          fontWeight={"bold"}
+          color={"white"}
+        >あなたの番！</Text>
       )}
-    </VStack>
+      <VStack
+        m={"0 auto"}
+        spacing={"24px"}
+        border={"1px solid #ddd"}
+        bg={"white"}
+        p={"24px 32px"}
+        borderRadius={"16px"}
+      >
+        <Text fontWeight={"bold"}>{player.name}さんの番</Text>
+        <VStack alignItems={"center"}>
+          <UserAvatar user={player} size={"xl"} />
+          <Text fontWeight={"bold"}>{player.name}</Text>
+        </VStack>
+        <VotedView player={player} loginUser={loginUser} game={game} />
+        {isMeTarget ? (
+          <Button colorScheme={"twitter"} onClick={onNext}>自分の番を終了する</Button>
+        ) : isJoined ? (
+          <VStack bg={"gray.100"} borderRadius={"8px"} p={"16px 24px"} spacing={"16px"}>
+            <Text fontWeight={"bold"}>判定！</Text>
+            <HStack w={"100%"} justifyContent={"center"} spacing={8}>
+              <VStack spacing={2}>
+                <Button
+                  colorScheme='red'
+                  variant={isVoted("bad") ? "solid" : "outline"}
+                  size='md'
+                  onClick={onVote("bad", player.id)}
+                >
+                  {"🤔"}
+                </Button>
+                <Text>うーん</Text>
+              </VStack>
+              <VStack spacing={2}>
+                <Button
+                  colorScheme='twitter'
+                  variant={isVoted("good") ? "solid" : "outline"}
+                  size='md'
+                  onClick={onVote("good", player.id)}
+                >
+                  {"👍"}
+                </Button>
+                <Text>いいね！</Text>
+              </VStack>
+            </HStack>
+          </VStack>
+        ) : (
+          <Box>
+            <Text fontWeight={"bold"} fontSize={"12px"} color={"red"}>ゲーム未参加のため投票できません</Text>
+          </Box>
+        )}
+      </VStack>
+    </>
   )
 }

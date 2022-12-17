@@ -1,4 +1,4 @@
-import {AvatarGroup, Button, ModalBody, Text, VStack} from "@chakra-ui/react";
+import {AvatarGroup, Button, Text, VStack} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {useMemo} from "react";
@@ -22,31 +22,30 @@ export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
   }, [game.gamePlayers, loginUser.id])
 
   return (
-    <ModalBody>
-      <VStack spacing={8} m={"0 auto"} w={"100%"}>
-        <VStack
-          m={"0 auto"}
-          spacing={"24px"}
-          border={"1px solid #ddd"}
-          p={"24px 32px"}
-          borderRadius={"16px"}
-        >
-          <Text fontWeight={"bold"}>ミッションをクリアしろ！</Text>
-          <VStack alignItems={"center"}>
-            <AvatarGroup size={"xl"}>
-              {sortedPlayers.map(v => (
-                <UserAvatar key={v.id} user={v} size={"xl"} />
-              ))}
-            </AvatarGroup>
-            <Text fontWeight={"bold"}>参加者: 全員</Text>
-            {isJoined ? (
-              <Button colorScheme={"twitter"} onClick={onNext}>{"次へ！"}</Button>
-            ) : (
-              <Button disabled size={"md"}>ミッションに参加できません</Button>
-            )}
-          </VStack>
+    <VStack spacing={"8px"}>
+      <VStack
+        m={"0 auto"}
+        spacing={"24px"}
+        border={"1px solid #ddd"}
+        bg={"white"}
+        p={"24px 32px"}
+        borderRadius={"16px"}
+      >
+        <Text fontWeight={"bold"}>ミッションをクリアしろ！</Text>
+        <VStack spacing={"16px"} alignItems={"center"}>
+          <AvatarGroup size={"xl"}>
+            {sortedPlayers.map(v => (
+              <UserAvatar key={v.id} user={v} size={"xl"} />
+            ))}
+          </AvatarGroup>
+          <Text fontWeight={"bold"}>回答者: 全員</Text>
+          {isJoined ? (
+            <Button colorScheme={"twitter"} onClick={onNext}>{"次へ！"}</Button>
+          ) : (
+            <Button disabled size={"md"}>ミッションに参加できません</Button>
+          )}
         </VStack>
       </VStack>
-    </ModalBody>
+    </VStack>
   )
 }

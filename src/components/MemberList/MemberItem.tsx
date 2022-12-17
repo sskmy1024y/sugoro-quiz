@@ -48,9 +48,9 @@ export const MemberItem = ({roomId, member}: Props) => {
   }, [isIncludePlayer, member.id, orderPlayers.length, roomId]);
 
   return (
-    <Card size={"sm"}>
+    <Card size={"sm"} bg={"white"} borderRadius={"8px"}>
       <CardBody>
-        <Flex gap='4'>
+        <Flex gap='4' alignItems={"center"}>
           <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap' opacity={isIncludePlayer ? 1 : 0.5}>
             <UserAvatar user={member} />
             <Box>

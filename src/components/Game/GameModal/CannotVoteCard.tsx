@@ -12,10 +12,11 @@ export const CannotVoteCard = ({targetUser}: Props) => {
       m={"0 auto"}
       spacing={"24px"}
       border={"1px solid #ddd"}
+      bg={"white"}
       p={"16px"}
       borderRadius={"16px"}
     >
-      <Text fontWeight={"bold"}>ミッションクリアした？</Text>
+      <Text fontWeight={"bold"} textAlign={"center"}>ミッションをクリアしたら<br/>「いいね」を押そう！</Text>
       <VStack alignItems={"center"}>
         <UserAvatar user={targetUser} size={"xl"} />
         <Text fontWeight={"bold"}>{targetUser.name}</Text>

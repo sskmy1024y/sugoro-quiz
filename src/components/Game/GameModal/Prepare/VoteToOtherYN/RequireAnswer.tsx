@@ -44,6 +44,7 @@ export const RequireAnswer = ({loginUser, game, onNext}: Props) => {
         m={"0 auto"}
         spacing={"24px"}
         border={"1px solid #ddd"}
+        bg={"white"}
         p={"24px 32px"}
         borderRadius={"16px"}
       >
@@ -54,8 +55,8 @@ export const RequireAnswer = ({loginUser, game, onNext}: Props) => {
               <UserAvatar key={v.id} user={v} size={"xl"} />
             ))}
           </AvatarGroup>
-          <Text fontWeight={"bold"}>参加者: 全員</Text>
-          <Text fontSize={"md"}>制限時間: {game.mission.timeout}秒</Text>
+          <Text fontWeight={"bold"}>回答者: 全員</Text>
+          <Text fontSize={"md"}>一人当たりの制限時間: {game.mission.timeout}秒</Text>
           {isJoined ? (
             <Button colorScheme={"twitter"} onClick={onOpen}>{"ミッションスタート！"}</Button>
           ) : (
