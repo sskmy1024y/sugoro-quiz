@@ -7,6 +7,7 @@ import {useSetNewGame} from "store/Game";
 import {LoginUser} from "models/User";
 import {MathPosition} from "config/Board";
 import {useSetUserPoint} from "store/Members";
+import {PT} from "config/Constants";
 
 interface Props {
   loginUser: LoginUser;
@@ -34,7 +35,6 @@ export const SugorokuBoard = ({loginUser}: Props) => {
   const positionsDeps = useMemo(() => positions.map(position => position.mathIndex).join(","), [positions]);
 
   useEffect(() => {
-    console.log("positions", positions);
     if (positions.length === 0) return;
     if (positions.length !== stepPositions.length) {
       setStepPositions(positions);
@@ -85,10 +85,13 @@ export const SugorokuBoard = ({loginUser}: Props) => {
 
         case "point": { // ポイントマスに止まった場合
           if (currentPlayer) {
+            const isPlus = nextMath.point > 0;
             toast({
-              title: `${loginUser.id !== currentPlayer.id ? `${currentPlayer.name}さんが` : ""}ポイントを獲得しました`,
-              description: `+${nextMath.point}pt`,
-              status: "success",
+              title: isPlus
+                ? `${loginUser.id !== currentPlayer.id ? `${currentPlayer.name}さんが` : ""}ポイントを獲得しました`
+                : `${loginUser.id !== currentPlayer.id ? `${currentPlayer.name}さんの` : ""}ポイントが減少しました`,
+              description: `${isPlus ? `+` : `-`}${nextMath.point}${PT}`,
+              status: isPlus ? "success" : "error",
               position: "top-right",
               duration: 5000,
               isClosable: true,

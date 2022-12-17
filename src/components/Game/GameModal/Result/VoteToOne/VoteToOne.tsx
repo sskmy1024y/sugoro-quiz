@@ -44,23 +44,14 @@ export const VoteToOne = ({loginUser, game, onNext}: Props) => {
       if (point === 0) return prev;
 
       if (prev.length > 0) {
-        if (prev[0].point < point) {
-          return [{
-            player: v.player,
-            point,
-          }]
-        } else if (prev[0].point === point) {
-          return [...prev, {
-            player: v.player,
-            point,
-          }]
-        } else {
-          return prev;
-        }
+        return [...prev, {
+          player: v.player,
+          point,
+        }]
       }
 
       return [{ player: v.player, point }]
-    }, [])
+    }, []).sort((a, b) => b.point - a.point)
   }, [game.gamePlayers, getPoint])
 
 
