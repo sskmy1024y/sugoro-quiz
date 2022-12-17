@@ -91,7 +91,7 @@ export const useSetNewGame = (roomId: string) => {
 }
 
 export const useVoteGame = (roomId: string, gameKey: string) => {
-  const loginUser = useRecoilValue(LoginUserState);
+  const loginUser = useRecoilValue(LoginUserState)
   const game = useRecoilValue(LatestGameSelectorState(roomId));
 
   return useCallback((vote: 'good' | 'bad', targetPlayerId: string) => async () => {

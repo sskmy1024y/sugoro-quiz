@@ -17,19 +17,22 @@ export const useSynchronizeRoomMembers = (roomId: string) => {
   const setMembers = useSetRecoilState(MembersState(roomId));
   useEffect(() => {
     const refs = ref(db, `rooms/${roomId}/users/`);
-    const unsubscribe = onValue(refs, snapshot => {
-      const members: User[] = [];
-      snapshot.forEach(childSnapshot => {
-        members.push({
-          key: childSnapshot.key!,
-          ...childSnapshot.val()
-        });
-      });
-      setMembers(members)
 
-      if (loginUser) {
-        const loginUserData = members.find(member => member.id === loginUser.id);
-        if (loginUserData) setLoginUser({...loginUserData, key: loginUser.key, roomId: loginUser.roomId});
+    const unsubscribe = onValue(refs, snapshot => {
+      if (snapshot.exists()) {
+        const members: User[] = [];
+        snapshot.forEach(childSnapshot => {
+          members.push({
+            key: childSnapshot.key!,
+            ...childSnapshot.val()
+          });
+        });
+        setMembers(members)
+
+        if (loginUser) {
+          const loginUserData = members.find(member => member.id === loginUser.id);
+          if (loginUserData) setLoginUser({...loginUserData, key: loginUser.key, roomId: loginUser.roomId});
+        }
       }
     })
 
@@ -37,7 +40,8 @@ export const useSynchronizeRoomMembers = (roomId: string) => {
       unsubscribe()
     }
   }
-  ,[loginUser, roomId, setLoginUser, setMembers])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  ,[roomId, setMembers])
 }
 
 export const useSetUserPoint = (roomId: string) => {
