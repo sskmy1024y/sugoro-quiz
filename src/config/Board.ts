@@ -12,7 +12,7 @@ type PointMath = {
 
 type EventMath = {
   type: "event",
-  missionId: string,
+  missionId: string | null,
 }
 
 type NormalMath = {
@@ -23,204 +23,203 @@ type MathType = PointMath | EventMath | NormalMath
 
 export const MathPosition: Math[] = [
   {
-    x: 2,
-    y: 9,
-    w: 16,
-    h: 11,
-    type: "normal"
+    x: 77,
+    y: 65,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
   },
   {
-    x: 2,
-    y: 20,
-    w: 16,
-    h: 11,
-    type: "normal"
+    x: 70,
+    y: 68,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
   },
   {
-    x: 2,
-    y: 31,
-    w: 16,
-    h: 11,
-    type: "normal"
+    x: 63,
+    y: 73,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: -1,
   },
   {
-    x: 2,
-    y: 42,
-    w: 16,
-    h: 11,
-    type: "normal"
+    x: 56,
+    y: 67,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
   },
   {
-    x: 2,
-    y: 53,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 2,
-    y: 64,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 2,
-    y: 75,
-    w: 24,
-    h: 17,
+    x: 49.2,
+    y: 72,
+    w: 8,
+    h: 15,
     type: "event",
-    missionId: "math_mission1"
+    missionId: null,
   },
   {
-    x: 26,
-    y: 82,
-    w: 16,
-    h: 11,
-    type: "normal"
+    x: 42.5,
+    y: 76,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
   },
   {
-    x: 42,
-    y: 82,
-    w: 16,
-    h: 11,
-    type: "normal"
+    x: 35.5,
+    y: 71,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: -1,
   },
   {
-    x: 58,
-    y: 82,
-    w: 16,
-    h: 11,
-    type: "normal"
+    x: 28.7,
+    y: 69,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
   },
   {
-    x: 74,
+    x: 22,
     y: 74,
-    w: 24,
-    h: 19,
-    type: "event",
-    missionId: "math_mission2"
-  },
-  {
-    x: 82,
-    y: 63,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 82,
-    y: 52,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 82,
-    y: 41,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 82,
-    y: 30,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 74,
-    y: 9,
-    w: 24,
-    h: 22,
-    type: "event",
-    missionId: "math_mission3"
-  },
-  {
-    x: 58,
-    y: 9,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 42,
-    y: 9,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 26,
-    y: 9,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 26,
-    y: 20,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 26,
-    y: 31,
-    w: 16,
-    h: 14,
-    type: "normal"
-  },
-  {
-    x: 26,
-    y: 45,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 26,
-    y: 56,
-    w: 24,
-    h: 18,
-    type: "event",
-    missionId: "math_mission4"
-  },
-  {
-    x: 50,
-    y: 63,
-    w: 16,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 66,
-    y: 63,
     w: 8,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 66,
-    y: 52,
-    w: 8,
-    h: 11,
-    type: "normal"
-  },
-  {
-    x: 58,
-    y: 31,
-    w: 16,
-    h: 21,
+    h: 15,
     type: "event",
-    missionId: "math_mission5"
+    missionId: null
   },
   {
-    x: 50,
-    y: 31,
+    x: 15,
+    y: 69,
     w: 8,
-    h: 11,
-    type: "normal"
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 12,
+    y: 53,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 10.5,
+    y: 37,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 12.5,
+    y: 21,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: -1,
+  },
+  {
+    x: 19,
+    y: 14,
+    w: 8,
+    h: 15,
+    type: "point", // スターマス。何するんだっけ
+    point: 10,
+  },
+  {
+    x: 25.5,
+    y: 8,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 32,
+    y: 8,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 39,
+    y: 11,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: -1,
+  },
+  {
+    x: 45.5,
+    y: 6,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 52,
+    y: 12,
+    w: 8,
+    h: 15,
+    type: "event",
+    missionId: null,
+  },
+  {
+    x: 58.5,
+    y: 8,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 65.1,
+    y: 12,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: -1,
+  },
+  {
+    x: 72.1,
+    y: 10,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 79,
+    y: 19,
+    w: 8,
+    h: 15,
+    type: "event",
+    missionId: null,
+  },
+  {
+    x: 81.5,
+    y: 33,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: 1,
+  },
+  {
+    x: 79.5,
+    y: 50,
+    w: 8,
+    h: 15,
+    type: "point",
+    point: -1,
   },
 ]

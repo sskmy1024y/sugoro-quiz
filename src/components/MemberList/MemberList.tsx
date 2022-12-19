@@ -24,7 +24,7 @@ export const MemberList = ({loginUser}: Props) => {
   }, [members, orderPlayers, loginUser.id]);
 
   return (
-    <Card w={"280px"} bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"}>
+    <Card w={"280px"} border={"1px solid white"} bg={"linear-gradient(104.31deg, #56CCE1D0 -1.14%, #68DCB6E0 105.66%)"} backdropFilter={"blur(0px)"}>
       <CardHeader>
         <Heading size={"md"} color={"gray.700"}>ルームメンバー</Heading>
       </CardHeader>
