@@ -12,12 +12,13 @@ import {
 } from "@chakra-ui/react";
 import {useIsIncludePlayer, useOrderPlayer} from "store/OrderPlayer";
 import {BsThreeDotsVertical} from "react-icons/all";
-import React, {useCallback} from "react";
+import React, {useCallback, useMemo} from "react";
 import {ref, set} from "firebase/database";
 import {db} from "config/firebase";
 import {usePlayerPositions} from "store/PlayerPosition";
 import {UserAvatar} from "components/common/UserAvatar";
 import {PT} from "config/Constants";
+import {useCurrentPlayer} from "store/Progress";
 
 interface Props {
   roomId: string;
@@ -28,6 +29,9 @@ export const MemberItem = ({roomId, member}: Props) => {
   const isIncludePlayer = useIsIncludePlayer(roomId, member.id);
   const orderPlayers = useOrderPlayer(roomId);
   const positions = usePlayerPositions(roomId);
+  const currentPlayer = useCurrentPlayer(roomId);
+
+  const isCurrentPlayer = useMemo(() => currentPlayer?.id === member.id, [currentPlayer?.id, member.id]);
 
   const onKick = useCallback(async () => {
     if (!isIncludePlayer) return;
@@ -49,7 +53,7 @@ export const MemberItem = ({roomId, member}: Props) => {
   }, [isIncludePlayer, member.id, orderPlayers.length, roomId]);
 
   return (
-    <Card size={"sm"} bg={"white"} borderRadius={"8px"} w={"244px"}>
+    <Card size={"sm"} bg={isCurrentPlayer ? "yellow" : "white"} borderRadius={"8px"} w={"244px"}>
       <CardBody>
         <Flex gap='4px' alignItems={"center"}>
           <Flex flex='1' gap='8px' alignItems='center' opacity={isIncludePlayer ? 1 : 0.5}>

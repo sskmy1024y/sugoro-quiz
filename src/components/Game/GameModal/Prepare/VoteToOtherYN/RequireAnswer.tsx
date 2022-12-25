@@ -48,17 +48,25 @@ export const RequireAnswer = ({loginUser, game, onNext}: Props) => {
         p={"24px 32px"}
         borderRadius={"16px"}
       >
-        <Text fontWeight={"bold"}>ミッションをクリアしろ！</Text>
-        <VStack alignItems={"center"}>
+        <VStack alignItems={"center"} spacing={"8px"}>
+          <VStack spacing={"4px"}>
+            <Text fontWeight={"bold"}>【ルール】</Text>
+            <Text>順番に回答して、ミッションをクリアしたと思ったら「いいね👍」を押してね</Text>
+          </VStack>
           <AvatarGroup size={"xl"}>
             {sortedPlayers.map(v => (
               <UserAvatar key={v.id} user={v} size={"xl"} />
             ))}
           </AvatarGroup>
-          <Text fontWeight={"bold"}>回答者: 全員</Text>
-          <Text fontSize={"md"}>一人当たりの制限時間: {game.mission.timeout}秒</Text>
+          <VStack spacing={"4px"}>
+            <Text fontWeight={"bold"}>回答する人: 全員</Text>
+            <Text fontWeight={"bold"}>制限時間/人: {game.mission.timeout}秒</Text>
+          </VStack>
           {isJoined ? (
-            <Button colorScheme={"twitter"} onClick={onOpen}>{"ミッションスタート！"}</Button>
+            <VStack pt={"16px"} spacing={"4px"}>
+              <Button colorScheme={"twitter"} onClick={onOpen}>{"ミッションスタート！"}</Button>
+              <Text fontSize={"xs"} color={"gray.500"}>代表で一人ボタンを押すと、ゲームが始まるよ</Text>
+            </VStack>
           ) : (
             <Button disabled size={"md"}>ミッションに参加できません</Button>
           )}

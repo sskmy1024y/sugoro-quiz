@@ -7,6 +7,6 @@ export enum Rooms {
   Room6 = "room6",
 }
 
-export const ENABLE_UNISEPON = process.env.NODE_ENV === "development" ??  false
+export const ENABLE_UNISEPON = true
 
 export const PT = "pt"

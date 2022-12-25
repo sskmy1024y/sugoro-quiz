@@ -102,22 +102,24 @@ export const SugorokuBoard = ({loginUser}: Props) => {
                 : `${loginUser.id !== currentPlayer.id ? `${currentPlayer.name}さんの` : ""}ポイントが減少しました`,
               description: `${isPlus ? `+` : ``}${nextMath.point}${PT}`,
               status: isPlus ? "success" : "error",
-              position: "top-right",
+              position: "top",
               duration: 5000,
               isClosable: true,
             })
             if (currentPlayer.id === loginUser.id) {
               setPoint(currentPlayer, Math.max(currentPlayer.point + nextMath.point, 0));
+              setTimeout(() => {
+                onNextTerm();
+              }, 1000);
             }
           }
-          setTimeout(() => {
-            onNextTerm();
-          }, 1000);
           return;
         }
 
         case "normal": { // 通常マスに止まった場合
-          onNextTerm();
+          if (currentPlayer && currentPlayer.id === loginUser.id) {
+            onNextTerm();
+          }
           return;
         }
       }

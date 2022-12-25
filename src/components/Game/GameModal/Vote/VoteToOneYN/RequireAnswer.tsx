@@ -1,14 +1,13 @@
-import { Text, VStack} from "@chakra-ui/react";
+import {Button, Text, VStack} from "@chakra-ui/react";
 import {UserAvatar} from "components/common/UserAvatar";
 import {LoginUser} from "models/User";
-import {CombinedGame} from "models/Game";
 
 interface Props {
   loginUser: LoginUser
-  game: CombinedGame
+  onNext: () => void
 }
 
-export const RequireAnswer = ({loginUser}: Props) => {
+export const RequireAnswer = ({loginUser, onNext}: Props) => {
   return (
     <VStack spacing={"8px"}>
       <Text
@@ -24,11 +23,15 @@ export const RequireAnswer = ({loginUser}: Props) => {
         p={"24px"}
         borderRadius={"16px"}
       >
-        <Text fontWeight={"bold"} textAlign={"center"}>ミッションをクリアして<br/>ココポを獲得しよう</Text>
+        <VStack spacing={"4px"}>
+          <Text fontWeight={"bold"}>【ルール】</Text>
+          <Text textAlign={"center"}>ミッションのお題について回答しよう。<br />クリアすると、みんなからポイントがもらえるよ</Text>
+        </VStack>
         <VStack alignItems={"center"}>
           <UserAvatar user={loginUser} size={"xl"} />
           <Text fontWeight={"bold"}>{loginUser.name}</Text>
         </VStack>
+        <Button colorScheme={"twitter"} onClick={onNext}>ミッションを終了する</Button>
       </VStack>
     </VStack>
   )

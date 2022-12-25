@@ -16,7 +16,7 @@ export const PlayerOrder = ({roomId, game}: Props) => {
   }, [game.currentGamePlayerId, progress.state])
 
   return (
-    <VStack w={"100%"} spacing={"4px"} borderRadius={"8px"} bg={"rgba(255, 255, 255, 0.6)"} backdropFilter={"blur(5px)"} p={"16px"}>
+    <VStack spacing={"8px"} borderRadius={"8px"} bg={"rgba(255, 255, 255, 0.6)"} backdropFilter={"blur(5px)"} p={"16px 24px"}>
       <Heading size={"sm"} w={"100%"}>回答する順番（一人ずつ回答してね！）</Heading>
       <HStack spacing={"12px"}>
         {game.gamePlayers.map((v, i) => (

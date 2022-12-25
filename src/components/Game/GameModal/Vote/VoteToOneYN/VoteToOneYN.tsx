@@ -10,9 +10,10 @@ interface Props {
   loginUser: LoginUser;
   targetUser: User;
   game: CombinedGame;
+  onNext: () => void;
 }
 
-export const VoteToOneYN = ({loginUser, targetUser, game}: Props) => {
+export const VoteToOneYN = ({loginUser, targetUser, game, onNext}: Props) => {
   const otherPlayers = useMemo(() =>
     game.gamePlayers.filter(v => v.player.id !== loginUser.id && v.player.id !== targetUser.id)
   , [game.gamePlayers, loginUser.id, targetUser.id]);
@@ -21,7 +22,7 @@ export const VoteToOneYN = ({loginUser, targetUser, game}: Props) => {
     <ModalBody>
       <VStack spacing={8} m={"0 auto"} w={"100%"}>
         {loginUser.id === targetUser.id ? (
-          <RequireAnswer loginUser={loginUser} game={game} />
+          <RequireAnswer loginUser={loginUser} onNext={onNext} />
         ) : (
           <VoteCard loginUser={loginUser} game={game} targetUser={targetUser} />
         )}

@@ -28,7 +28,7 @@ export const VoteToOne = ({loginUser, game, onNext}: Props) => {
       <VStack spacing={8} m={"0 auto"} w={"100%"}>
         <PlayerOrder game={game} roomId={loginUser.roomId} />
         {currentPlayer && <TargetPlayer player={currentPlayer.player} loginUser={loginUser} onNext={onNext} game={game} />}
-        {isJoined && <Text fontWeight={"bold"}>一番いいと思った人に投票してね！</Text>}
+        {isJoined && <Text fontWeight={"bold"}>一人選んで投票してね！</Text>}
         <HStack spacing={"4px"} w={"100%"} justifyContent={"space-around"}>
           {otherPlayers.map((v) => (
             <VoteCard key={v.player.id} {...v} loginUser={loginUser} game={game} />

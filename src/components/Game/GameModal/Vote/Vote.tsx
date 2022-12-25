@@ -91,7 +91,7 @@ export const Vote = ({loginUser, latestGame}: Props) => {
       </ModalHeader>
       <ModalBody>
         {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
-          <VoteToOneYN loginUser={loginUser} targetUser={targetUsers[0]} game={latestGame} />
+          <VoteToOneYN loginUser={loginUser} targetUser={targetUsers[0]} onNext={onNext} game={latestGame} />
         ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (
           <VoteToOtherYN loginUser={loginUser} game={latestGame} onNext={onNext} />
         ) : latestGame.mission.rule === MissionRule.VoteTo1 ? (

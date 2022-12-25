@@ -26,13 +26,19 @@ export const RequireAnswer = ({loginUser, game, onNext}: Props) => {
           p={"24px 32px"}
           borderRadius={"16px"}
         >
-          <Text fontWeight={"bold"} textAlign={"center"}>ミッションをクリアして<br/>ココポを獲得しよう</Text>
+          <VStack spacing={"4px"}>
+            <Text fontWeight={"bold"}>【ルール】</Text>
+            <Text textAlign={"center"}>ミッションのお題について回答しよう。<br />クリアすると、みんなからポイントがもらえるよ</Text>
+          </VStack>
           <VStack alignItems={"center"}>
             <UserAvatar user={loginUser} size={"xl"} />
             <Text fontWeight={"bold"}>{loginUser.name}</Text>
           </VStack>
-          <Text fontSize={"md"}>制限時間: {game.mission.timeout}秒</Text>
-          <Button colorScheme={"twitter"} onClick={onNext}>{"ミッションスタート！"}</Button>
+          <Text fontWeight={"bold"}>制限時間: {game.mission.timeout}秒</Text>
+          <VStack pt={"8px"} spacing={"4px"}>
+            <Button colorScheme={"twitter"} onClick={onNext}>{"ミッションスタート！"}</Button>
+            <Text fontSize={"xs"} color={"gray.500"}>あなたがボタンを押すと、ゲームが始まるよ</Text>
+          </VStack>
         </VStack>
       </VStack>
     </VStack>
