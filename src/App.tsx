@@ -10,6 +10,7 @@ import 'config/firebase'
 import {RecoilRoot} from "recoil";
 import {Fonts} from "theme/GlobalStyle";
 import {useEffect} from "react";
+import {UnifesStaff} from "pages/UnifesStaff";
 
 const theme = extendTheme({
   fonts: {
@@ -37,6 +38,7 @@ export const App = () => {
           <Routes>
             <Route path={`/`} element={<Main/>}/>
             <Route path={`/login`} element={<Login/>}/>
+            <Route path={`/unifes-staff`} element={<UnifesStaff />}/>
           </Routes>
         </BrowserRouter>
       </ChakraProvider>

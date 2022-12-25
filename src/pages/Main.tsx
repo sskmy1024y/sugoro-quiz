@@ -39,7 +39,7 @@ export const Main = () => {
       <Container maxW='9xl' mb={"24px"}>
         <Box mt={"24px"} position={"relative"} zIndex={0}>
           <Box position={"absolute"} top={"16px"} left={"16px"} zIndex={1}>
-            <MemberList loginUser={loginUser} />
+            <MemberList roomId={loginUser.roomId} />
           </Box>
           <SugorokuBoard loginUser={loginUser} />
         </Box>
