@@ -107,8 +107,8 @@ export const MathPosition: Math[] = [
     y: 53,
     w: 8,
     h: 15,
-    type: "point",
-    point: 1,
+    type: "event",
+    missionId: null
   },
   {
     x: 10.5,
@@ -132,7 +132,7 @@ export const MathPosition: Math[] = [
     w: 8,
     h: 15,
     type: "point", // スターマス。何するんだっけ
-    point: 10,
+    point: 5,
   },
   {
     x: 25.5,

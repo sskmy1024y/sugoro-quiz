@@ -26,8 +26,8 @@ export const Happened = ({loginUser, latestGame}: Props) => {
     <>
       <ModalBody>
         <Flex alignItems={"center"} gap={"8px"} justifyContent={"center"} m={"32px"} direction={"column"}>
-          <Heading size={"lg"} color="white" fontWeight={"900"}>ミッション発生！</Heading>
-          <Text size={"md"} color={"gray.100"} fontWeight={"700"}>サイコロが一周するとミッションが発生するよ！</Text>
+          <Heading size={"lg"} color="white" fontWeight={"900"}>ミニゲーム発生！</Heading>
+          <Text size={"md"} color={"gray.100"} fontWeight={"700"}>順番が一周するとミニゲームが発生するよ！</Text>
         </Flex>
         <Box position={"relative"}>
           {latestGame.mission.rule === MissionRule.VoteTo1YN ? (

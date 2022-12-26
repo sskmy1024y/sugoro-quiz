@@ -56,7 +56,7 @@ export const VoteToOneYN = ({loginUser, targetUser, game, onNext}: Props) => {
           {loginUser.id === targetUser.id ? (
             <Button colorScheme={"twitter"} onClick={onNext}>{"すごろくに戻る"}</Button>
           ) : (
-            <SkipButton onClick={onNext} confirmText={"他の人にも終了していいか確認してね！"}>{"ミッションを終了する"}</SkipButton>
+            <SkipButton onClick={onNext} skipLabel={"終了する"} confirmText={"他の人にも終了していいか確認してね！"}>{"ミッションを終了する"}</SkipButton>
           )}
           <Box position={"absolute"} bottom={"84px"} right={"-42px"} zIndex={1}>
             {ENABLE_UNISEPON && <Image src={"/images/ouen.gif"} w={"128px"} h={"100%"} />}

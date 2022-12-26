@@ -12,10 +12,11 @@ import {useCallback, useRef} from "react";
 interface Props {
   onClick: () => void;
   confirmText?: string;
+  skipLabel?: string;
   children?: string;
 }
 
-export const SkipButton = ({children = "スキップ", confirmText = "まだ残り時間がありますが、ミッションを終了しますか？", onClick}: Props) => {
+export const SkipButton = ({children = "スキップ", skipLabel = "スキップする", confirmText = "まだ残り時間がありますが、ミッションを終了しますか？", onClick}: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const cancelRef = useRef(null)
 
@@ -46,7 +47,7 @@ export const SkipButton = ({children = "スキップ", confirmText = "まだ残�
                 キャンセル
               </Button>
               <Button colorScheme='red' onClick={onSkip} ml={3}>
-                終了する
+                {skipLabel}
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>
