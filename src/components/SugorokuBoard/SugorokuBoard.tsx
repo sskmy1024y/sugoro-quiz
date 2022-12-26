@@ -10,6 +10,7 @@ import {useSetUserPoint} from "store/Members";
 import {PT} from "config/Constants";
 import {ChevronLeftIcon, ChevronRightIcon} from '@chakra-ui/icons'
 import {EVENT_MATH_MISSIONS} from "config/Missions";
+import {Star} from "components/SugorokuBoard/Star";
 
 interface Props {
   loginUser: LoginUser;
@@ -93,6 +94,7 @@ export const SugorokuBoard = ({loginUser}: Props) => {
           return;
         }
 
+        case "star": // スターに止まった場合
         case "point": { // ポイントマスに止まった場合
           if (currentPlayer) {
             const isPlus = nextMath.point > 0;
@@ -175,6 +177,9 @@ export const SugorokuBoard = ({loginUser}: Props) => {
                       </WrapItem>
                     )
                   })}
+                  {position.type === "star" && (
+                    <Star />
+                  )}
                 </Wrap>
               )
             })

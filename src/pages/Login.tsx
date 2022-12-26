@@ -82,7 +82,7 @@ export const Login = () => {
 
   return (
     <Box h={"100lvh"} pt={"24px"} bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"}>
-      <Image src={"/images/logo.png"} w={"200px"} mx={"auto"} mb={"24px"}/>
+      <Image src={"/images/logo.png"} w={"240px"} mx={"auto"} mb={"36px"}/>
       <Card maxW={"2xl"} margin={"24px auto"} bg={"white"} borderRadius={"16px"}>
         <CardHeader>
           <Heading size='lg'>メンバー登録</Heading>
