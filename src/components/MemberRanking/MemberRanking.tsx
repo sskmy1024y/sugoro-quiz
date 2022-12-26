@@ -28,7 +28,7 @@ export const MemberRanking = ({roomId}: Props) => {
         <Heading size={"md"} color={"gray.700"}>{roomId}</Heading>
       </CardHeader>
       <CardBody p={"0 16px 16px"}>
-        <VStack spacing={4} alignItems={"flex-start"} maxH={"500px"} overflowX={"unset"} overflowY={"scroll"}>
+        <VStack spacing={4} alignItems={"flex-start"} maxH={"500px"} overflowX={"unset"} overflowY={"auto"}>
           {orderMembers.map(member => (
             <MemberItem key={member.id} roomId={roomId} member={member}/>
           ))}
