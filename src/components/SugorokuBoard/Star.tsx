@@ -10,7 +10,7 @@ export const Star = ({...props}: Props) => {
         as={motion.div}
         position={"absolute"}
         top={"-15px"}
-        left={"5px"}
+        left={"6px"}
         animation={animation1}
         display="flex"
         {...props}
@@ -31,8 +31,8 @@ export const Star = ({...props}: Props) => {
       <Box
         as={motion.div}
         position={"absolute"}
-        bottom={"-8px"}
-        right={"-8px"}
+        bottom={"-7px"}
+        right={"-7px"}
         animation={animation2}
         display="flex"
         {...props}
