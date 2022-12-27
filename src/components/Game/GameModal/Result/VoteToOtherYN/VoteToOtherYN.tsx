@@ -53,7 +53,7 @@ export const VoteToOtherYN = ({loginUser, game, onNext}: Props) => {
     <>
       <VStack spacing={8} m={"0 auto 42px"} w={"100%"}>
         <VStack
-          m={"0 auto"}
+          m={"0 auto 24px"}
           spacing={"24px"}
           p={"32px"}
           bg={"rgba(255, 255, 255, 0.4)"}

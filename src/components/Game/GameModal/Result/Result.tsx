@@ -47,6 +47,18 @@ export const Result = ({loginUser, latestGame}: Props) => {
           <Box w={"1px"} bg={"white"} height={"360px"} />
           <Ranking roomId={loginUser.roomId} />
         </HStack>
+        <VStack
+          m={"0 auto"}
+          bg={"rgba(255, 255, 255, 0.6)"}
+          backdropFilter={"blur(5px)"}
+          p={"24px"}
+          borderRadius={"16px"}
+          minW={"380px"}
+          zIndex={0}
+          position={"relative"}
+        >
+          <Text fontWeight={"bold"}>{"ミッション中に気になった話があったら、深ぼって聞いてみよう！"}</Text>
+        </VStack>
       </ModalBody>
     </>
   )

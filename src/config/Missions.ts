@@ -30,6 +30,42 @@ export const EVENT_MATH_MISSIONS: Mission[] = [
     mission: "今年やり残したことは？（来年がんばれ！って思ったら投票してね！）",
     rule: MissionRule.VoteTo1YN,
     timeout: 60,
+  },
+  {
+    id: 'math_mission6',
+    mission: "仕事のこだわりを教えて！（いいね、って思ったら投票してね！）",
+    rule: MissionRule.VoteTo1YN,
+    timeout: 60,
+  },
+  {
+    id: 'math_mission7',
+    mission: "一生これしか食べられないなら、何を死ぬまで食べる？（わかる！って思ったら投票してね！）",
+    rule: MissionRule.VoteTo1YN,
+    timeout: 60,
+  },
+  {
+    id: 'math_mission8',
+    mission: "もしも自分が総理大臣だったらどんな法律を作る？（その法律欲しい！と思ったら投票してね！）",
+    rule: MissionRule.VoteTo1YN,
+    timeout: 60,
+  },
+  {
+    id: 'math_mission9',
+    mission: "自分の好きな言葉は？（わかる！って思ったら投票してね！）",
+    rule: MissionRule.VoteTo1YN,
+    timeout: 60,
+  },
+  {
+    id: 'math_mission10',
+    mission: "今年1番かなしかった出来事は？（なぐさめたくなったら投票してね！）",
+    rule: MissionRule.VoteTo1YN,
+    timeout: 60,
+  },
+  {
+    id: 'math_mission11',
+    mission: "この会社にUniposが入ったら嬉しい！って思う会社は？（いいね！と思ったら投票してね！）",
+    rule: MissionRule.VoteTo1YN,
+    timeout: 60,
   }
 ];
 
