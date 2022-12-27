@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {LoginUser} from "models/User";
 import {MemberList} from "components/MemberList";
-import {Box, Container, Flex} from "@chakra-ui/react";
+import {Box, Container, Flex, Image} from "@chakra-ui/react";
 import {ProgressPanel} from "components/ProgressPanel";
 import {SubscribeProvider} from "components/SubscribeProvider";
 import {SugorokuBoard} from "components/SugorokuBoard";
@@ -37,11 +37,14 @@ export const Main = () => {
   return (
     <SubscribeProvider roomId={loginUser.roomId}>
       <Container maxW='9xl' mb={"24px"}>
-        <Box mt={"24px"} position={"relative"} zIndex={0}>
-          <Box position={"absolute"} top={"16px"} left={"16px"} zIndex={1}>
-            <MemberList loginUser={loginUser} />
+        <Box position={"relative"} zIndex={0}>
+          <Box position={"absolute"} top={0} left={"16px"} zIndex={1}>
+            <Image src={"/images/logo.png"} w={"120px"} m={"8px auto"} />
+            <MemberList roomId={loginUser.roomId} />
           </Box>
-          <SugorokuBoard loginUser={loginUser} />
+          <Box pt={"16px"}>
+            <SugorokuBoard loginUser={loginUser} />
+          </Box>
         </Box>
         <Flex direction={"row"} gap={"16px"}>
           <ProgressPanel loginUser={loginUser} />

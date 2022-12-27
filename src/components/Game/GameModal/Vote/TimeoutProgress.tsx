@@ -45,7 +45,7 @@ export const TimeoutProgress = ({timeout, timeoutAt, onNext}: Props) => {
           <Text w={"100px"} fontSize={"24px"} fontWeight={"bold"}>{`${diff.toFixed(3)}`}</Text>
           <Text>秒</Text>
         </HStack>
-        <SkipButton onClick={onNext}>ミッション終了</SkipButton>
+        <SkipButton onClick={onNext} skipLabel={"終了する"}>ミッション終了</SkipButton>
       </HStack>
     </>
   )

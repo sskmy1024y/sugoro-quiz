@@ -17,7 +17,7 @@ export const EVENT_MATH_MISSIONS: Mission[] = [
     id: 'math_mission3',
     mission: "今年１番自分を褒めたくなった瞬間は？（いい話と思ったら投票してね！）",
     rule: MissionRule.VoteTo1YN,
-    timeout: 20,
+    timeout: 60,
   },
   {
     id: 'math_mission4',
@@ -35,15 +35,15 @@ export const EVENT_MATH_MISSIONS: Mission[] = [
 
 
 export const MISSIONS: Mission[] = [
-  {
-    id: 'mission1',
-    mission: "ミッション順番1番目の人の、昨日の晩御飯は何だった！？ 周りのみんなで順番に質問して当てよう！（見事当てた人に、みんなで投票してね！）",
-    rule: MissionRule.VoteTo1,
-    timeout: 60,
-  },
+  // {
+  //   id: 'mission1',
+  //   mission: "ミッション順番1番目の人の、昨日の晩御飯は何だった！？ 周りのみんなで順番に質問して当てよう！（見事当てた人に、みんなで投票してね！）",
+  //   rule: MissionRule.VoteTo1,
+  //   timeout: 60,
+  // },
   {
     id: 'mission2',
-    mission: "今年一番やらかした話を教えて！仕事以外でもOKだよ。　（一番「やらかしてんなあ〜(笑)」と思った人に投票してね！）",
+    mission: "今年一番やらかした話を教えて！仕事以外でもOKだよ。　（一番「来年がんばれ！」と思った人に投票してね！）",
     rule: MissionRule.VoteTo1,
     timeout: 60,
   },

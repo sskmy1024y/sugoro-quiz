@@ -66,7 +66,7 @@ export const VoteToOne = ({loginUser, game, onNext}: Props) => {
             backdropFilter={"blur(5px)"}
             p={"32px"}
             borderRadius={"16px"}
-            minW={"280px"}
+            minW={"380px"}
             zIndex={0}
             position={"relative"}
           >
@@ -84,7 +84,7 @@ export const VoteToOne = ({loginUser, game, onNext}: Props) => {
               </VStack>
             )}
             <Button colorScheme={"twitter"} onClick={onOpen}>{"すごろくに戻る"}</Button>
-            <Box position={"absolute"} bottom={"18px"} right={0} zIndex={1}>
+            <Box position={"absolute"} bottom={"18px"} right={"-16px"} zIndex={1}>
               {ENABLE_UNISEPON && <Image src={"/images/ouen.gif"} w={"128px"} h={"100%"} />}
             </Box>
           </VStack>

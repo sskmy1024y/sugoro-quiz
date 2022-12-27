@@ -21,7 +21,7 @@ export const VoteCard = ({loginUser, game, player}: Props) => {
   }, [game.gamePlayers, loginUser.id, player.id]);
 
   return (
-    <Card w={"160px"} size={"sm"}>
+    <Card w={"160px"} size={"sm"} bg={"white"} borderRadius={"8px"}>
       <CardBody>
         <VStack spacing={"8px"}>
           <VStack alignItems={"center"}>

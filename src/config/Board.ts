@@ -19,7 +19,12 @@ type NormalMath = {
   type: "normal",
 }
 
-type MathType = PointMath | EventMath | NormalMath
+type StarMath = {
+  type: "star",
+  point: number,
+}
+
+type MathType = PointMath | EventMath | NormalMath | StarMath
 
 export const MathPosition: Math[] = [
   {
@@ -107,8 +112,8 @@ export const MathPosition: Math[] = [
     y: 53,
     w: 8,
     h: 15,
-    type: "point",
-    point: 1,
+    type: "event",
+    missionId: null
   },
   {
     x: 10.5,
@@ -131,8 +136,8 @@ export const MathPosition: Math[] = [
     y: 14,
     w: 8,
     h: 15,
-    type: "point", // スターマス。何するんだっけ
-    point: 10,
+    type: "star",
+    point: 5,
   },
   {
     x: 25.5,

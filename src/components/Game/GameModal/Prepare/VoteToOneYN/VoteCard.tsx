@@ -51,13 +51,19 @@ export const VoteCard = ({loginUser, game, targetUser, onSkip}: Props) => {
           p={"16px 24px"}
           borderRadius={"16px"}
         >
-          <Text fontWeight={"bold"}>ミッションをする人</Text>
+          <VStack spacing={"4px"}>
+            <Text fontWeight={"bold"}>【ルール】</Text>
+            <Text textAlign={"center"}>回答者がミッションをクリアしたら「いいね👍」を押そう！</Text>
+          </VStack>
           <VStack alignItems={"center"}>
             <UserAvatar user={targetUser} size={"xl"} />
             <Text fontWeight={"bold"}>{targetUser.name}</Text>
           </VStack>
-          <Text fontSize={"md"}>制限時間: {game.mission.timeout}秒</Text>
-          <Button colorScheme={"twitter"} isLoading loadingText={"ミッション開始待ち"} />
+          <Text fontWeight={"bold"}>制限時間: {game.mission.timeout}秒</Text>
+          <VStack pt={"8px"} spacing={"4px"}>
+            <Button colorScheme={"twitter"} isLoading loadingText={"ミッション開始待ち"} />
+            <Text fontSize={"xs"} color={"gray.500"}>{targetUser.name}さんを待っています…</Text>
+          </VStack>
         </VStack>
       </VStack>
       <VStack spacing={"16px"} borderRadius={"16px"} bg={"rgba(255, 255, 255, 0.6)"} backdropFilter={"blur(5px)"} p={"16px 32px"}>

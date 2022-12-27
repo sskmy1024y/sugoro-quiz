@@ -74,5 +74,5 @@ export const useOnNextTurn = (roomId: string) => {
         state: "dice-waiting"
       })
     }
-  },[currentPlayer, orderPlayer, progress.state, latestGame, setGame, updateProgress]);
+  },[currentPlayer, orderPlayer, progress.state, latestGame?.isEventMath, setGame, updateProgress]);
 }

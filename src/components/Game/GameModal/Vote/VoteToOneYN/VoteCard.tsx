@@ -34,11 +34,14 @@ export const VoteCard = ({loginUser, game, targetUser}: Props) => {
       p={"16px 24px"}
       borderRadius={"16px"}
     >
+      <VStack spacing={"4px"}>
+        <Text fontWeight={"bold"}>【ルール】</Text>
+        <Text textAlign={"center"}>回答者がミッションをクリアしたら「いいね👍」を押そう！</Text>
+      </VStack>
       <VStack alignItems={"center"}>
         <UserAvatar user={targetUser} size={"xl"} />
         <Text fontWeight={"bold"}>{targetUser.name}</Text>
       </VStack>
-      <Text fontWeight={"bold"}>ミッションクリアした？</Text>
       <HStack w={"100%"} justifyContent={"center"} spacing={8}>
         <VStack spacing={2}>
           <Button

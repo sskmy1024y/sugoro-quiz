@@ -1,4 +1,4 @@
-import {Box, Flex, Heading, ModalBody, Image} from "@chakra-ui/react";
+import {Box, Flex, Heading, ModalBody, Text, Image} from "@chakra-ui/react";
 import {LoginUser} from "models/User";
 import {CombinedGame} from "models/Game";
 import {useCallback, useMemo} from "react";
@@ -25,8 +25,9 @@ export const Happened = ({loginUser, latestGame}: Props) => {
   return (
     <>
       <ModalBody>
-        <Flex justifyContent={"center"} m={"32px"}>
-          <Heading size={"lg"} color="white" fontWeight={"900"}>ミッション発生！</Heading>
+        <Flex alignItems={"center"} gap={"8px"} justifyContent={"center"} m={"32px"} direction={"column"}>
+          <Heading size={"lg"} color="white" fontWeight={"900"}>ミニゲーム発生！</Heading>
+          <Text size={"md"} color={"gray.100"} fontWeight={"700"}>順番が一周するとミニゲームが発生するよ！</Text>
         </Flex>
         <Box position={"relative"}>
           {latestGame.mission.rule === MissionRule.VoteTo1YN ? (

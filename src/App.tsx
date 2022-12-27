@@ -10,6 +10,7 @@ import 'config/firebase'
 import {RecoilRoot} from "recoil";
 import {Fonts} from "theme/GlobalStyle";
 import {useEffect} from "react";
+import {UnifesStaff} from "pages/UnifesStaff";
 
 const theme = extendTheme({
   fonts: {
@@ -27,6 +28,22 @@ export const App = () => {
       "",
       "color:white; font-size: 14px; padding-top: 4px;",
     );
+
+    const comment = document.createComment(`
+ここにたどり着いたそこのあなた。
+ゆにぽすごろくは楽しんでいただけたでしょうか？
+
+もし楽しんでいただけたなら、次はあなたもUniFes!チームに参加してみませんか？
+UniFes!チームでは、楽しさを通じて最高の集団をつくる時代をつくるための企画を考えています。
+企画する自分たちが楽しむ、をモットーにしているので、こんな企画をしてみたい、ゲームを作ってみたい！というアイデアがあればぜひUniFes!チームに参加してみてください。
+
+UniFes!チーム
+    `)
+    document.prepend(comment)
+
+    return () => {
+      document.removeChild(comment)
+    }
   }, [])
 
   return (
@@ -37,6 +54,7 @@ export const App = () => {
           <Routes>
             <Route path={`/`} element={<Main/>}/>
             <Route path={`/login`} element={<Login/>}/>
+            <Route path={`/unifes-staff`} element={<UnifesStaff />}/>
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
