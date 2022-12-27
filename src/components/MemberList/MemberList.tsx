@@ -23,7 +23,7 @@ export const MemberList = ({roomId}: Props) => {
   return (
     <Card w={"280px"} border={"1px solid white"} bg={"linear-gradient(104.31deg, #56CCE1D0 -1.14%, #68DCB6E0 105.66%)"} backdropFilter={"blur(0px)"}>
       <CardHeader>
-        <Heading size={"md"} color={"gray.700"}>ルームメンバー</Heading>
+        <Heading size={"md"} color={"gray.700"}>チームメンバー</Heading>
       </CardHeader>
       <CardBody p={"0 16px 16px"}>
         <VStack spacing={4} alignItems={"flex-start"} maxH={"500px"} overflowX={"unset"} overflowY={"auto"}>
