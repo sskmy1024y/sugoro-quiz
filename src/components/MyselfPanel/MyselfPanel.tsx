@@ -54,7 +54,7 @@ export const MyselfPanel = ({loginUser}: Props) => {
             </Flex>
           </VStack>
           <Spacer minH={"16px"} />
-          <Button size={"sm"} onClick={onOpen}>ルームから退出する</Button>
+          <Button size={"sm"} onClick={onOpen}>退出する</Button>
         </CardBody>
       </Card>
       <AlertDialog
@@ -69,7 +69,7 @@ export const MyselfPanel = ({loginUser}: Props) => {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              {isMyTurn ? "自分の番の間は退出できません。ゲームを進めて、他の人の番になってから退出してください。" : "ルームから退出すると、参加記録も削除されます。本当に退出しますか？"}
+              {isMyTurn ? "自分の番の間は退出できません。ゲームを進めて、他の人の番になってから退出してください。" : "ゲームから退出すると、ポイントも削除されます。本当に退出しますか？"}
             </AlertDialogBody>
 
             <AlertDialogFooter>

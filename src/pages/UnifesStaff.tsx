@@ -1,5 +1,5 @@
 import {Box, Container, Heading, HStack} from "@chakra-ui/react";
-import {Rooms} from "config/Constants";
+import {Teams} from "config/Constants";
 import {MemberRanking} from "../components/MemberRanking";
 import {useRecoilCallback} from "recoil";
 import {MembersState} from "store/Members/atoms";
@@ -10,7 +10,7 @@ import {User} from "models/User";
 import {OrderPlayerIdsState} from "store/OrderPlayer/atoms";
 
 export const UnifesStaff = () => {
-  const roomIds = Object.values(Rooms)
+  const roomIds = Object.values(Teams)
   useFetchOnce(roomIds)
 
   return (

@@ -36,7 +36,7 @@ export const NotStarted = ({loginUser}: Props) => {
       <Heading size='md'>参加メンバー募集中</Heading>
       <VStack alignItems={"flex-start"} mt={"8px"} spacing={"4px"}>
         <Text>参加メンバーが集まったら、「開始する」ボタンを押してください。</Text>
-        <Text>（未参加のルームメンバーも、開始すると自動で「参加」になります）</Text>
+        <Text>（未参加のチームメンバーも、開始すると自動で「参加」になります）</Text>
       </VStack>
       <Spacer />
       <Button colorScheme='twitter' onClick={onUpdateProgress}>ゲームを開始する</Button>

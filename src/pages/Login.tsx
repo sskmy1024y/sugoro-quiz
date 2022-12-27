@@ -9,7 +9,7 @@ import {
   VStack, Select, Button, Avatar, Image
 } from "@chakra-ui/react";
 import React, {ChangeEvent, FormEvent, useCallback, useEffect} from "react";
-import {Rooms} from "config/Constants";
+import {Teams} from "config/Constants";
 import {db, storage} from "config/firebase";
 import {v4} from 'uuid'
 import {push, ref, set } from "firebase/database";
@@ -103,10 +103,10 @@ export const Login = () => {
               </VStack>
               <VStack align={"start"} spacing={"8px"}>
                 <Heading size='s' textTransform='uppercase'>
-                  ルームを入力してください
+                  チーム番号を入力してください
                 </Heading>
-                <Select value={roomId} onChange={e => setRoomId(e.target.value)} placeholder='ルームを選んでね'>
-                  {Object.values(Rooms).map(room => (
+                <Select value={roomId} onChange={e => setRoomId(e.target.value)} placeholder='チームを選んでね'>
+                  {Object.values(Teams).map(room => (
                     <option key={room} value={room}>{room}</option>
                   ))}
                 </Select>
