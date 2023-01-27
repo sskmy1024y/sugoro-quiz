@@ -6,10 +6,9 @@ import {
   Heading,
   Stack,
   Input,
-  VStack, Select, Button, Avatar, Image
+  VStack, Button, Avatar, Image, Text
 } from "@chakra-ui/react";
 import React, {ChangeEvent, FormEvent, useCallback, useEffect} from "react";
-import {Teams} from "config/Constants";
 import {db, storage} from "config/firebase";
 import {v4} from 'uuid'
 import {push, ref, set } from "firebase/database";
@@ -103,13 +102,15 @@ export const Login = () => {
               </VStack>
               <VStack align={"start"} spacing={"8px"}>
                 <Heading size='s' textTransform='uppercase'>
-                  チーム番号を入力してください
+                  ルーム名を入力してください
                 </Heading>
-                <Select value={roomId} onChange={e => setRoomId(e.target.value)} placeholder='チームを選んでね'>
-                  {Object.values(Teams).map(room => (
-                    <option key={room} value={room}>{room}</option>
-                  ))}
-                </Select>
+                <Input value={roomId} onChange={(e) => setRoomId(e.target.value)} placeholder={"ゆにぽんチーム"} />
+                <Text fontSize={"12px"} color={"#666"}>※ルーム名は一緒に参加する人と決めて、全員で同じルーム名を入力してください</Text>
+                {/*<Select value={roomId} onChange={e => setRoomId(e.target.value)} placeholder='チームを選んでね'>*/}
+                {/*  {Object.values(Teams).map(room => (*/}
+                {/*    <option key={room} value={room}>{room}</option>*/}
+                {/*  ))}*/}
+                {/*</Select>*/}
               </VStack>
               <Button
                 type={"submit"}
