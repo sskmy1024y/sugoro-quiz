@@ -152,9 +152,6 @@ export const SugorokuBoard = ({loginUser}: Props) => {
           h={"580px"}
           backgroundImage={"url('/images/board_bg.png')"}
           backgroundSize={"cover"}
-          sx={{
-            "background-image": "image-set(url('/images/board_bg.png') 1x, url('/images/board_bg2x.png') 2x)",
-          }}
         >
           {
             MathPosition.map((position, index) => {
