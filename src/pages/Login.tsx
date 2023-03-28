@@ -75,19 +75,19 @@ export const Login = () => {
       point: 0,
     }
 
-    const room = team === Teams.Custom ? roomName : team;
+    const roomId = team === Teams.Custom ? roomName : `${team}_20234Q`;
 
     const {key, ...value} = user;
-    const pushRef = push(ref(db, `rooms/${roomName}/users`));
+    const pushRef = push(ref(db, `rooms/${roomId}/users`));
     await set(pushRef, {
       ...value,
       iconUrl: iconUrl ?? null
     }).then(async () => {
       const key = pushRef.key!;
-      const loginUser = {...user, key, roomId: roomName}
+      const loginUser = {...user, key, roomId: roomId}
       await setLoginUser(loginUser);
     })
-  }, [iconBase64, name, roomName, setLoginUser])
+  }, [iconBase64, name, roomName, setLoginUser, team])
 
   return (
     <Box h={"100lvh"} pt={"24px"} bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"}>
