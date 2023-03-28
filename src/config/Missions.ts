@@ -15,19 +15,19 @@ export const EVENT_MATH_MISSIONS: Mission[] = [
   },
   {
     id: 'math_mission3',
-    mission: "今年１番自分を褒めたくなった瞬間は？（いい話と思ったら投票してね！）",
+    mission: "4Q（1～3月）１番自分を褒めたくなった瞬間は？（いい話と思ったら投票してね！）",
     rule: MissionRule.VoteTo1YN,
     timeout: 60,
   },
   {
     id: 'math_mission4',
-    mission: "自分の動きの中で、今年一番顧客の未来を変えたと思えた瞬間は？（それは顧客の行動を変えてると思ったらいいねに投票してね！）",
+    mission: "自分の動きの中で、4Q（1～3月）一番顧客の未来を変えたと思えた瞬間は？（それは顧客の行動を変えてると思ったらいいねに投票してね！）",
     rule: MissionRule.VoteTo1YN,
     timeout: 60,
   },
   {
     id: 'math_mission5',
-    mission: "今年やり残したことは？（来年がんばれ！って思ったら投票してね！）",
+    mission: "4Q（1～3月）やり残したことは？（新しいQ（4〜6月）がんばれ！って思ったら投票してね！）",
     rule: MissionRule.VoteTo1YN,
     timeout: 60,
   },
@@ -57,7 +57,7 @@ export const EVENT_MATH_MISSIONS: Mission[] = [
   },
   {
     id: 'math_mission10',
-    mission: "今年1番かなしかった出来事は？（なぐさめたくなったら投票してね！）",
+    mission: "4Q（1～3月）1番かなしかった出来事は？（なぐさめたくなったら投票してね！）",
     rule: MissionRule.VoteTo1YN,
     timeout: 60,
   },
@@ -79,7 +79,7 @@ export const MISSIONS: Mission[] = [
   // },
   {
     id: 'mission2',
-    mission: "今年一番やらかした話を教えて！仕事以外でもOKだよ。　（一番「来年がんばれ！」と思った人に投票してね！）",
+    mission: "4Q（1～3月）一番やらかした話を教えて！仕事以外でもOKだよ。　（一番「新しいQ（4〜6月）がんばれ！」と思った人に投票してね！）",
     rule: MissionRule.VoteTo1,
     timeout: 60,
   },
@@ -103,43 +103,43 @@ export const MISSIONS: Mission[] = [
   },
   {
     id: 'mission6',
-    mission: "みんなの今年買ってよかったものを教えて！（一番「いいな〜！ほしい！」と思った人に投票してね！）",
+    mission: "みんなの4Q（1～3月）買ってよかったものを教えて！（一番「いいな〜！ほしい！」と思った人に投票してね！）",
     rule: MissionRule.VoteTo1,
     timeout: 60,
   },
   {
     id: 'mission7',
-    mission: "今年一番成長したことは何でしょうか？（一番成長したと思う人に投票してね！）",
+    mission: "4Q（1～3月）一番成長したことは何でしょうか？（一番成長したと思う人に投票してね！）",
     rule: MissionRule.VoteTo1,
     timeout: 60,
   },
   {
     id: 'mission8',
-    mission: "今年の自分的ビッグニュースを発表！（一番驚いたニュースを発表した人に投票してね！）",
+    mission: "4Q（1～3月）の自分的ビッグニュースを発表！（一番驚いたニュースを発表した人に投票してね！）",
     rule: MissionRule.VoteTo1,
     timeout: 60,
   },
   {
     id: 'mission9',
-    mission: "今年一番お世話になった人を紹介して！（いい話だなと思った人全員に投票してね！）",
+    mission: "4Q（1～3月）一番お世話になった人を紹介して！（いい話だなと思った人全員に投票してね！）",
     rule: MissionRule.VoteToOtherYN,
     timeout: 60,
   },
   {
     id: 'mission10',
-    mission: "来年の抱負を一言で！（一人ずつ話して、いいと思った人全員に投票してね！）",
+    mission: "新しいQ（4〜6月）の抱負を一言で！（一人ずつ話して、いいと思った人全員に投票してね！）",
     rule: MissionRule.VoteToOtherYN,
     timeout: 60,
   },
   {
     id: 'mission11',
-    mission:　"英語禁止で今年よかった出来事を教えて！（１人ずつ話して、いいと思った人全員に投票してね！）",
+    mission:　"英語禁止で4Q（1～3月）よかった出来事を教えて！（１人ずつ話して、いいと思った人全員に投票してね！）",
     rule: MissionRule.VoteToOtherYN,
     timeout: 60,
   },
   {
     id: 'mission12',
-    mission: "今年一年を一漢字で例えるなら？（１人ずつ話して、いいと思った人全員に投票してね！）",
+    mission: "4Q（1～3月）を一漢字で例えるなら？（１人ずつ話して、いいと思った人全員に投票してね！）",
     rule: MissionRule.VoteToOtherYN,
     timeout: 60,
   },
@@ -151,16 +151,22 @@ export const MISSIONS: Mission[] = [
   },
   {
     id: 'mission14',
-    mission: "英語禁止で来年会社でやってみたいことを教えて！（１人ずつ話して、いいと思った人全員に投票してね！）",
+    mission: "英語禁止で新しいQ（4〜6月）会社でやってみたいことを教えて！（１人ずつ話して、いいと思った人全員に投票してね！）",
     rule: MissionRule.VoteToOtherYN,
     timeout: 60,
   },
   {
     id: 'mission15',
-    mission: "今年仕事してて一番嬉しかった瞬間は？（１人ずつ話して、いいと思った人全員に投票してね！）",
+    mission: "4Q（1～3月）仕事してて一番嬉しかった瞬間は？（１人ずつ話して、いいと思った人全員に投票してね！）",
     rule: MissionRule.VoteToOtherYN,
     timeout: 60,
-  }
+  },
+  {
+    id: 'mission16',
+    mission: "4Q（1～3月）仕事してて一番辛かった瞬間は？（１人ずつ話して、いいと思った人全員に投票してね！）",
+    rule: MissionRule.VoteToOtherYN,
+    timeout: 60,
+  },
 ]
 
 export const ALL_MISSIONS = [...EVENT_MATH_MISSIONS, ...MISSIONS];
