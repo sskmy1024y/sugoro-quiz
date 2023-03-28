@@ -1,4 +1,5 @@
 export enum Teams {
+  Custom = "自分でチーム名を入力する",
   Team1 = "team1",
   Team2 = "team2",
   Team3 = "team3",
@@ -14,6 +15,9 @@ export enum Teams {
   Team13 = "team13",
   Team14 = "team14",
   Team15 = "team15",
+  Team16 = "team16",
+  Team17 = "team17",
+  Team18 = "team18",
 }
 
 export const ENABLE_UNISEPON = true
