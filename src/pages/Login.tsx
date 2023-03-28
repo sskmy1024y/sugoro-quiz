@@ -1,28 +1,35 @@
 import {
+  Avatar,
   Box,
+  Button,
   Card,
   CardBody,
   CardHeader,
   Heading,
-  Stack,
+  Image,
   Input,
-  VStack, Button, Avatar, Image, Text
+  Select,
+  Stack,
+  Text,
+  VStack
 } from "@chakra-ui/react";
-import React, {ChangeEvent, FormEvent, useCallback, useEffect} from "react";
-import {db, storage} from "config/firebase";
-import {v4} from 'uuid'
-import {push, ref, set } from "firebase/database";
-import {getDownloadURL, ref as storageRef, uploadString} from 'firebase/storage';
-import {useLoginUserState} from "store/LoginUser";
-import {User} from "models/User";
-import {useNavigate} from "react-router-dom";
 import {FileUpload,} from "components/common/FileUpload";
+import {Teams} from "config/Constants";
+import {db, storage} from "config/firebase";
+import {push, ref, set} from "firebase/database";
+import {getDownloadURL, ref as storageRef, uploadString} from 'firebase/storage';
+import {User} from "models/User";
+import React, {ChangeEvent, FormEvent, useCallback, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import {useLoginUserState} from "store/LoginUser";
 import {fileToBase64} from "utils/fileToBase64";
+import {v4} from 'uuid'
 
 export const Login = () => {
   const navigate = useNavigate();
   const [name, setName] = React.useState("");
-  const [roomId, setRoomId] = React.useState("");
+  const [roomName, setRoomName] = React.useState("");
+  const [team, setTeam] = React.useState<Teams>();
   const [loginUser, setLoginUser] = useLoginUserState();
 
   const [iconBase64, setIconBase64] = React.useState<string>();
@@ -48,7 +55,8 @@ export const Login = () => {
 
   const onSubmit = useCallback(async (e: FormEvent) => {
     e.preventDefault();
-    if (roomId === "" || name === "") return;
+    if (team === undefined || name === "") return;
+    if (team === Teams.Custom && roomName === "") return;
 
     const userId = v4();
 
@@ -67,17 +75,19 @@ export const Login = () => {
       point: 0,
     }
 
+    const room = team === Teams.Custom ? roomName : team;
+
     const {key, ...value} = user;
-    const pushRef = push(ref(db, `rooms/${roomId}/users`));
+    const pushRef = push(ref(db, `rooms/${roomName}/users`));
     await set(pushRef, {
       ...value,
       iconUrl: iconUrl ?? null
     }).then(async () => {
       const key = pushRef.key!;
-      const loginUser = {...user, key, roomId}
+      const loginUser = {...user, key, roomId: roomName}
       await setLoginUser(loginUser);
     })
-  }, [iconBase64, name, roomId, setLoginUser])
+  }, [iconBase64, name, roomName, setLoginUser])
 
   return (
     <Box h={"100lvh"} pt={"24px"} bg={"linear-gradient(104.31deg, #56CCE180 -1.14%, #68DCB6C0 105.66%)"} backdropFilter={"blur(30px)"}>
@@ -102,20 +112,24 @@ export const Login = () => {
               </VStack>
               <VStack align={"start"} spacing={"8px"}>
                 <Heading size='s' textTransform='uppercase'>
-                  ルーム名を入力してください
+                  {team === Teams.Custom ?　"ルーム名を入力してください" : "チームを選んでください"}
                 </Heading>
-                <Input value={roomId} onChange={(e) => setRoomId(e.target.value)} placeholder={"ゆにぽんチーム"} />
-                <Text fontSize={"12px"} color={"#666"}>※ルーム名は一緒に参加する人と決めて、全員で同じルーム名を入力してください</Text>
-                {/*<Select value={roomId} onChange={e => setRoomId(e.target.value)} placeholder='チームを選んでね'>*/}
-                {/*  {Object.values(Teams).map(room => (*/}
-                {/*    <option key={room} value={room}>{room}</option>*/}
-                {/*  ))}*/}
-                {/*</Select>*/}
+                {team === Teams.Custom && (
+                  <>
+                    <Input value={roomName} onChange={(e) => setRoomName(e.target.value)} placeholder={"ゆにぽんチーム"} />
+                    <Text fontSize={"12px"} color={"#666"}>※ルーム名は一緒に参加する人と決めて、全員で同じルーム名を入力してください</Text>
+                  </>
+                )}
+                <Select value={team} onChange={e => setTeam(e.target.value as Teams)} placeholder='チームを選んでね'>
+                  {Object.values(Teams).map(room => (
+                    <option key={room} value={room}>{room}</option>
+                  ))}
+                </Select>
               </VStack>
               <Button
                 type={"submit"}
                 colorScheme='twitter'
-                disabled={name === "" || roomId === ""}
+                disabled={name === "" || team === undefined || (team === Teams.Custom && roomName === "")}
               >
                 ゲームに入る
               </Button>
