@@ -55,6 +55,6 @@ const useFetchOnce = (roomIds: string[]) => {
   })
 
   useEffect(() => {
-    roomIds.map(fetchOnceMembers)
+    roomIds.map((roomId) => fetchOnceMembers(`${roomId}_20234Q`))
   }, [roomIds, fetchOnceMembers])
 }
