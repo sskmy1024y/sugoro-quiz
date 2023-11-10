@@ -75,7 +75,7 @@ export const Login = () => {
       point: 0,
     }
 
-    const roomId = team === Teams.Custom ? roomName : `${team}_20234Q`;
+    const roomId = team === Teams.Custom ? roomName : team;
 
     const {key, ...value} = user;
     const pushRef = push(ref(db, `rooms/${roomId}/users`));

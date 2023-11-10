@@ -35,7 +35,7 @@ export const Result = ({loginUser, latestGame}: Props) => {
       <ModalBody mb={"20px"}>
         <HStack alignItems={"flex-start"} gap={"24px"}>
           <VStack flex={1}>
-            <Heading size={"lg"} mb={"28px"} fontWeight={"900"} color={"gray.800"} sx={{"text-stroke": "1px #FFF", "-webkit-text-stroke": "1px #FFF"}} textAlign={"center"}>結果発表</Heading>
+            <Heading size={"lg"} mb={"28px"} fontWeight={"900"} color={"gray.800"} sx={{"text-stroke": "1px #FFF"}} textAlign={"center"}>結果発表</Heading>
             {latestGame.mission.rule === MissionRule.VoteTo1YN ? (
               <VoteToOneYN loginUser={loginUser} targetUser={targetUser[0]} game={latestGame} onNext={onNextTurn} />
             ) : latestGame.mission.rule === MissionRule.VoteToOtherYN ? (

@@ -1,4 +1,5 @@
 import {Box, Container, Heading, HStack} from "@chakra-ui/react";
+import {ControlPopover} from "components/Staff/ControlPopover";
 import {Teams} from "config/Constants";
 import {MemberRanking} from "../components/MemberRanking";
 import {useRecoilCallback} from "recoil";
@@ -10,16 +11,17 @@ import {User} from "models/User";
 import {OrderPlayerIdsState} from "store/OrderPlayer/atoms";
 
 export const UnifesStaff = () => {
-  const roomIds = Object.values(Teams)
+  const roomIds = Object.values(Teams).filter(v => v !== Teams.Custom)
   useFetchOnce(roomIds)
 
   return (
-    <Container maxW='9xl'>
+    <Container maxW='9xl' display={"flex"} flexDirection={"column"} gap={"16px"}>
       <Heading>UnifesStaff</Heading>
+      <ControlPopover />
       <Box overflow={"auto"}>
         <HStack alignItems={"flex-start"}>
           {roomIds.map((roomId) => (
-            <MemberRanking key={roomId} roomId={`${roomId}_20234Q`} />
+            <MemberRanking key={roomId} roomId={roomId} />
           ))}
         </HStack>
       </Box>
@@ -55,6 +57,6 @@ const useFetchOnce = (roomIds: string[]) => {
   })
 
   useEffect(() => {
-    roomIds.map((roomId) => fetchOnceMembers(`${roomId}_20234Q`))
+    roomIds.map((roomId) => fetchOnceMembers(roomId))
   }, [roomIds, fetchOnceMembers])
 }
